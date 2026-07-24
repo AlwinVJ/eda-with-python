@@ -1,0 +1,16 @@
+{
+  "type": "handbook",
+  "slug": "data-preprocessing-eda-handbook",
+  "title": "Data Preprocessing & EDA Handbook",
+  "description": "Start here. A complete overview of the data preprocessing and exploratory data analysis workflow used throughout every project on this platform.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["overview", "workflow", "eda"],
+  "lastUpdated": "2026-07-01",
+  "githubPath": "docs/handbooks/data-preprocessing-eda-handbook",
+  "version": "1.0.0",
+  "pages": 22,
+  "file": "handbook.pdf",
+  "topics": ["Workflow overview", "Where to start", "How projects connect"],
+  "order": 1
+}

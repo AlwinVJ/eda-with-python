@@ -1,0 +1,170 @@
+[
+  {
+    "id": "step-1",
+    "order": 1,
+    "title": "Step 1",
+    "summary": "Understand the overall workflow before touching any code.",
+    "actions": [
+      {
+        "verb": "Read",
+        "label": "Data Preprocessing & EDA Handbook",
+        "targetType": "handbook",
+        "targetSlug": "data-preprocessing-eda-handbook"
+      }
+    ]
+  },
+  {
+    "id": "step-2",
+    "order": 2,
+    "title": "Step 2",
+    "summary": "Build the foundation every later project relies on.",
+    "actions": [
+      {
+        "verb": "Study",
+        "label": "NumPy Essentials",
+        "targetType": "handbook",
+        "targetSlug": "numpy-essentials"
+      },
+      {
+        "verb": "Complete",
+        "label": "NumPy Essentials exercises"
+      },
+      {
+        "verb": "Practice",
+        "label": "NumPy basics"
+      }
+    ]
+  },
+  {
+    "id": "step-3",
+    "order": 3,
+    "title": "Step 3",
+    "summary": "Apply what you've learned to real data for the first time.",
+    "actions": [
+      {
+        "verb": "Complete",
+        "label": "Project 1 \u2014 Tips Dataset",
+        "targetType": "project",
+        "targetSlug": "tips"
+      },
+      {
+        "verb": "Apply",
+        "label": "NumPy concepts"
+      },
+      {
+        "verb": "Understand",
+        "label": "Pandas fundamentals"
+      }
+    ]
+  },
+  {
+    "id": "step-4",
+    "order": 4,
+    "title": "Step 4",
+    "summary": "Go deeper into cleaning and exploring real-world data.",
+    "actions": [
+      {
+        "verb": "Study",
+        "label": "Pandas Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "pandas-developer-handbook"
+      },
+      {
+        "verb": "Continue",
+        "label": "Project 1",
+        "targetType": "project",
+        "targetSlug": "tips"
+      },
+      {
+        "verb": "Perform",
+        "label": "Data cleaning"
+      },
+      {
+        "verb": "Perform",
+        "label": "Exploratory data analysis"
+      }
+    ]
+  },
+  {
+    "id": "step-5",
+    "order": 5,
+    "title": "Step 5",
+    "summary": "Turn your analysis into clear, readable visuals.",
+    "actions": [
+      {
+        "verb": "Study",
+        "label": "Matplotlib Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "matplotlib-developer-handbook"
+      },
+      {
+        "verb": "Improve",
+        "label": "Visualizations"
+      },
+      {
+        "verb": "Complete",
+        "label": "Project 1",
+        "targetType": "project",
+        "targetSlug": "tips"
+      }
+    ]
+  },
+  {
+    "id": "step-6",
+    "order": 6,
+    "title": "Step 6",
+    "summary": "Add statistical depth to your visual storytelling.",
+    "actions": [
+      {
+        "verb": "Study",
+        "label": "Seaborn Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "seaborn-developer-handbook"
+      },
+      {
+        "verb": "Create",
+        "label": "Statistical visualizations"
+      },
+      {
+        "verb": "Finish",
+        "label": "Project 1",
+        "targetType": "project",
+        "targetSlug": "tips"
+      }
+    ]
+  },
+  {
+    "id": "step-7",
+    "order": 7,
+    "title": "Step 7",
+    "summary": "Keep building \u2014 each project introduces a new challenge.",
+    "actions": [
+      {
+        "verb": "Continue",
+        "label": "Titanic",
+        "targetType": "project",
+        "targetSlug": "titanic"
+      },
+      {
+        "verb": "Continue",
+        "label": "House Prices",
+        "targetType": "project",
+        "targetSlug": "house-prices"
+      },
+      {
+        "verb": "Continue",
+        "label": "Netflix",
+        "targetType": "project",
+        "targetSlug": "netflix-eda"
+      },
+      {
+        "verb": "Continue",
+        "label": "Superstore"
+      },
+      {
+        "verb": "Continue",
+        "label": "Customer Churn"
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "type": "handbook",
+  "slug": "matplotlib-developer-handbook",
+  "title": "Matplotlib Developer Handbook",
+  "description": "Building readable, publication-quality plots — figure/axes structure, styling, and multi-panel layouts.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["matplotlib", "visualization"],
+  "lastUpdated": "2026-05-05",
+  "githubPath": "docs/handbooks/matplotlib-developer-handbook",
+  "version": "1.1.0",
+  "pages": 26,
+  "file": "handbook.pdf",
+  "topics": ["Figures & Axes", "Styling", "Multi-panel layouts"],
+  "order": 5
+}

@@ -1,0 +1,24 @@
+{
+  "type": "dataset",
+  "slug": "titanic-dataset",
+  "title": "Titanic: Machine Learning from Disaster",
+  "description": "Passenger-level data from the Titanic disaster, including demographics, ticket class, and survival outcome.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["classification", "tabular"],
+  "lastUpdated": "2026-02-01",
+  "githubPath": "datasets/titanic-dataset",
+  "source": "Kaggle",
+  "sourceUrl": "https://www.kaggle.com/competitions/titanic",
+  "rows": 891,
+  "columns": 12,
+  "features": [
+    { "name": "PassengerId", "type": "int", "description": "Unique passenger identifier" },
+    { "name": "Survived", "type": "int (0/1)", "description": "Target — survival outcome" },
+    { "name": "Pclass", "type": "int", "description": "Ticket class (1st, 2nd, 3rd)" },
+    { "name": "Sex", "type": "categorical", "description": "Passenger sex" },
+    { "name": "Age", "type": "float", "description": "Age in years, contains missing values" }
+  ],
+  "usedInProjects": ["titanic"],
+  "downloadFile": "train.csv"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "handbook",
+  "slug": "numpy-developer-handbook",
+  "title": "NumPy Developer Handbook",
+  "description": "A deeper reference for NumPy — memory layout, advanced indexing, and performance patterns for larger projects.",
+  "difficulty": "intermediate",
+  "status": "in-progress",
+  "tags": ["numpy", "reference"],
+  "lastUpdated": "2026-06-10",
+  "githubPath": "docs/handbooks/numpy-developer-handbook",
+  "version": "1.0.0",
+  "pages": 34,
+  "file": "handbook.pdf",
+  "topics": ["Memory layout", "Advanced indexing", "Performance"],
+  "order": 3
+}

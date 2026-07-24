@@ -1,0 +1,33 @@
+{
+  "type": "project",
+  "slug": "video-game-sales-analysis",
+  "title": "Video Game Sales Analysis",
+  "description": "Performed complete exploratory data analysis on a video game sales dataset — from data cleaning through genre, platform, and publisher-level sales trends.",
+  "difficulty": "intermediate",
+  "status": "completed",
+  "tags": ["eda", "sales", "visualization"],
+  "lastUpdated": "2026-07-10",
+  "githubPath": "projects/video-game-sales-analysis",
+  "dataset": "video-game-sales-dataset",
+  "librariesUsed": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
+  "skillsLearned": ["Data cleaning", "Missing value handling", "Feature engineering", "Sales trend analysis", "Genre analysis", "Platform analysis", "Publisher analysis", "Correlation analysis"],
+  "businessProblem": "Understand what drives video game sales performance across platforms, genres, and publishers to surface actionable business insights.",
+  "workflow": [
+    "Clean and prepare the raw sales dataset",
+    "Handle missing values across platform and publisher fields",
+    "Engineer features for trend and regional analysis",
+    "Analyze sales trends over time",
+    "Break down performance by genre, platform, and publisher",
+    "Run correlation analysis across sales regions",
+    "Visualize findings and summarize business insights"
+  ],
+  "results": "Action and Sports genres led global sales volume; a small number of publishers accounted for a disproportionate share of top-selling titles.",
+  "lessonsLearned": "Regional sales columns were highly correlated, which shaped how the correlation analysis was interpreted and presented.",
+  "files": {
+    "readme": "README.md",
+    "notebook": "notebook.ipynb"
+  },
+  "relatedHandbooks": ["pandas-developer-handbook", "seaborn-developer-handbook"],
+  "relatedCheatsheets": ["matplotlib-cheatsheet"],
+  "estimatedTime": "5-6 hours"
+}

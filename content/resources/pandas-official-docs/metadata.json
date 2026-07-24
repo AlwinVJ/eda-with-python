@@ -1,0 +1,13 @@
+{
+  "type": "resource",
+  "slug": "pandas-official-docs",
+  "title": "Pandas Official Documentation",
+  "description": "The canonical reference for the pandas library, maintained by the pandas core team.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["pandas", "reference"],
+  "lastUpdated": "2026-01-01",
+  "githubPath": "resources",
+  "category": "official-links",
+  "officialUrl": "https://pandas.pydata.org/docs/"
+}

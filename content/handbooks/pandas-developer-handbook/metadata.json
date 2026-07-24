@@ -1,0 +1,16 @@
+{
+  "type": "handbook",
+  "slug": "pandas-developer-handbook",
+  "title": "Pandas Developer Handbook",
+  "description": "A complete, project-oriented reference for data manipulation with pandas — indexing, grouping, merging, and performance patterns.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["pandas", "reference"],
+  "lastUpdated": "2026-04-02",
+  "githubPath": "docs/handbooks/pandas-developer-handbook",
+  "version": "2.1.0",
+  "pages": 48,
+  "file": "handbook.pdf",
+  "topics": ["Indexing", "GroupBy", "Merging & Joining", "Performance"],
+  "order": 4
+}

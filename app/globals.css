@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   DESIGN TOKENS — Brand Palette (Light + Dark)
+   Every color in the app resolves through these variables — components never
+   hardcode hex values, so both themes re-theme from this one block.
+   Light: Navy #2F4156 · Teal #567C8D · Sky Blue #C8D9E6 · Beige #F5EFEB · White
+   Dark:  #16222D · #223446 · #2A3E52 · #567C8D · #6B92A5 · rgba(255,255,255,.08)
+   ============================================================================ */
+:root {
+  --background: 0 0% 100%;            /* #FFFFFF — background */
+  --foreground: 212 29% 26%;          /* #2F4156 (navy) — primary text */
+
+  --muted: 24 33% 94%;                /* #F5EFEB (beige) — secondary background */
+  --muted-foreground: 199 24% 45%;    /* #567C8D (teal) — secondary text */
+
+  --border: 206 37% 84%;              /* #C8D9E6 (sky blue) — borders */
+  --border-opacity: 1;
+
+  --card: 0 0% 100%;                  /* #FFFFFF — cards */
+  --card-foreground: 212 29% 26%;     /* #2F4156 (navy) */
+
+  --accent: 199 24% 45%;              /* #567C8D (teal) — links, highlights */
+  --accent-foreground: 0 0% 100%;     /* #FFFFFF — text on teal */
+
+  --primary: 212 29% 26%;             /* #2F4156 (navy) — button background */
+  --primary-foreground: 0 0% 100%;    /* #FFFFFF — button text */
+  --primary-hover: 199 24% 45%;       /* #567C8D (teal) — button hover */
+}
+
+.dark {
+  --background: 209 34% 13%;          /* #16222D — main background */
+  --foreground: 0 0% 100%;            /* #FFFFFF — primary text */
+
+  --muted: 210 35% 20%;               /* #223446 — secondary background */
+  --muted-foreground: 206 37% 84%;    /* #C8D9E6 — secondary text */
+
+  --border: 0 0% 100%;                /* rgba(255,255,255,0.08) via opacity token below */
+  --border-opacity: 0.08;
+
+  --card: 210 32% 24%;                /* #2A3E52 — cards */
+  --card-foreground: 0 0% 100%;       /* #FFFFFF */
+
+  --accent: 199 24% 45%;              /* #567C8D — accent (unchanged from light) */
+  --accent-foreground: 0 0% 100%;
+
+  --primary: 199 24% 45%;             /* #567C8D — button background */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 200 24% 53%;       /* #6B92A5 — button hover */
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+code, pre {
+  @apply font-mono;
+}
+
+.prose pre {
+  @apply bg-muted border border-border rounded-lg;
+}

@@ -1,0 +1,32 @@
+{
+  "type": "project",
+  "slug": "netflix-eda",
+  "title": "Netflix Movies and TV Shows EDA",
+  "description": "Comprehensive exploratory data analysis of the Netflix catalog — cleaning, country and genre analysis, ratings, release trends, and duration patterns.",
+  "difficulty": "intermediate",
+  "status": "completed",
+  "tags": ["eda", "streaming", "visualization"],
+  "lastUpdated": "2026-07-12",
+  "githubPath": "projects/netflix-eda",
+  "dataset": "netflix-dataset",
+  "librariesUsed": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+  "skillsLearned": ["Data cleaning", "Missing values", "Duplicate removal", "Feature engineering", "Country analysis", "Genre analysis", "Ratings analysis", "Release trend analysis", "Duration analysis", "Correlation analysis"],
+  "businessProblem": "Explore what the Netflix catalog reveals about content strategy — which countries, genres, and ratings dominate, and how the catalog has shifted over time.",
+  "workflow": [
+    "Clean the dataset and remove duplicate entries",
+    "Handle missing values across cast, country, and rating fields",
+    "Engineer features to separate movies from TV show durations",
+    "Analyze content by country and genre",
+    "Analyze ratings and release-year trends",
+    "Explore correlations across catalog attributes",
+    "Visualize findings and summarize business insights"
+  ],
+  "results": "US-produced titles and the Drama/Comedy genres dominate the catalog; content additions accelerated sharply in the years leading up to the dataset's cutoff.",
+  "lessonsLearned": "The `country` and `cast` fields required careful multi-value parsing before any group-level analysis was reliable.",
+  "files": {
+    "readme": "README.md",
+    "notebook": "notebook.ipynb"
+  },
+  "relatedHandbooks": ["pandas-developer-handbook", "matplotlib-developer-handbook"],
+  "estimatedTime": "5-6 hours"
+}

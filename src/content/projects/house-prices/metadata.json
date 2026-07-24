@@ -1,0 +1,38 @@
+{
+  "type": "project",
+  "slug": "house-prices",
+  "title": "House Prices \u2014 Regression & Feature Selection",
+  "description": "Advanced regression on the Ames Housing dataset, focused on feature selection techniques and handling high-cardinality categoricals.",
+  "difficulty": "intermediate",
+  "status": "in-progress",
+  "tags": [
+    "regression",
+    "feature-selection"
+  ],
+  "lastUpdated": "2026-06-30",
+  "githubPath": "projects/house-prices",
+  "dataset": "titanic-dataset",
+  "librariesUsed": [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "xgboost"
+  ],
+  "skillsLearned": [
+    "Correlation-based feature selection",
+    "Target encoding",
+    "Regularized regression"
+  ],
+  "businessProblem": "Predict final sale price of homes in Ames, Iowa from 79 explanatory variables.",
+  "workflow": [
+    "Explore target distribution and skew",
+    "Handle high-cardinality categorical features",
+    "Select features via correlation and mutual information",
+    "Train Ridge/Lasso and XGBoost baselines"
+  ],
+  "files": {
+    "readme": "README.md",
+    "notebook": "notebook.ipynb"
+  },
+  "estimatedTime": "5-6 hours"
+}

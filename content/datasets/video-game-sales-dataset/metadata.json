@@ -1,0 +1,25 @@
+{
+  "type": "dataset",
+  "slug": "video-game-sales-dataset",
+  "title": "Video Game Sales Dataset",
+  "description": "Global video game sales data by platform, genre, publisher, and region.",
+  "difficulty": "intermediate",
+  "status": "completed",
+  "tags": ["sales", "tabular"],
+  "lastUpdated": "2026-07-10",
+  "githubPath": "datasets/video-game-sales-dataset",
+  "source": "Kaggle",
+  "sourceUrl": "https://www.kaggle.com/datasets/gregorut/videogamesales",
+  "rows": 16598,
+  "columns": 11,
+  "features": [
+    { "name": "Name", "type": "string", "description": "Game title" },
+    { "name": "Platform", "type": "categorical", "description": "Console/platform released on" },
+    { "name": "Year", "type": "int", "description": "Release year" },
+    { "name": "Genre", "type": "categorical", "description": "Game genre" },
+    { "name": "Publisher", "type": "categorical", "description": "Publishing company" },
+    { "name": "Global_Sales", "type": "float", "description": "Global sales in millions of units" }
+  ],
+  "usedInProjects": ["video-game-sales-analysis"],
+  "downloadFile": "vgsales.csv"
+}

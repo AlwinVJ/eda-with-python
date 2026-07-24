@@ -1,0 +1,58 @@
+{
+  "type": "project",
+  "slug": "titanic",
+  "title": "Titanic Survival Analysis",
+  "description": "End-to-end EDA and feature engineering on the classic Titanic dataset, from missing-value handling to a baseline survival model.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": [
+    "classification",
+    "eda",
+    "feature-engineering"
+  ],
+  "lastUpdated": "2026-05-12",
+  "githubPath": "projects/titanic",
+  "dataset": "titanic-dataset",
+  "librariesUsed": [
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn"
+  ],
+  "skillsLearned": [
+    "Missing value imputation",
+    "Categorical encoding",
+    "Univariate & bivariate analysis",
+    "Feature engineering"
+  ],
+  "businessProblem": "Predict which passengers survived the Titanic disaster using demographic and ticketing data, and understand what factors most influenced survival.",
+  "workflow": [
+    "Load and inspect the raw dataset",
+    "Handle missing values in Age, Cabin, and Embarked",
+    "Engineer features: FamilySize, Title, IsAlone",
+    "Perform univariate and bivariate EDA",
+    "Encode categorical variables",
+    "Train and evaluate a baseline classifier"
+  ],
+  "results": "A baseline logistic regression achieved ~81% accuracy; sex and passenger class were the strongest predictors of survival.",
+  "lessonsLearned": "Title extraction from passenger names was a stronger signal than raw Age after imputation.",
+  "preview": "assets/preview.png",
+  "visualizations": [
+    "assets/survival-by-class.png",
+    "assets/age-distribution.png"
+  ],
+  "files": {
+    "readme": "README.md",
+    "notebook": "notebook.ipynb",
+    "report": "report.pdf"
+  },
+  "relatedHandbooks": [
+    "pandas-developer-handbook",
+    "numpy-essentials"
+  ],
+  "relatedCheatsheets": [
+    "matplotlib-cheatsheet"
+  ],
+  "estimatedTime": "3-4 hours"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "cheatsheet",
+  "slug": "matplotlib-cheatsheet",
+  "title": "Matplotlib Essentials",
+  "description": "One-page visual reference covering figure/axes structure, common plot types, and styling shortcuts.",
+  "difficulty": "beginner",
+  "status": "completed",
+  "tags": ["matplotlib", "visualization"],
+  "lastUpdated": "2026-05-06",
+  "githubPath": "docs/cheatsheets/matplotlib-cheatsheet",
+  "version": "1.0",
+  "library": "matplotlib",
+  "topicsCovered": ["Figures & Axes", "Plot types", "Styling"],
+  "image": "cheatsheet.png"
+}

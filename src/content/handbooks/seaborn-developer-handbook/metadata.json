@@ -1,0 +1,16 @@
+{
+  "type": "handbook",
+  "slug": "seaborn-developer-handbook",
+  "title": "Seaborn Developer Handbook",
+  "description": "Statistical visualization patterns — distributions, categorical plots, and relationships between variables.",
+  "difficulty": "intermediate",
+  "status": "completed",
+  "tags": ["seaborn", "visualization", "statistics"],
+  "lastUpdated": "2026-05-20",
+  "githubPath": "docs/handbooks/seaborn-developer-handbook",
+  "version": "1.0.0",
+  "pages": 20,
+  "file": "handbook.pdf",
+  "topics": ["Distributions", "Categorical plots", "Relationships"],
+  "order": 6
+}
