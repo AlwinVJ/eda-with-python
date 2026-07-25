@@ -12,7 +12,7 @@ export function HandbookCard({ handbook }: { handbook: HandbookMetadata }) {
         <DifficultyBadge difficulty={handbook.difficulty} />
       </div>
       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{handbook.description}</p>
-      <dl className="mt-3 grid grid-cols-3 gap-2 text-xs text-muted-foreground">
+      <dl className="mt-3 grid grid-cols-2 gap-2 text-xs text-muted-foreground xs:grid-cols-3 sm:grid-cols-3">
         <div><dt className="font-medium text-foreground">v{handbook.version}</dt><dd>Version</dd></div>
         <div><dt className="font-medium text-foreground">{handbook.pages}</dt><dd>Pages</dd></div>
         <div><dt className="font-medium text-foreground">{handbook.lastUpdated}</dt><dd>Updated</dd></div>

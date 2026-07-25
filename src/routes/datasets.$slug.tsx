@@ -39,7 +39,7 @@ function DatasetPage() {
         <p className="text-muted-foreground">{dataset.description}</p>
       </header>
 
-      <section className="grid grid-cols-3 gap-4 text-sm">
+      <section className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-3">
         <Stat label="Source" value={dataset.source} />
         <Stat label="Rows" value={dataset.rows.toLocaleString()} />
         <Stat label="Columns" value={String(dataset.columns)} />
