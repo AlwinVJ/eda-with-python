@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS, isNavItemActive, SITE_NAME } from '@/lib/constants';
+import { NavLink, ProjectsNavGroup } from './Sidebar';
 import { cn } from '@/lib/utils';
 
 export function MobileNav() {
@@ -31,6 +32,8 @@ export function MobileNav() {
     setVisible(false);
   }, [open]);
 
+  const close = () => setOpen(false);
+
   return (
     <>
       <button
@@ -49,44 +52,32 @@ export function MobileNav() {
               'absolute inset-0 bg-primary/40 transition-opacity duration-200',
               visible ? 'opacity-100' : 'opacity-0',
             )}
-            onClick={() => setOpen(false)}
+            onClick={close}
           />
           <nav
             className={cn(
-              'absolute left-0 top-0 flex h-[100dvh] max-h-screen w-72 max-w-[80vw] flex-col border-r border-border bg-card transition-transform duration-200',
+              'absolute left-0 top-0 flex max-h-[100dvh] w-72 max-w-[80vw] flex-col overflow-hidden rounded-br-xl border-b border-r border-border bg-card shadow-lg transition-transform duration-200',
               visible ? 'translate-x-0' : '-translate-x-full',
             )}
-          
           >
-            <div className="flex h-14 items-center justify-between border-b border-border px-5">
+            <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-5">
               <span className="font-mono text-sm font-semibold">{SITE_NAME}</span>
               <button
-                onClick={() => setOpen(false)}
+                onClick={close}
                 className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-muted"
                 aria-label="Close navigation menu"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="flex-1 space-y-0.5 overflow-y-auto px-3 py-4">
-              {NAV_ITEMS.map((item) => {
-                const active = isNavItemActive(item, pathname);
-                return (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className={cn(
-                      'flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors',
-                      active
-                        ? 'bg-accent/15 font-medium text-accent'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                    )}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    {item.label}
-                  </Link>
-                );
-              })}
+            <div className="min-h-0 space-y-0.5 overflow-y-auto px-3 py-3 pb-4">
+              {NAV_ITEMS.map((item) =>
+                item.href === '/projects' ? (
+                  <ProjectsNavGroup key={item.href} item={item} pathname={pathname} onNavigate={close} />
+                ) : (
+                  <MobileTopLink key={item.href} href={item.href} label={item.label} icon={item.icon} active={isNavItemActive(item, pathname)} onNavigate={close} />
+                )
+              )}
             </div>
           </nav>
         </div>
@@ -94,3 +85,30 @@ export function MobileNav() {
     </>
   );
 }
+
+function MobileTopLink({
+  href, label, icon: Icon, active, onNavigate,
+}: {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  active: boolean;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      to={href}
+      onClick={onNavigate}
+      className={cn(
+        'flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors',
+        active ? 'bg-accent/15 font-medium text-accent' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+      )}
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </Link>
+  );
+}
+
+// Silence unused import warning: NavLink is re-exported convenience for consumers.
+void NavLink;

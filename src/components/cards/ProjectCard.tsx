@@ -3,13 +3,29 @@ import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from 'lucide-re
 import type { ProjectMetadata } from '@/lib/types';
 import { DifficultyBadge, StatusBadge, TechBadge } from '@/components/ui/badge';
 import { githubUrl } from '@/lib/content';
+import { PROJECT_IMAGES } from '@/lib/project-categories';
 
 export function ProjectCard({ project }: { project: ProjectMetadata }) {
+  const image = PROJECT_IMAGES[project.slug];
+
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-accent/40">
       <Link to="/projects/$slug" params={{ slug: project.slug }} className="block">
-        <div className="flex aspect-video items-center justify-center border-b border-border bg-muted">
-          <ImageIcon className="h-8 w-8 text-muted-foreground/50" />
+        <div className="aspect-video overflow-hidden border-b border-border bg-muted">
+          {image ? (
+            <img
+              src={image}
+              alt={`${project.title} cover`}
+              loading="lazy"
+              width={1200}
+              height={675}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <ImageIcon className="h-8 w-8 text-muted-foreground/50" />
+            </div>
+          )}
         </div>
       </Link>
 

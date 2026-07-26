@@ -1,7 +1,7 @@
 {
   "type": "project",
   "slug": "tips",
-  "title": "Project 1 \u2014 Tips Dataset",
+  "title": "Tips Dataset",
   "description": "Your first end-to-end project: apply NumPy and Pandas basics to clean and explore a small restaurant tips dataset, then visualize the results.",
   "difficulty": "beginner",
   "status": "completed",

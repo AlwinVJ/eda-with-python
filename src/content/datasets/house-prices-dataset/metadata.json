@@ -1,0 +1,26 @@
+{
+  "type": "dataset",
+  "slug": "house-prices-dataset",
+  "title": "Ames Housing (House Prices) Dataset",
+  "description": "The Ames Housing dataset — 79 explanatory variables describing residential homes in Ames, Iowa, used to predict final sale price.",
+  "difficulty": "intermediate",
+  "status": "completed",
+  "tags": ["regression", "tabular", "real-estate"],
+  "lastUpdated": "2026-06-30",
+  "githubPath": "datasets/house-prices-dataset",
+  "source": "Kaggle — House Prices: Advanced Regression Techniques",
+  "sourceUrl": "https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques",
+  "rows": 1460,
+  "columns": 81,
+  "features": [
+    { "name": "SalePrice", "type": "int", "description": "Property's final sale price in USD (target)" },
+    { "name": "OverallQual", "type": "int", "description": "Overall material and finish quality (1-10)" },
+    { "name": "GrLivArea", "type": "int", "description": "Above-grade (ground) living area in square feet" },
+    { "name": "GarageCars", "type": "int", "description": "Size of garage in car capacity" },
+    { "name": "TotalBsmtSF", "type": "int", "description": "Total square feet of basement area" },
+    { "name": "YearBuilt", "type": "int", "description": "Original construction year" },
+    { "name": "Neighborhood", "type": "categorical", "description": "Physical location within Ames city limits" }
+  ],
+  "usedInProjects": ["house-prices"],
+  "downloadFile": "train.csv"
+}

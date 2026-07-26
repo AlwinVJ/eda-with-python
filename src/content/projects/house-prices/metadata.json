@@ -1,38 +1,49 @@
 {
   "type": "project",
   "slug": "house-prices",
-  "title": "House Prices \u2014 Regression & Feature Selection",
-  "description": "Advanced regression on the Ames Housing dataset, focused on feature selection techniques and handling high-cardinality categoricals.",
+  "title": "House Price Prediction",
+  "description": "End-to-end machine learning project on the Ames Housing dataset — from data cleaning and feature engineering through regularized regression and gradient boosting models to predict final home sale prices.",
   "difficulty": "intermediate",
   "status": "in-progress",
   "tags": [
     "regression",
-    "feature-selection"
+    "machine-learning",
+    "feature-engineering"
   ],
   "lastUpdated": "2026-06-30",
   "githubPath": "projects/house-prices",
-  "dataset": "titanic-dataset",
+  "dataset": "house-prices-dataset",
   "librariesUsed": [
     "pandas",
     "numpy",
     "scikit-learn",
-    "xgboost"
+    "xgboost",
+    "matplotlib",
+    "seaborn"
   ],
   "skillsLearned": [
     "Correlation-based feature selection",
     "Target encoding",
-    "Regularized regression"
+    "Regularized regression",
+    "Gradient boosting",
+    "Model evaluation with RMSE"
   ],
-  "businessProblem": "Predict final sale price of homes in Ames, Iowa from 79 explanatory variables.",
+  "businessProblem": "Predict the final sale price of residential homes in Ames, Iowa from 79 explanatory variables describing (almost) every aspect of the property.",
   "workflow": [
-    "Explore target distribution and skew",
-    "Handle high-cardinality categorical features",
+    "Explore the SalePrice target distribution and log-transform for skew",
+    "Impute missing values across numeric and categorical features",
+    "Handle high-cardinality categorical features with target encoding",
+    "Engineer features (total square footage, age, remodel age, quality scores)",
     "Select features via correlation and mutual information",
-    "Train Ridge/Lasso and XGBoost baselines"
+    "Train Ridge, Lasso, and XGBoost models with cross-validation",
+    "Evaluate with RMSE on log-transformed SalePrice"
   ],
   "files": {
     "readme": "README.md",
     "notebook": "notebook.ipynb"
   },
+  "relatedHandbooks": [
+    "pandas-developer-handbook"
+  ],
   "estimatedTime": "5-6 hours"
 }

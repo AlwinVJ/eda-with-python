@@ -2,169 +2,101 @@
   {
     "id": "step-1",
     "order": 1,
-    "title": "Step 1",
-    "summary": "Understand the overall workflow before touching any code.",
+    "title": "Step 1 — Python Foundations",
+    "summary": "Get comfortable with core Python before touching any data libraries.",
     "actions": [
-      {
-        "verb": "Read",
-        "label": "Data Preprocessing & EDA Handbook",
-        "targetType": "handbook",
-        "targetSlug": "data-preprocessing-eda-handbook"
-      }
+      { "verb": "Learn", "label": "Python syntax, functions, and control flow" },
+      { "verb": "Practice", "label": "List comprehensions and file I/O" }
     ]
   },
   {
     "id": "step-2",
     "order": 2,
-    "title": "Step 2",
-    "summary": "Build the foundation every later project relies on.",
+    "title": "Step 2 — NumPy",
+    "summary": "Build the numerical foundation every later library relies on.",
     "actions": [
-      {
-        "verb": "Study",
-        "label": "NumPy Essentials",
-        "targetType": "handbook",
-        "targetSlug": "numpy-essentials"
-      },
-      {
-        "verb": "Complete",
-        "label": "NumPy Essentials exercises"
-      },
-      {
-        "verb": "Practice",
-        "label": "NumPy basics"
-      }
+      { "verb": "Study", "label": "NumPy Essentials", "targetType": "handbook", "targetSlug": "numpy-essentials" },
+      { "verb": "Practice", "label": "Array creation, indexing, and vectorized math" }
     ]
   },
   {
     "id": "step-3",
     "order": 3,
-    "title": "Step 3",
-    "summary": "Apply what you've learned to real data for the first time.",
+    "title": "Step 3 — Pandas",
+    "summary": "Learn the primary tool for working with tabular data in Python.",
     "actions": [
-      {
-        "verb": "Complete",
-        "label": "Project 1 \u2014 Tips Dataset",
-        "targetType": "project",
-        "targetSlug": "tips"
-      },
-      {
-        "verb": "Apply",
-        "label": "NumPy concepts"
-      },
-      {
-        "verb": "Understand",
-        "label": "Pandas fundamentals"
-      }
+      { "verb": "Study", "label": "Pandas Developer Handbook", "targetType": "handbook", "targetSlug": "pandas-developer-handbook" },
+      { "verb": "Practice", "label": "Series, DataFrames, indexing, and groupby" }
     ]
   },
   {
     "id": "step-4",
     "order": 4,
-    "title": "Step 4",
-    "summary": "Go deeper into cleaning and exploring real-world data.",
+    "title": "Step 4 — Data Cleaning",
+    "summary": "Turn raw, messy data into a reliable analysis-ready dataset.",
     "actions": [
-      {
-        "verb": "Study",
-        "label": "Pandas Developer Handbook",
-        "targetType": "handbook",
-        "targetSlug": "pandas-developer-handbook"
-      },
-      {
-        "verb": "Continue",
-        "label": "Project 1",
-        "targetType": "project",
-        "targetSlug": "tips"
-      },
-      {
-        "verb": "Perform",
-        "label": "Data cleaning"
-      },
-      {
-        "verb": "Perform",
-        "label": "Exploratory data analysis"
-      }
+      { "verb": "Read", "label": "Data Preprocessing & EDA Handbook", "targetType": "handbook", "targetSlug": "data-preprocessing-eda-handbook" },
+      { "verb": "Practice", "label": "Missing values, duplicates, and type fixes" }
     ]
   },
   {
     "id": "step-5",
     "order": 5,
-    "title": "Step 5",
-    "summary": "Turn your analysis into clear, readable visuals.",
+    "title": "Step 5 — Data Visualization",
+    "summary": "Turn your data into clear, readable charts.",
     "actions": [
-      {
-        "verb": "Study",
-        "label": "Matplotlib Developer Handbook",
-        "targetType": "handbook",
-        "targetSlug": "matplotlib-developer-handbook"
-      },
-      {
-        "verb": "Improve",
-        "label": "Visualizations"
-      },
-      {
-        "verb": "Complete",
-        "label": "Project 1",
-        "targetType": "project",
-        "targetSlug": "tips"
-      }
+      { "verb": "Study", "label": "Matplotlib Developer Handbook", "targetType": "handbook", "targetSlug": "matplotlib-developer-handbook" },
+      { "verb": "Study", "label": "Seaborn Developer Handbook", "targetType": "handbook", "targetSlug": "seaborn-developer-handbook" }
     ]
   },
   {
     "id": "step-6",
     "order": 6,
-    "title": "Step 6",
-    "summary": "Add statistical depth to your visual storytelling.",
+    "title": "Step 6 — Exploratory Data Analysis (EDA)",
+    "summary": "Combine cleaning and visualization to actually understand a dataset.",
     "actions": [
-      {
-        "verb": "Study",
-        "label": "Seaborn Developer Handbook",
-        "targetType": "handbook",
-        "targetSlug": "seaborn-developer-handbook"
-      },
-      {
-        "verb": "Create",
-        "label": "Statistical visualizations"
-      },
-      {
-        "verb": "Finish",
-        "label": "Project 1",
-        "targetType": "project",
-        "targetSlug": "tips"
-      }
+      { "verb": "Perform", "label": "Univariate and bivariate analysis" },
+      { "verb": "Investigate", "label": "Correlations, distributions, and outliers" }
     ]
   },
   {
     "id": "step-7",
     "order": 7,
-    "title": "Step 7",
-    "summary": "Keep building \u2014 each project introduces a new challenge.",
+    "title": "Step 7 — EDA Projects",
+    "summary": "Apply everything above to real datasets. Complete these before moving on to machine learning.",
     "actions": [
-      {
-        "verb": "Continue",
-        "label": "Titanic",
-        "targetType": "project",
-        "targetSlug": "titanic"
-      },
-      {
-        "verb": "Continue",
-        "label": "House Prices",
-        "targetType": "project",
-        "targetSlug": "house-prices"
-      },
-      {
-        "verb": "Continue",
-        "label": "Netflix",
-        "targetType": "project",
-        "targetSlug": "netflix-eda"
-      },
-      {
-        "verb": "Continue",
-        "label": "Superstore"
-      },
-      {
-        "verb": "Continue",
-        "label": "Customer Churn"
-      }
+      { "verb": "Complete", "label": "Tips Dataset", "targetType": "project", "targetSlug": "tips" },
+      { "verb": "Complete", "label": "Netflix EDA", "targetType": "project", "targetSlug": "netflix-eda" },
+      { "verb": "Complete", "label": "Video Game Sales Analysis", "targetType": "project", "targetSlug": "video-game-sales-analysis" }
+    ]
+  },
+  {
+    "id": "step-8",
+    "order": 8,
+    "title": "Step 8 — Feature Engineering",
+    "summary": "Craft the inputs that make machine learning models actually work.",
+    "actions": [
+      { "verb": "Learn", "label": "Encoding, scaling, and interaction features" },
+      { "verb": "Practice", "label": "Feature selection techniques" }
+    ]
+  },
+  {
+    "id": "step-9",
+    "order": 9,
+    "title": "Step 9 — Machine Learning",
+    "summary": "Learn the core supervised learning workflow with scikit-learn.",
+    "actions": [
+      { "verb": "Learn", "label": "Regression, classification, and cross-validation" },
+      { "verb": "Practice", "label": "Model evaluation and hyperparameter tuning" }
+    ]
+  },
+  {
+    "id": "step-10",
+    "order": 10,
+    "title": "Step 10 — End-to-End Machine Learning Projects",
+    "summary": "Ship a complete ML project — data in, trained model out. Only start after finishing the EDA projects.",
+    "actions": [
+      { "verb": "Complete", "label": "House Price Prediction", "targetType": "project", "targetSlug": "house-prices" }
     ]
   }
 ]
