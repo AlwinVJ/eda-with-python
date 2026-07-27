@@ -1,49 +1,20 @@
-import type { ProjectMetadata } from './types';
+// Backwards-compatible re-exports. The real data lives in `src/data/projects.ts`.
+export {
+  PROJECT_CATEGORIES,
+  groupProjectsByCategory,
+  getProjectCategoryMeta,
+} from '@/data/projects';
+export type { ProjectCategoryId, ProjectCategory } from '@/data/projects';
 
-export const ML_PROJECT_SLUGS = new Set<string>(['house-prices']);
+import { getProjectBySlug } from '@/data/projects';
 
-export type ProjectCategoryId = 'eda' | 'ml';
-
-export interface ProjectCategory {
-  id: ProjectCategoryId;
-  title: string;
-  description: string;
+export function getProjectCategory(slug: string) {
+  return getProjectBySlug(slug)?.category ?? 'eda';
 }
 
-export const PROJECT_CATEGORIES: ProjectCategory[] = [
-  {
-    id: 'eda',
-    title: 'EDA Projects',
-    description: 'Exploratory data analysis on real datasets — cleaning, visualization, and insight.',
-  },
-  {
-    id: 'ml',
-    title: 'End-to-End Machine Learning Projects',
-    description: 'Full ML workflows — from raw data through feature engineering to a trained, evaluated model.',
-  },
-];
-
-export function getProjectCategory(slug: string): ProjectCategoryId {
-  return ML_PROJECT_SLUGS.has(slug) ? 'ml' : 'eda';
-}
-
-export function groupProjectsByCategory(projects: ProjectMetadata[]): Record<ProjectCategoryId, ProjectMetadata[]> {
-  const groups: Record<ProjectCategoryId, ProjectMetadata[]> = { eda: [], ml: [] };
-  for (const p of projects) groups[getProjectCategory(p.slug)].push(p);
-  return groups;
-}
-
-// Static import so Vite bundles the image URLs
-import tipsImg from '@/assets/projects/tips.jpg';
-import netflixImg from '@/assets/projects/netflix.jpg';
-import vgsalesImg from '@/assets/projects/vgsales.jpg';
-import houseImg from '@/assets/projects/house.jpg';
-import titanicImg from '@/assets/projects/titanic.jpg';
-
-export const PROJECT_IMAGES: Record<string, string> = {
-  tips: tipsImg,
-  'netflix-eda': netflixImg,
-  'video-game-sales-analysis': vgsalesImg,
-  'house-prices': houseImg,
-  titanic: titanicImg,
-};
+/** Kept only so any lingering imports don't break; consumers should read
+ *  `image` off the project object instead. */
+import { PROJECTS } from '@/data/projects';
+export const PROJECT_IMAGES: Record<string, string | undefined> = Object.fromEntries(
+  PROJECTS.map((p) => [p.slug, p.image]),
+);

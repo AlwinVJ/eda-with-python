@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
-import { getAllProjects, getAllHandbooks, getRepoStats } from '@/lib/content';
+import { getAllHandbooks, getRepoStats } from '@/lib/content';
+import { getFeaturedProjects } from '@/data/projects';
 import { ProjectCard } from '@/components/cards/ProjectCard';
 import { HandbookCard } from '@/components/cards/HandbookCard';
 
@@ -17,7 +18,7 @@ export const Route = createFileRoute('/')({
 });
 
 function HomePage() {
-  const featuredProjects = getAllProjects().slice(0, 3);
+  const featuredProjects = getFeaturedProjects();
   const latestHandbooks = getAllHandbooks().slice(0, 2);
   const stats = getRepoStats();
 

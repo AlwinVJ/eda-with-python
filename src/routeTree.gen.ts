@@ -9,47 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ResourcesRouteImport } from './routes/resources'
-import { Route as LearningGuideRouteImport } from './routes/learning-guide'
-import { Route as HandbooksRouteImport } from './routes/handbooks'
-import { Route as DocumentationRouteImport } from './routes/documentation'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CheatsheetsRouteImport } from './routes/cheatsheets'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CheatsheetsRouteImport } from './routes/cheatsheets'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DocumentationRouteImport } from './routes/documentation'
+import { Route as HandbooksRouteImport } from './routes/handbooks'
+import { Route as LearningGuideRouteImport } from './routes/learning-guide'
+import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as DatasetsIndexRouteImport } from './routes/datasets.index'
-import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as DatasetsSlugRouteImport } from './routes/datasets.$slug'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 
-const ResourcesRoute = ResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LearningGuideRoute = LearningGuideRouteImport.update({
-  id: '/learning-guide',
-  path: '/learning-guide',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HandbooksRoute = HandbooksRouteImport.update({
-  id: '/handbooks',
-  path: '/handbooks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DocumentationRoute = DocumentationRouteImport.update({
-  id: '/documentation',
-  path: '/documentation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheatsheetsRoute = CheatsheetsRouteImport.update({
-  id: '/cheatsheets',
-  path: '/cheatsheets',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -57,14 +32,34 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CheatsheetsRoute = CheatsheetsRouteImport.update({
+  id: '/cheatsheets',
+  path: '/cheatsheets',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentationRoute = DocumentationRouteImport.update({
+  id: '/documentation',
+  path: '/documentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HandbooksRoute = HandbooksRouteImport.update({
+  id: '/handbooks',
+  path: '/handbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningGuideRoute = LearningGuideRouteImport.update({
+  id: '/learning-guide',
+  path: '/learning-guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DatasetsIndexRoute = DatasetsIndexRouteImport.update({
@@ -72,14 +67,19 @@ const DatasetsIndexRoute = DatasetsIndexRouteImport.update({
   path: '/datasets/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
-  id: '/projects/$slug',
-  path: '/projects/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DatasetsSlugRoute = DatasetsSlugRouteImport.update({
   id: '/datasets/$slug',
   path: '/datasets/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/projects/$slug',
+  path: '/projects/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -188,46 +188,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/resources': {
-      id: '/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof ResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/learning-guide': {
-      id: '/learning-guide'
-      path: '/learning-guide'
-      fullPath: '/learning-guide'
-      preLoaderRoute: typeof LearningGuideRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/handbooks': {
-      id: '/handbooks'
-      path: '/handbooks'
-      fullPath: '/handbooks'
-      preLoaderRoute: typeof HandbooksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/documentation': {
-      id: '/documentation'
-      path: '/documentation'
-      fullPath: '/documentation'
-      preLoaderRoute: typeof DocumentationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cheatsheets': {
-      id: '/cheatsheets'
-      path: '/cheatsheets'
-      fullPath: '/cheatsheets'
-      preLoaderRoute: typeof CheatsheetsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -237,18 +202,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/cheatsheets': {
+      id: '/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/cheatsheets'
+      preLoaderRoute: typeof CheatsheetsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/': {
-      id: '/projects/'
-      path: '/projects'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof ProjectsIndexRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentation': {
+      id: '/documentation'
+      path: '/documentation'
+      fullPath: '/documentation'
+      preLoaderRoute: typeof DocumentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/handbooks': {
+      id: '/handbooks'
+      path: '/handbooks'
+      fullPath: '/handbooks'
+      preLoaderRoute: typeof HandbooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning-guide': {
+      id: '/learning-guide'
+      path: '/learning-guide'
+      fullPath: '/learning-guide'
+      preLoaderRoute: typeof LearningGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/datasets/': {
@@ -258,18 +251,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DatasetsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/$slug': {
-      id: '/projects/$slug'
-      path: '/projects/$slug'
-      fullPath: '/projects/$slug'
-      preLoaderRoute: typeof ProjectsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/datasets/$slug': {
       id: '/datasets/$slug'
       path: '/datasets/$slug'
       fullPath: '/datasets/$slug'
       preLoaderRoute: typeof DatasetsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -292,3 +292,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

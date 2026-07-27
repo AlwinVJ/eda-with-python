@@ -1,17 +1,17 @@
 import { Link } from '@tanstack/react-router';
 import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from 'lucide-react';
-import type { ProjectMetadata } from '@/lib/types';
-import { DifficultyBadge, StatusBadge, TechBadge } from '@/components/ui/badge';
+import { DifficultyBadge, StatusBadge, TechBadge, Badge } from '@/components/ui/badge';
 import { githubUrl } from '@/lib/content';
-import { PROJECT_IMAGES } from '@/lib/project-categories';
+import { getProjectCategoryMeta, type Project } from '@/data/projects';
 
-export function ProjectCard({ project }: { project: ProjectMetadata }) {
-  const image = PROJECT_IMAGES[project.slug];
+export function ProjectCard({ project }: { project: Project }) {
+  const image = project.image;
+  const category = getProjectCategoryMeta(project.category);
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-accent/40">
       <Link to="/projects/$slug" params={{ slug: project.slug }} className="block">
-        <div className="aspect-video overflow-hidden border-b border-border bg-muted">
+        <div className="relative aspect-video overflow-hidden border-b border-border bg-muted">
           {image ? (
             <img
               src={image}
@@ -26,6 +26,12 @@ export function ProjectCard({ project }: { project: ProjectMetadata }) {
               <ImageIcon className="h-8 w-8 text-muted-foreground/50" />
             </div>
           )}
+          <Badge
+            variant="default"
+            className="absolute left-3 top-3 bg-primary/90 text-primary-foreground backdrop-blur-sm"
+          >
+            {category.badge}
+          </Badge>
         </div>
       </Link>
 

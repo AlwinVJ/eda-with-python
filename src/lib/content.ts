@@ -8,11 +8,12 @@ import type {
   LearningGuideStepResolved,
   LearningGuideTargetType,
 } from './types';
+import { getProjectBySlug, getProjectsSorted } from '@/data/projects';
 
 // Build-time import of every metadata.json under src/content/. Vite's
 // import.meta.glob replaces this with a static map at bundle time — works
 // in both SSR and the browser with no filesystem access.
-const projectModules = import.meta.glob('../content/projects/*/metadata.json', { eager: true }) as Record<string, { default: ProjectMetadata }>;
+// Projects live in `src/data/projects.ts` (single source of truth).
 const handbookModules = import.meta.glob('../content/handbooks/*/metadata.json', { eager: true }) as Record<string, { default: HandbookMetadata }>;
 const cheatsheetModules = import.meta.glob('../content/cheatsheets/*/metadata.json', { eager: true }) as Record<string, { default: CheatsheetMetadata }>;
 const datasetModules = import.meta.glob('../content/datasets/*/metadata.json', { eager: true }) as Record<string, { default: DatasetMetadata }>;
@@ -34,10 +35,10 @@ function loadAll<T extends { slug: string }>(mods: Record<string, { default: T }
 }
 
 export function getAllProjects(): ProjectMetadata[] {
-  return loadAll(projectModules).sort((a, b) => a.title.localeCompare(b.title));
+  return getProjectsSorted();
 }
 export function getProject(slug: string) {
-  return getAllProjects().find((p) => p.slug === slug);
+  return getProjectBySlug(slug);
 }
 
 export function getAllHandbooks(): HandbookMetadata[] {

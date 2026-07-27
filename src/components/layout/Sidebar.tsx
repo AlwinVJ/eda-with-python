@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouterState } from '@tanstack/react-router';
+import { Link, useRouter, useRouterState } from '@tanstack/react-router';
 import { ChevronDown } from 'lucide-react';
 import { NAV_ITEMS, isNavItemActive, SITE_NAME, type NavItem } from '@/lib/constants';
-import { getAllProjects } from '@/lib/content';
-import { PROJECT_CATEGORIES, groupProjectsByCategory } from '@/lib/project-categories';
+import { PROJECT_CATEGORIES } from '@/data/projects';
 import { cn } from '@/lib/utils';
 
 export function Sidebar() {
@@ -42,14 +41,43 @@ export function NavLink({ item, pathname, onNavigate }: { item: NavItem; pathnam
   );
 }
 
+/**
+ * Smoothly scroll to a section on the /projects page. If the user is on a
+ * different route, navigate to /projects first and let the page's hashchange
+ * handler do the scroll.
+ */
+function useScrollToProjectSection() {
+  const router = useRouter();
+  return (anchor: string | null) => {
+    const targetHash = anchor ?? '';
+    const alreadyOnProjects = window.location.pathname === '/projects';
+    if (alreadyOnProjects) {
+      const newUrl = `/projects${targetHash ? `#${targetHash}` : ''}`;
+      window.history.replaceState(null, '', newUrl);
+      if (targetHash) {
+        const el = document.getElementById(targetHash);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      router.navigate({ to: '/projects', hash: targetHash || undefined });
+    }
+  };
+}
+
 export function ProjectsNavGroup({
   item, pathname, onNavigate,
 }: { item: NavItem; pathname: string; onNavigate: () => void }) {
   const active = isNavItemActive(item, pathname);
   const [open, setOpen] = useState(active);
   useEffect(() => { if (active) setOpen(true); }, [active]);
+  const scrollTo = useScrollToProjectSection();
 
-  const grouped = groupProjectsByCategory(getAllProjects());
+  const sections: { label: string; anchor: string | null }[] = [
+    { label: 'All Projects', anchor: null },
+    ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
+  ];
 
   return (
     <div>
@@ -74,51 +102,24 @@ export function ProjectsNavGroup({
         )}
       >
         <div className="overflow-hidden">
-          <div className="mt-1 space-y-2 pl-6">
-            <Link
-              to="/projects"
-              onClick={onNavigate}
-              className={cn(
-                'block rounded-md px-3 py-1 text-xs transition-colors',
-                pathname === '/projects'
-                  ? 'text-accent'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-            >
-              All projects
-            </Link>
-            {PROJECT_CATEGORIES.map((cat) => {
-              const items = grouped[cat.id];
-              if (!items || items.length === 0) return null;
-              return (
-                <div key={cat.id}>
-                  <div className="px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground/70">
-                    {cat.title}
-                  </div>
-                  <div className="mt-0.5 space-y-0.5">
-                    {items.map((p) => {
-                      const isActive = pathname === `/projects/${p.slug}`;
-                      return (
-                        <Link
-                          key={p.slug}
-                          to="/projects/$slug"
-                          params={{ slug: p.slug }}
-                          onClick={onNavigate}
-                          className={cn(
-                            'block truncate rounded-md px-3 py-1 text-xs transition-colors',
-                            isActive
-                              ? 'bg-accent/15 font-medium text-accent'
-                              : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                          )}
-                        >
-                          {p.title}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mt-1 space-y-0.5 pl-6">
+            {sections.map((s) => (
+              <button
+                key={s.label}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(s.anchor);
+                  onNavigate();
+                }}
+                className={cn(
+                  'block w-full truncate rounded-md px-3 py-1 text-left text-xs transition-colors',
+                  'text-muted-foreground hover:bg-muted hover:text-foreground',
+                )}
+              >
+                {s.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
