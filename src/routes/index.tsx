@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { getAllHandbooks, getRepoStats } from '@/lib/content';
 import { getFeaturedProjects } from '@/data/projects';
+import { getFeaturedReferences } from '@/data/references';
 import { ProjectCard } from '@/components/cards/ProjectCard';
 import { HandbookCard } from '@/components/cards/HandbookCard';
 
@@ -20,6 +21,7 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   const featuredProjects = getFeaturedProjects();
   const latestHandbooks = getAllHandbooks().slice(0, 2);
+  const featuredReferences = getFeaturedReferences();
   const stats = getRepoStats();
 
   return (
@@ -63,6 +65,28 @@ function HomePage() {
           {latestHandbooks.map((h) => <HandbookCard key={h.slug} handbook={h} />)}
         </div>
       </section>
+
+      {featuredReferences.length > 0 && (
+        <section>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Featured References</h2>
+            <Link to="/references" className="text-sm text-accent hover:text-primary hover:underline transition-colors">View all →</Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredReferences.map((r) => (
+              <a key={r.id} href={r.url} target="_blank" rel="noreferrer"
+                className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-accent/40">
+                <div className="min-w-0">
+                  <div className="text-xs uppercase tracking-wide text-muted-foreground">{r.type}</div>
+                  <h3 className="mt-1 text-sm font-medium group-hover:text-accent">{r.title}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{r.description}</p>
+                </div>
+                <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section>
         <h2 className="mb-4 text-lg font-semibold">At a Glance</h2>

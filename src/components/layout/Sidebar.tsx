@@ -3,6 +3,8 @@ import { Link, useRouter, useRouterState } from '@tanstack/react-router';
 import { ChevronDown } from 'lucide-react';
 import { NAV_ITEMS, isNavItemActive, SITE_NAME, type NavItem } from '@/lib/constants';
 import { PROJECT_CATEGORIES } from '@/data/projects';
+import { REFERENCE_TYPES } from '@/data/references';
+import { DOC_CATEGORIES } from '@/data/docs';
 import { cn } from '@/lib/utils';
 
 export function Sidebar() {
@@ -14,14 +16,51 @@ export function Sidebar() {
         <span className="font-mono text-sm font-semibold">{SITE_NAME}</span>
       </div>
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-4">
-        {NAV_ITEMS.map((item) =>
-          item.href === '/projects'
-            ? <ProjectsNavGroup key={item.href} item={item} pathname={pathname} onNavigate={() => {}} />
-            : <NavLink key={item.href} item={item} pathname={pathname} />
-        )}
+        {NAV_ITEMS.map((item) => renderNavItem(item, pathname))}
       </nav>
     </aside>
   );
+}
+
+/** Render the right variant for each top-level nav item. */
+export function renderNavItem(item: NavItem, pathname: string, onNavigate: () => void = () => {}) {
+  if (item.href === '/projects') {
+    return (
+      <ScrollNavGroup
+        key={item.href}
+        item={item}
+        pathname={pathname}
+        onNavigate={onNavigate}
+        basePath="/projects"
+        sections={[
+          { label: 'All Projects', anchor: null },
+          ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
+        ]}
+      />
+    );
+  }
+  if (item.href === '/documentation') {
+    // Documentation collapses into topic categories that scroll on /docs.
+    // Categories come from `src/data/docs.ts` (imported lazily to avoid a
+    // circular sidebar-icon import cycle at build time).
+    return <DocumentationNavGroup key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />;
+  }
+  if (item.href === '/references') {
+    return (
+      <ScrollNavGroup
+        key={item.href}
+        item={item}
+        pathname={pathname}
+        onNavigate={onNavigate}
+        basePath="/references"
+        sections={[
+          { label: 'All References', anchor: null },
+          ...REFERENCE_TYPES.map((t) => ({ label: t.title, anchor: t.anchor })),
+        ]}
+      />
+    );
+  }
+  return <NavLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />;
 }
 
 export function NavLink({ item, pathname, onNavigate }: { item: NavItem; pathname: string; onNavigate?: () => void }) {
@@ -42,17 +81,17 @@ export function NavLink({ item, pathname, onNavigate }: { item: NavItem; pathnam
 }
 
 /**
- * Smoothly scroll to a section on the /projects page. If the user is on a
- * different route, navigate to /projects first and let the page's hashchange
- * handler do the scroll.
+ * Smoothly scroll to a section on a given base page. If the user is on a
+ * different route, navigate first and let the page's own hash handler do the
+ * scroll on arrival.
  */
-function useScrollToProjectSection() {
+function useScrollToSection() {
   const router = useRouter();
-  return (anchor: string | null) => {
+  return (basePath: string, anchor: string | null) => {
     const targetHash = anchor ?? '';
-    const alreadyOnProjects = window.location.pathname === '/projects';
-    if (alreadyOnProjects) {
-      const newUrl = `/projects${targetHash ? `#${targetHash}` : ''}`;
+    const alreadyOnPage = window.location.pathname === basePath;
+    if (alreadyOnPage) {
+      const newUrl = `${basePath}${targetHash ? `#${targetHash}` : ''}`;
       window.history.replaceState(null, '', newUrl);
       if (targetHash) {
         const el = document.getElementById(targetHash);
@@ -61,23 +100,31 @@ function useScrollToProjectSection() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
-      router.navigate({ to: '/projects', hash: targetHash || undefined });
+      router.navigate({ to: basePath, hash: targetHash || undefined });
     }
   };
 }
 
-export function ProjectsNavGroup({
-  item, pathname, onNavigate,
-}: { item: NavItem; pathname: string; onNavigate: () => void }) {
+interface ScrollSection { label: string; anchor: string | null }
+
+/**
+ * A collapsible sidebar group whose sub-items smoothly scroll to anchors on
+ * a base page. Reused by Projects, Documentation, and References — all three
+ * work the same way, only the data changes.
+ */
+export function ScrollNavGroup({
+  item, pathname, onNavigate, basePath, sections,
+}: {
+  item: NavItem;
+  pathname: string;
+  onNavigate: () => void;
+  basePath: string;
+  sections: ScrollSection[];
+}) {
   const active = isNavItemActive(item, pathname);
   const [open, setOpen] = useState(active);
   useEffect(() => { if (active) setOpen(true); }, [active]);
-  const scrollTo = useScrollToProjectSection();
-
-  const sections: { label: string; anchor: string | null }[] = [
-    { label: 'All Projects', anchor: null },
-    ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
-  ];
+  const scrollTo = useScrollToSection();
 
   return (
     <div>
@@ -109,13 +156,10 @@ export function ProjectsNavGroup({
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollTo(s.anchor);
+                  scrollTo(basePath, s.anchor);
                   onNavigate();
                 }}
-                className={cn(
-                  'block w-full truncate rounded-md px-3 py-1 text-left text-xs transition-colors',
-                  'text-muted-foreground hover:bg-muted hover:text-foreground',
-                )}
+                className="block w-full truncate rounded-md px-3 py-1 text-left text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 {s.label}
               </button>
@@ -124,5 +168,41 @@ export function ProjectsNavGroup({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Documentation gets its own component because it links to the classic
+ * /documentation hub AND expands into topic categories that scroll on /docs.
+ */
+function DocumentationNavGroup({
+  item, pathname, onNavigate,
+}: { item: NavItem; pathname: string; onNavigate: () => void }) {
+  const sections: ScrollSection[] = [
+    { label: 'All Documentation', anchor: null },
+    ...DOC_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
+  ];
+  return (
+    <ScrollNavGroup
+      item={item}
+      pathname={pathname}
+      onNavigate={onNavigate}
+      basePath="/docs"
+      sections={sections}
+    />
+  );
+}
+
+/** Kept for backwards compatibility with existing MobileNav imports. */
+export function ProjectsNavGroup(props: { item: NavItem; pathname: string; onNavigate: () => void }) {
+  return (
+    <ScrollNavGroup
+      {...props}
+      basePath="/projects"
+      sections={[
+        { label: 'All Projects', anchor: null },
+        ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
+      ]}
+    />
   );
 }

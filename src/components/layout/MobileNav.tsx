@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link, useRouterState } from '@tanstack/react-router';
+import { useRouterState } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
-import { NAV_ITEMS, isNavItemActive, SITE_NAME } from '@/lib/constants';
-import { NavLink, ProjectsNavGroup } from './Sidebar';
+import { NAV_ITEMS, SITE_NAME } from '@/lib/constants';
+import { renderNavItem } from './Sidebar';
 import { cn } from '@/lib/utils';
 
 export function MobileNav() {
@@ -71,13 +71,7 @@ export function MobileNav() {
               </button>
             </div>
             <div className="min-h-0 space-y-0.5 overflow-y-auto px-3 py-3 pb-4">
-              {NAV_ITEMS.map((item) =>
-                item.href === '/projects' ? (
-                  <ProjectsNavGroup key={item.href} item={item} pathname={pathname} onNavigate={close} />
-                ) : (
-                  <MobileTopLink key={item.href} href={item.href} label={item.label} icon={item.icon} active={isNavItemActive(item, pathname)} onNavigate={close} />
-                )
-              )}
+              {NAV_ITEMS.map((item) => renderNavItem(item, pathname, close))}
             </div>
           </nav>
         </div>
@@ -86,29 +80,3 @@ export function MobileNav() {
   );
 }
 
-function MobileTopLink({
-  href, label, icon: Icon, active, onNavigate,
-}: {
-  href: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  active: boolean;
-  onNavigate: () => void;
-}) {
-  return (
-    <Link
-      to={href}
-      onClick={onNavigate}
-      className={cn(
-        'flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors',
-        active ? 'bg-accent/15 font-medium text-accent' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-      )}
-    >
-      <Icon className="h-4 w-4" />
-      {label}
-    </Link>
-  );
-}
-
-// Silence unused import warning: NavLink is re-exported convenience for consumers.
-void NavLink;

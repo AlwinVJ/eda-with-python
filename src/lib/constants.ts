@@ -1,4 +1,4 @@
-import { Home, Compass, FolderKanban, BookOpen, Info, Mail } from 'lucide-react';
+import { Home, Compass, FolderKanban, BookOpen, Library, Info, Mail } from 'lucide-react';
 import type { ComponentType } from 'react';
 
 export const SITE_NAME = 'EDA-With-Python';
@@ -19,8 +19,9 @@ export const NAV_ITEMS: NavItem[] = [
     href: '/documentation',
     label: 'Documentation',
     icon: BookOpen,
-    matchPrefixes: ['/handbooks', '/cheatsheets', '/datasets', '/resources'],
+    matchPrefixes: ['/docs', '/handbooks', '/cheatsheets', '/datasets', '/resources'],
   },
+  { href: '/references', label: 'References', icon: Library },
   { href: '/about', label: 'About', icon: Info },
   { href: '/contact', label: 'Contact', icon: Mail },
 ];
