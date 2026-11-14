@@ -3,9 +3,10 @@ name: Deploy to GitHub Pages
 on:
   # Allows manual triggering when ready to deploy
   workflow_dispatch:
-  # When ready to enable continuous deployment on push, uncomment the following block:
-  # push:
-  #   branches: [main]
+  # Enable continuous deployment on push:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -18,7 +19,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -57,7 +58,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

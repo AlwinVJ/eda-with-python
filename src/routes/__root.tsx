@@ -11,7 +11,8 @@ import {
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { ThemeProvider, themeNoFlashScript } from "@/lib/theme";
+import { ThemeProvider } from "@/lib/theme";
+import { themeNoFlashScript } from "@/lib/theme-context";
 import { Topbar } from "@/components/layout/Topbar";
 import { BackToTop } from "@/components/BackToTop";
 import { SITE_TAGLINE } from "@/lib/constants";

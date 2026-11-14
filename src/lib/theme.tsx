@@ -1,12 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { THEME_STORAGE_KEY } from "./constants";
-
-type Theme = "light" | "dark";
-type ThemeCtx = { theme: Theme; toggle: () => void; setTheme: (t: Theme) => void };
-
-const ThemeContext = createContext<ThemeCtx | null>(null);
-
-export const themeNoFlashScript = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='light'||s==='dark'?s:(m?'dark':'light');var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;}catch(e){}})();`;
+import { ThemeContext, type Theme } from "./theme-context";
 
 function readInitial(): Theme {
   if (typeof document === "undefined") return "light";
@@ -53,10 +47,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <ThemeContext.Provider value={{ theme, toggle, setTheme }}>{children}</ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
-  return ctx;
 }
