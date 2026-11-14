@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Github, FileText, NotebookPen, Database, ExternalLink } from "lucide-react";
 import {
   getDataset,
@@ -42,6 +43,18 @@ export function ProjectDetailLayout({
     project.relatedCheatsheets?.includes(c.slug),
   );
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hashId = window.location.hash.slice(1);
+      const target = document.getElementById(hashId);
+      if (target) {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+  }, []);
+
   return (
     <article className="space-y-10">
       <header className="space-y-3 border-b border-border pb-6">
@@ -65,7 +78,7 @@ export function ProjectDetailLayout({
         PROJECT_SECTION_ORDER.filter(({ id }) => details[id]).map(({ id, title }) => {
           const s = details[id]!;
           return (
-            <Section key={id} title={title}>
+            <Section key={id} id={id} title={title}>
               <div
                 className={s.placeholder ? "rounded-lg border border-dashed border-border p-3" : ""}
               >
@@ -350,9 +363,17 @@ export function ProjectDetailLayout({
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  id,
+  title,
+  children,
+}: {
+  id?: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <section>
+    <section id={id} className="scroll-mt-20">
       <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         {title}
       </h2>
