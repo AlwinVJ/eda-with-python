@@ -16,6 +16,10 @@
  *     appears under, its badge label, and the sidebar it scrolls to.
  *  4. Set `featured: true` if you want it on the Home page.
  *  5. Fill in the standard project metadata (title, description, workflow…).
+ *  6. (Optional) For a rich detail page, create
+ *     `src/data/projectDetails/<name>.ts` and register it in
+ *     `src/data/projectDetails/index.ts`. Without it, the detail page falls
+ *     back to the standard sections built from this metadata.
  *
  *  The Projects page, sidebar, category badges, and Featured Projects list
  *  will update automatically. No component code needs to change.
@@ -38,6 +42,8 @@ import netflixImg from '@/assets/projects/netflix.jpg';
 import vgsalesImg from '@/assets/projects/vgsales.jpg';
 import houseImg from '@/assets/projects/house.jpg';
 import titanicImg from '@/assets/projects/titanic.jpg';
+import mentalHealthImg from '@/assets/projects/mental-health.jpg';
+import creditRiskImg from '@/assets/projects/credit-risk.jpg';
 
 export type ProjectCategoryId = 'eda' | 'ml';
 
@@ -78,7 +84,7 @@ export interface Project extends ProjectMetadata {
 
 /**
  * Add new projects here. Order within the array doesn't matter — the site
- * sorts projects alphabetically inside each category.
+ * sorts by `order`, then alphabetically, inside each category.
  */
 export const PROJECTS: Project[] = [
   {
@@ -265,7 +271,9 @@ export const PROJECTS: Project[] = [
     category: 'ml',
     featured: true,
     image: houseImg,
-    slug: 'house-prices',
+    order: 1,
+    slug: 'house-price-prediction',
+    legacySlugs: ['house-prices'],
     title: 'House Price Prediction',
     description:
       'End-to-end machine learning project on the Ames Housing dataset — from data cleaning and feature engineering through regularized regression and gradient boosting models to predict final home sale prices.',
@@ -298,6 +306,54 @@ export const PROJECTS: Project[] = [
     relatedHandbooks: ['pandas-developer-handbook'],
     estimatedTime: '5-6 hours',
   },
+  {
+    type: 'project',
+    category: 'ml',
+    featured: true,
+    image: mentalHealthImg,
+    order: 2,
+    slug: 'mental-health-signal',
+    title: 'Mental Health Signal',
+    description:
+      'End-to-end machine learning project that estimates a student\'s mental health score (0–10) from social media usage, sleep, study habits and stress, served through a FastAPI backend and a web interface.',
+    difficulty: 'intermediate',
+    status: 'completed',
+    tags: ['regression', 'machine-learning', 'mental-health'],
+    lastUpdated: '2026-11-12',
+    githubPath: '',
+    githubRepoUrl: 'https://github.com/AlwinVJ/Mental-Health-Score',
+    liveDemoUrl: 'https://mental-health-score-mbgd.onrender.com/',
+    dataset: '',
+    librariesUsed: ['pandas', 'numpy', 'scikit-learn', 'matplotlib', 'seaborn', 'FastAPI', 'Pydantic', 'Uvicorn', 'Docker'],
+    skillsLearned: ['ColumnTransformer pipelines', 'High-cardinality grouping', 'Random Forest regression', 'Hyperparameter tuning', 'Model serving with FastAPI'],
+    businessProblem: 'Estimate a student\'s mental health score from lifestyle, digital-usage and stress factors.',
+    workflow: [],
+    files: {},
+  },
+  {
+    type: 'project',
+    category: 'ml',
+    featured: true,
+    image: creditRiskImg,
+    order: 3,
+    slug: 'credit-risk-assessment',
+    title: 'Credit Risk Assessment System',
+    description:
+      'End-to-end loan-default prediction with XGBoost, probability calibration and SHAP analysis, served through FastAPI and the CredWise web dashboard.',
+    difficulty: 'intermediate',
+    status: 'completed',
+    tags: ['classification', 'machine-learning', 'credit-risk'],
+    lastUpdated: '2026-11-14',
+    githubPath: '',
+    githubRepoUrl: 'https://github.com/AlwinVJ/Credit-Risk-Assessment',
+    liveDemoUrl: 'https://credit-risk-assessment-5cnu.onrender.com/',
+    dataset: '',
+    librariesUsed: ['pandas', 'numpy', 'scikit-learn', 'XGBoost', 'SHAP', 'matplotlib', 'seaborn', 'Joblib', 'FastAPI', 'Pydantic', 'Uvicorn', 'Docker'],
+    skillsLearned: ['Imbalanced classification', 'ColumnTransformer pipelines', 'XGBoost tuning', 'Probability calibration', 'Threshold evaluation', 'SHAP explanations', 'Model serving with FastAPI'],
+    businessProblem: 'Estimate loan-default probability from applicant, loan and credit-history features for educational credit-risk decision support.',
+    workflow: [],
+    files: {},
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -305,7 +361,9 @@ export const PROJECTS: Project[] = [
 // ---------------------------------------------------------------------------
 
 export function getProjectsSorted(): Project[] {
-  return [...PROJECTS].sort((a, b) => a.title.localeCompare(b.title));
+  return [...PROJECTS].sort(
+    (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity) || a.title.localeCompare(b.title),
+  );
 }
 
 export function getFeaturedProjects(): Project[] {
@@ -314,6 +372,11 @@ export function getFeaturedProjects(): Project[] {
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug);
+}
+
+/** Resolves an old slug (e.g. 'house-prices') to its current project. */
+export function getProjectByLegacySlug(slug: string): Project | undefined {
+  return PROJECTS.find((p) => p.legacySlugs?.includes(slug));
 }
 
 export function getProjectCategoryMeta(id: ProjectCategoryId): ProjectCategory {
@@ -326,4 +389,10 @@ export function groupProjectsByCategory(
   const groups: Record<ProjectCategoryId, Project[]> = { eda: [], ml: [] };
   for (const p of projects) groups[p.category].push(p);
   return groups;
+}
+
+/** GitHub link for a project, or undefined if none is configured yet. */
+export function getProjectRepoUrl(p: Project, base: (path: string) => string): string | undefined {
+  if (p.githubRepoUrl) return p.githubRepoUrl;
+  return p.githubPath ? base(p.githubPath) : undefined;
 }

@@ -96,7 +96,7 @@
     "title": "Step 10 — End-to-End Machine Learning Projects",
     "summary": "Ship a complete ML project — data in, trained model out. Only start after finishing the EDA projects.",
     "actions": [
-      { "verb": "Complete", "label": "House Price Prediction", "targetType": "project", "targetSlug": "house-prices" }
+      { "verb": "Complete", "label": "House Price Prediction", "targetType": "project", "targetSlug": "house-price-prediction" }
     ]
   }
 ]

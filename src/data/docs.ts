@@ -49,19 +49,19 @@ import {
   Sigma,
   Brush,
   type LucideIcon,
-} from 'lucide-react';
-import type { Difficulty } from '@/lib/types';
+} from "lucide-react";
+import type { Difficulty } from "@/lib/types";
 
 export type DocCategoryId =
-  | 'python'
-  | 'numpy'
-  | 'pandas'
-  | 'data-cleaning'
-  | 'data-visualization'
-  | 'eda'
-  | 'feature-engineering'
-  | 'machine-learning'
-  | 'deployment';
+  | "python"
+  | "numpy"
+  | "pandas"
+  | "data-cleaning"
+  | "data-visualization"
+  | "eda"
+  | "feature-engineering"
+  | "machine-learning"
+  | "deployment";
 
 export interface DocCategory {
   id: DocCategoryId;
@@ -74,15 +74,78 @@ export interface DocCategory {
 }
 
 export const DOC_CATEGORIES: DocCategory[] = [
-  { id: 'python',              title: 'Python',              anchor: 'python',              order: 1, icon: Code2,     description: 'Language basics that every later library relies on.' },
-  { id: 'numpy',               title: 'NumPy',               anchor: 'numpy',               order: 2, icon: Sigma,     description: 'The numerical foundation for data work in Python.' },
-  { id: 'pandas',              title: 'Pandas',              anchor: 'pandas',              order: 3, icon: Database,  description: 'Tabular data manipulation with DataFrames.' },
-  { id: 'data-cleaning',       title: 'Data Cleaning',       anchor: 'data-cleaning',       order: 4, icon: Wrench,    description: 'Turn raw, messy data into an analysis-ready dataset.' },
-  { id: 'data-visualization',  title: 'Data Visualization',  anchor: 'data-visualization',  order: 5, icon: Brush,     description: 'Communicate findings with clear, readable charts.' },
-  { id: 'eda',                 title: 'Exploratory Data Analysis', anchor: 'eda',           order: 6, icon: LineChart, description: 'Explore, question, and understand a dataset.' },
-  { id: 'feature-engineering', title: 'Feature Engineering', anchor: 'feature-engineering', order: 7, icon: Layers,    description: 'Design inputs that make models perform better.' },
-  { id: 'machine-learning',    title: 'Machine Learning',    anchor: 'machine-learning',    order: 8, icon: Sparkles,  description: 'Train, tune, and evaluate models.' },
-  { id: 'deployment',          title: 'Deployment',          anchor: 'deployment',          order: 9, icon: Rocket,    description: 'Ship models and dashboards to production.' },
+  {
+    id: "python",
+    title: "Python",
+    anchor: "python",
+    order: 1,
+    icon: Code2,
+    description: "Language basics that every later library relies on.",
+  },
+  {
+    id: "numpy",
+    title: "NumPy",
+    anchor: "numpy",
+    order: 2,
+    icon: Sigma,
+    description: "The numerical foundation for data work in Python.",
+  },
+  {
+    id: "pandas",
+    title: "Pandas",
+    anchor: "pandas",
+    order: 3,
+    icon: Database,
+    description: "Tabular data manipulation with DataFrames.",
+  },
+  {
+    id: "data-cleaning",
+    title: "Data Cleaning",
+    anchor: "data-cleaning",
+    order: 4,
+    icon: Wrench,
+    description: "Turn raw, messy data into an analysis-ready dataset.",
+  },
+  {
+    id: "data-visualization",
+    title: "Data Visualization",
+    anchor: "data-visualization",
+    order: 5,
+    icon: Brush,
+    description: "Communicate findings with clear, readable charts.",
+  },
+  {
+    id: "eda",
+    title: "Exploratory Data Analysis",
+    anchor: "eda",
+    order: 6,
+    icon: LineChart,
+    description: "Explore, question, and understand a dataset.",
+  },
+  {
+    id: "feature-engineering",
+    title: "Feature Engineering",
+    anchor: "feature-engineering",
+    order: 7,
+    icon: Layers,
+    description: "Design inputs that make models perform better.",
+  },
+  {
+    id: "machine-learning",
+    title: "Machine Learning",
+    anchor: "machine-learning",
+    order: 8,
+    icon: Sparkles,
+    description: "Train, tune, and evaluate models.",
+  },
+  {
+    id: "deployment",
+    title: "Deployment",
+    anchor: "deployment",
+    order: 9,
+    icon: Rocket,
+    description: "Ship models and dashboards to production.",
+  },
 ];
 
 export interface Doc {
@@ -107,167 +170,162 @@ export interface Doc {
 /** Add new documents here. */
 export const DOCS: Doc[] = [
   {
-    id: 'doc-python-foundations',
-    slug: 'python-foundations',
-    title: 'Python Foundations',
+    id: "doc-python-foundations",
+    slug: "python-foundations",
+    title: "Python Foundations",
     description:
-      'Core Python — syntax, data structures, functions, and file I/O — the baseline for every later library.',
-    category: 'python',
-    difficulty: 'beginner',
+      "Core Python — syntax, data structures, functions, and file I/O — the baseline for every later library.",
+    category: "python",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '30 min',
+    estimatedReadingTime: "30 min",
     icon: Code2,
-    tags: ['python', 'foundations'],
-    body: 'A gentle introduction to Python for data work: variables, control flow, functions, list comprehensions, and reading files.',
+    tags: ["python", "foundations"],
+    body: "A gentle introduction to Python for data work: variables, control flow, functions, list comprehensions, and reading files.",
   },
   {
-    id: 'doc-numpy-essentials',
-    slug: 'numpy-essentials',
-    title: 'NumPy Essentials',
+    id: "doc-numpy-essentials",
+    slug: "numpy-essentials",
+    title: "NumPy Essentials",
     description:
-      'Array creation, broadcasting, indexing, and vectorized operations — the foundation for every project.',
-    category: 'numpy',
-    difficulty: 'beginner',
+      "Array creation, broadcasting, indexing, and vectorized operations — the foundation for every project.",
+    category: "numpy",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '25 min',
+    estimatedReadingTime: "25 min",
     icon: Sigma,
     featured: true,
-    tags: ['numpy'],
+    tags: ["numpy"],
     resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/numpy-essentials/handbook.pdf',
+      "https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/numpy-essentials/handbook.pdf",
   },
   {
-    id: 'doc-numpy-developer',
-    slug: 'numpy-developer-handbook',
-    title: 'NumPy Developer Handbook',
+    id: "doc-numpy-developer",
+    slug: "numpy-developer-handbook",
+    title: "NumPy Developer Handbook",
     description:
-      'A deeper reference for NumPy — memory layout, advanced indexing, and performance patterns for larger projects.',
-    category: 'numpy',
-    difficulty: 'intermediate',
+      "A deeper reference for NumPy — memory layout, advanced indexing, and performance patterns for larger projects.",
+    category: "numpy",
+    difficulty: "intermediate",
     order: 2,
-    estimatedReadingTime: '45 min',
+    estimatedReadingTime: "45 min",
     icon: Sigma,
-    tags: ['numpy', 'reference'],
+    tags: ["numpy", "reference"],
     resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/numpy-developer-handbook/handbook.pdf',
+      "https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/numpy-developer-handbook/handbook.pdf",
   },
   {
-    id: 'doc-pandas-developer',
-    slug: 'pandas-developer-handbook',
-    title: 'Pandas Developer Handbook',
+    id: "doc-pandas-developer",
+    slug: "pandas-developer-handbook",
+    title: "Pandas Developer Handbook",
     description:
-      'A complete, project-oriented reference for data manipulation with pandas — indexing, grouping, merging, and performance.',
-    category: 'pandas',
-    difficulty: 'beginner',
+      "A complete, project-oriented reference for data manipulation with pandas — indexing, grouping, merging, and performance.",
+    category: "pandas",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '60 min',
+    estimatedReadingTime: "60 min",
     icon: Database,
     featured: true,
-    tags: ['pandas', 'reference'],
+    tags: ["pandas", "reference"],
     resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/pandas-developer-handbook/handbook.pdf',
+      "https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/pandas-developer-handbook/handbook.pdf",
   },
   {
-    id: 'doc-data-cleaning',
-    slug: 'data-preprocessing-eda-handbook',
-    title: 'Data Preprocessing & EDA Handbook',
+    id: "doc-data-cleaning",
+    slug: "data-preprocessing-eda-handbook",
+    title: "Data Preprocessing & EDA Handbook",
     description:
-      'The complete data preprocessing and exploratory analysis workflow used throughout every project on this platform.',
-    category: 'data-cleaning',
-    difficulty: 'beginner',
+      "The complete data preprocessing and exploratory analysis workflow used throughout every project on this platform.",
+    category: "data-cleaning",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '35 min',
+    estimatedReadingTime: "35 min",
     icon: Wrench,
     featured: true,
-    tags: ['overview', 'workflow', 'eda'],
-    resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/data-preprocessing-eda-handbook/handbook.pdf',
+    tags: ["overview", "workflow", "eda"],
+    resourceUrl: "https://www.stat.cmu.edu/~hseltman/309/Book/chapter4.pdf",
   },
   {
-    id: 'doc-matplotlib',
-    slug: 'matplotlib-developer-handbook',
-    title: 'Matplotlib Developer Handbook',
+    id: "doc-matplotlib",
+    slug: "matplotlib-developer-handbook",
+    title: "Matplotlib Developer Handbook",
     description:
-      'Building readable, publication-quality plots — figure/axes structure, styling, and multi-panel layouts.',
-    category: 'data-visualization',
-    difficulty: 'beginner',
+      "Building readable, publication-quality plots — figure/axes structure, styling, and multi-panel layouts.",
+    category: "data-visualization",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '40 min',
+    estimatedReadingTime: "40 min",
     icon: Brush,
-    tags: ['matplotlib', 'visualization'],
+    tags: ["matplotlib", "visualization"],
     resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/matplotlib-developer-handbook/handbook.pdf',
+      "https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/matplotlib-developer-handbook/handbook.pdf",
   },
   {
-    id: 'doc-seaborn',
-    slug: 'seaborn-developer-handbook',
-    title: 'Seaborn Developer Handbook',
+    id: "doc-seaborn",
+    slug: "seaborn-developer-handbook",
+    title: "Seaborn Developer Handbook",
     description:
-      'Statistical visualization patterns — distributions, categorical plots, and relationships between variables.',
-    category: 'data-visualization',
-    difficulty: 'intermediate',
+      "Statistical visualization patterns — distributions, categorical plots, and relationships between variables.",
+    category: "data-visualization",
+    difficulty: "intermediate",
     order: 2,
-    estimatedReadingTime: '30 min',
+    estimatedReadingTime: "30 min",
     icon: Brush,
-    tags: ['seaborn', 'visualization', 'statistics'],
+    tags: ["seaborn", "visualization", "statistics"],
     resourceUrl:
-      'https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/seaborn-developer-handbook/handbook.pdf',
+      "https://raw.githubusercontent.com/your-username/EDA-With-Python/main/docs/handbooks/seaborn-developer-handbook/handbook.pdf",
   },
   {
-    id: 'doc-eda-workflow',
-    slug: 'eda-workflow',
-    title: 'EDA Workflow',
-    description:
-      'A repeatable questioning-and-visualization loop for exploring any new dataset.',
-    category: 'eda',
-    difficulty: 'beginner',
+    id: "doc-eda-workflow",
+    slug: "eda-workflow",
+    title: "EDA Workflow",
+    description: "A repeatable questioning-and-visualization loop for exploring any new dataset.",
+    category: "eda",
+    difficulty: "beginner",
     order: 1,
-    estimatedReadingTime: '20 min',
+    estimatedReadingTime: "20 min",
     icon: LineChart,
-    tags: ['eda', 'workflow'],
-    body: 'Frame questions, inspect distributions, look for missingness patterns, and iterate.',
+    tags: ["eda", "workflow"],
+    body: "Frame questions, inspect distributions, look for missingness patterns, and iterate.",
   },
   {
-    id: 'doc-feature-engineering',
-    slug: 'feature-engineering-basics',
-    title: 'Feature Engineering Basics',
-    description:
-      'Encoding, scaling, interactions, and feature selection strategies before modelling.',
-    category: 'feature-engineering',
-    difficulty: 'intermediate',
+    id: "doc-feature-engineering",
+    slug: "feature-engineering-basics",
+    title: "Feature Engineering Basics",
+    description: "Encoding, scaling, interactions, and feature selection strategies before modelling.",
+    category: "feature-engineering",
+    difficulty: "intermediate",
     order: 1,
-    estimatedReadingTime: '30 min',
+    estimatedReadingTime: "30 min",
     icon: Layers,
-    tags: ['feature-engineering'],
-    body: 'Techniques for turning raw columns into signal-rich model inputs.',
+    tags: ["feature-engineering"],
+    body: "Techniques for turning raw columns into signal-rich model inputs.",
   },
   {
-    id: 'doc-ml-basics',
-    slug: 'machine-learning-basics',
-    title: 'Machine Learning Basics',
-    description:
-      'Model families, training loops, evaluation metrics, and validation strategies.',
-    category: 'machine-learning',
-    difficulty: 'intermediate',
+    id: "doc-ml-basics",
+    slug: "machine-learning-basics",
+    title: "Machine Learning Basics",
+    description: "Model families, training loops, evaluation metrics, and validation strategies.",
+    category: "machine-learning",
+    difficulty: "intermediate",
     order: 1,
-    estimatedReadingTime: '45 min',
+    estimatedReadingTime: "45 min",
     icon: Sparkles,
-    tags: ['ml', 'training'],
-    body: 'Choose the right family, train on a clean split, evaluate honestly.',
+    tags: ["ml", "training"],
+    body: "Choose the right family, train on a clean split, evaluate honestly.",
   },
   {
-    id: 'doc-deployment',
-    slug: 'model-deployment',
-    title: 'Model Deployment',
-    description:
-      'Package trained models, expose them behind an API, and monitor them in production.',
-    category: 'deployment',
-    difficulty: 'advanced',
+    id: "doc-deployment",
+    slug: "model-deployment",
+    title: "Model Deployment",
+    description: "Package trained models, expose them behind an API, and monitor them in production.",
+    category: "deployment",
+    difficulty: "advanced",
     order: 1,
-    estimatedReadingTime: '35 min',
+    estimatedReadingTime: "35 min",
     icon: Rocket,
-    tags: ['deployment', 'mlops'],
-    body: 'From notebook to service: packaging, serving, and monitoring.',
+    tags: ["deployment", "mlops"],
+    body: "From notebook to service: packaging, serving, and monitoring.",
   },
 ];
 

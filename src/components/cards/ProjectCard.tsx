@@ -2,11 +2,12 @@ import { Link } from '@tanstack/react-router';
 import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from 'lucide-react';
 import { DifficultyBadge, StatusBadge, TechBadge, Badge } from '@/components/ui/badge';
 import { githubUrl } from '@/lib/content';
-import { getProjectCategoryMeta, type Project } from '@/data/projects';
+import { getProjectCategoryMeta, getProjectRepoUrl, type Project } from '@/data/projects';
 
 export function ProjectCard({ project }: { project: Project }) {
   const image = project.image;
   const category = getProjectCategoryMeta(project.category);
+  const repoUrl = getProjectRepoUrl(project, githubUrl);
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-accent/40">
@@ -44,9 +45,11 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
           <DifficultyBadge difficulty={project.difficulty} />
           <StatusBadge status={project.status} />
-          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-            <Database className="h-3 w-3" /> {project.dataset}
-          </span>
+          {project.dataset && (
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+              <Database className="h-3 w-3" /> {project.dataset}
+            </span>
+          )}
         </div>
 
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -63,10 +66,12 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
 
         <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4 text-sm">
-          <a href={githubUrl(project.githubPath)} target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted">
-            <Github className="h-3.5 w-3.5" /> GitHub
-          </a>
+          {repoUrl && (
+            <a href={repoUrl} target="_blank" rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted">
+              <Github className="h-3.5 w-3.5" /> GitHub
+            </a>
+          )}
           {project.liveDemoUrl && (
             <a href={project.liveDemoUrl} target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted">

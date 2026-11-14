@@ -21,6 +21,6 @@
     { "name": "YearBuilt", "type": "int", "description": "Original construction year" },
     { "name": "Neighborhood", "type": "categorical", "description": "Physical location within Ames city limits" }
   ],
-  "usedInProjects": ["house-prices"],
+  "usedInProjects": ["house-price-prediction"],
   "downloadFile": "train.csv"
 }

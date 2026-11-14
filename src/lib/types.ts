@@ -28,6 +28,12 @@ export interface ProjectMetadata extends BaseMetadata {
   relatedCheatsheets?: string[];
   estimatedTime?: string;
   liveDemoUrl?: string;
+  /** Full repository URL (overrides githubPath-based link when set). */
+  githubRepoUrl?: string;
+  /** Display order (lower first). Falls back to title order. */
+  order?: number;
+  /** Old slugs that should redirect to this project. */
+  legacySlugs?: string[];
 }
 
 export interface HandbookMetadata extends BaseMetadata {
