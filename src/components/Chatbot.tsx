@@ -306,12 +306,21 @@ export function Chatbot() {
         )}
       </button>
 
+      {/* Backdrop for mobile & tablet (closed by tapping outside) */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-background/50 backdrop-blur-xs lg:hidden"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Floating Chatbot Modal / Panel */}
       {isOpen && (
         <section
           id="chatbot-panel"
           aria-label="Eddie - EDA Learning Assistant"
-          className="fixed bottom-20 right-4 left-4 z-50 flex h-[580px] max-h-[calc(100vh-6.5rem)] flex-col rounded-2xl border border-border bg-card text-card-foreground shadow-2xl transition-all sm:right-6 sm:left-auto sm:w-[370px] md:w-[380px]"
+          className="fixed bottom-20 right-4 left-4 z-50 flex h-[580px] max-h-[calc(100vh-6.5rem)] flex-col rounded-2xl border border-border bg-card text-card-foreground shadow-2xl transition-all sm:right-6 sm:left-auto sm:w-[360px] md:w-[370px] xl:w-[380px]"
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">

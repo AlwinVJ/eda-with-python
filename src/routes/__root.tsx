@@ -129,8 +129,8 @@ function RootComponent() {
       <ThemeProvider>
         <div className="flex min-h-screen min-w-0 flex-col bg-background">
           <Topbar />
-          <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
-            <div className="w-full min-w-0 mr-auto max-w-full md:max-w-3xl lg:ml-48 xl:ml-52 lg:max-w-[calc(100%-12rem)] xl:max-w-[calc(100%-13rem-26rem)] 2xl:max-w-[1280px]">
+          <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 pb-20 md:pb-24">
+            <div className="w-full min-w-0 mr-auto max-w-full md:max-w-3xl lg:ml-48 xl:ml-52 lg:max-w-[calc(100%-12rem-25rem)] xl:max-w-[min(calc(100%-13rem-26rem),1200px)]">
               <Outlet />
             </div>
           </main>
