@@ -8,11 +8,13 @@ import type { ProjectDetails } from "./types";
 import { housePricePrediction } from "./housePricePrediction";
 import { mentalHealthSignal } from "./mentalHealthSignal";
 import { creditRiskAssessment } from "./creditRiskAssessment";
+import { discountVsProfit } from "./discountVsProfit";
 
 const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "house-price-prediction": housePricePrediction,
   "mental-health-signal": mentalHealthSignal,
   "credit-risk-assessment": creditRiskAssessment,
+  "discount-vs-profit": discountVsProfit,
 };
 
 export function getProjectDetails(slug: string): ProjectDetails | undefined {

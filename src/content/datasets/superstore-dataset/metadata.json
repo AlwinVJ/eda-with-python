@@ -1,0 +1,43 @@
+{
+  "type": "dataset",
+  "slug": "superstore-dataset",
+  "title": "Sample Superstore Retail Dataset",
+  "description": "Historical commercial sales, profit, and discount transaction records across United States retail operations (2014–2017).",
+  "difficulty": "advanced",
+  "status": "completed",
+  "tags": ["retail", "tabular", "pricing", "financial"],
+  "lastUpdated": "2026-07-20",
+  "githubPath": "datasets/superstore-dataset",
+  "source": "Kaggle Sample Superstore",
+  "sourceUrl": "https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset",
+  "rows": 9994,
+  "columns": 21,
+  "features": [
+    { "name": "Sales", "type": "float", "description": "Transaction monetary sales volume" },
+    { "name": "Profit", "type": "float", "description": "Net financial profit or loss" },
+    { "name": "Discount", "type": "float", "description": "Discount rate applied (0.0 to 0.8)" },
+    { "name": "Quantity", "type": "integer", "description": "Number of units ordered" },
+    {
+      "name": "Category",
+      "type": "categorical",
+      "description": "Product category (Furniture, Office Supplies, Technology)"
+    },
+    {
+      "name": "Sub-Category",
+      "type": "categorical",
+      "description": "17 retail product sub-categories"
+    },
+    {
+      "name": "Segment",
+      "type": "categorical",
+      "description": "Customer tier (Consumer, Corporate, Home Office)"
+    },
+    {
+      "name": "Region",
+      "type": "categorical",
+      "description": "Geographical region (Central, East, South, West)"
+    }
+  ],
+  "usedInProjects": ["discount-vs-profit"],
+  "downloadFile": "Superstore.csv"
+}

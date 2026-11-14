@@ -11,6 +11,16 @@ import { DifficultyBadge, StatusBadge, TechBadge } from "@/components/ui/badge";
 import { getProjectRepoUrl, type Project } from "@/data/projects";
 import { PROJECT_SECTION_ORDER, type ProjectDetails } from "@/data/projectDetails";
 
+function getFileBlobUrl(project: Project, file: string): string {
+  if (file.startsWith("http://") || file.startsWith("https://")) {
+    return file;
+  }
+  if (project.githubRepoUrl) {
+    return `${project.githubRepoUrl}/blob/main/${file}`;
+  }
+  return githubBlobUrl(`${project.githubPath}/${file}`);
+}
+
 /**
  * Shared template for every project detail page. Renders long-form sections
  * from `src/data/projectDetails` when registered, otherwise the standard
@@ -107,6 +117,68 @@ export function ProjectDetailLayout({
                     ))}
                   </div>
                 )}
+                {s.subsections && (
+                  <div className="space-y-6 pt-2">
+                    {s.subsections.map((sub, idx) => (
+                      <div
+                        key={idx}
+                        className="space-y-3 rounded-xl border border-border/70 bg-card/60 p-4 sm:p-5"
+                      >
+                        <h3 className="text-sm font-semibold text-foreground tracking-tight">
+                          {sub.title}
+                        </h3>
+                        {sub.body && (
+                          <div className="space-y-2">
+                            {sub.body.map((p, i) => (
+                              <p key={i} className="text-sm text-muted-foreground leading-relaxed">
+                                {p}
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                        {sub.steps && (
+                          <ol className="list-inside list-decimal space-y-1 text-sm text-muted-foreground">
+                            {sub.steps.map((st, i) => (
+                              <li key={i}>{st}</li>
+                            ))}
+                          </ol>
+                        )}
+                        {sub.bullets && (
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {sub.bullets.map((b) => (
+                              <span
+                                key={b}
+                                className="rounded-md bg-muted px-2 py-0.5 text-xs text-foreground"
+                              >
+                                {b}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {sub.images && (
+                          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                            {sub.images.map((img) => (
+                              <figure
+                                key={img.src}
+                                className="overflow-hidden rounded-lg border border-border bg-card"
+                              >
+                                <img
+                                  src={img.src}
+                                  alt={img.caption}
+                                  loading="lazy"
+                                  className="w-full bg-white object-contain"
+                                />
+                                <figcaption className="px-3 py-2 text-xs text-muted-foreground">
+                                  {img.caption}
+                                </figcaption>
+                              </figure>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </Section>
           );
@@ -153,7 +225,7 @@ export function ProjectDetailLayout({
         <div className="flex flex-wrap gap-2 text-sm">
           {project.files.notebook && (
             <a
-              href={githubBlobUrl(`${project.githubPath}/${project.files.notebook}`)}
+              href={getFileBlobUrl(project, project.files.notebook)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
@@ -163,7 +235,7 @@ export function ProjectDetailLayout({
           )}
           {project.files.report && (
             <a
-              href={githubBlobUrl(`${project.githubPath}/${project.files.report}`)}
+              href={getFileBlobUrl(project, project.files.report)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
@@ -229,7 +301,7 @@ export function ProjectDetailLayout({
         </Section>
       )}
 
-      {project.visualizations && project.visualizations.length > 0 && (
+      {!details && project.visualizations && project.visualizations.length > 0 && (
         <Section title="Visualizations">
           <div className="grid gap-3 sm:grid-cols-2">
             {project.visualizations.map((v: string) => (

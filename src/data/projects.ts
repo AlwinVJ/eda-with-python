@@ -37,7 +37,7 @@
 
 import type { ProjectMetadata } from "@/lib/types";
 
-import tipsImg from "@/assets/projects/tips.jpg";
+import discountVsProfitCover from "@/assets/projects/discount-vs-profit-cover.svg";
 import netflixImg from "@/assets/projects/netflix.jpg";
 import vgsalesImg from "@/assets/projects/vgsales.jpg";
 import houseImg from "@/assets/projects/house.jpg";
@@ -91,45 +91,62 @@ export const PROJECTS: Project[] = [
     type: "project",
     category: "eda",
     featured: true,
-    image: tipsImg,
-    slug: "tips",
-    title: "Tips Dataset",
+    image: discountVsProfitCover,
+    slug: "discount-vs-profit",
+    title: "Retail Discount Strategy Analysis",
     description:
-      "Your first end-to-end project: apply NumPy and Pandas basics to clean and explore a small restaurant tips dataset, then visualize the results.",
-    difficulty: "beginner",
+      "An extensive exploratory data analysis investigating how retail discount strategies influence profitability, identifying loss-making discount thresholds, and deriving statistically validated pricing recommendations.",
+    difficulty: "advanced",
     status: "completed",
-    tags: ["numpy", "pandas", "eda", "first-project"],
-    lastUpdated: "2026-07-05",
-    githubPath: "projects/tips",
-    dataset: "tips-dataset",
-    librariesUsed: ["numpy", "pandas", "matplotlib", "seaborn"],
-    skillsLearned: [
-      "NumPy basics",
-      "Pandas fundamentals",
-      "Data cleaning",
-      "Basic and statistical visualization",
+    tags: ["eda", "retail", "pricing-strategy", "statistical-analysis", "hypothesis-testing"],
+    lastUpdated: "2026-07-20",
+    githubPath: "projects/discount-vs-profit",
+    githubRepoUrl: "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA",
+    dataset: "superstore-dataset",
+    librariesUsed: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "SciPy",
+      "Jupyter Notebook",
     ],
-    businessProblem: "Explore what factors are associated with higher tip amounts at a restaurant.",
+    skillsLearned: [
+      "Advanced EDA",
+      "Feature engineering",
+      "Statistical hypothesis testing",
+      "One-Way ANOVA",
+      "Independent t-tests",
+      "Correlation analysis",
+      "Threshold optimization",
+      "Pricing policy formulation",
+    ],
+    businessProblem:
+      "How do discount levels affect retail profitability, and what pricing strategy maximizes sustainable profit?",
     workflow: [
-      "Load the dataset with pandas and inspect its structure",
-      "Practice NumPy operations on the numeric columns",
-      "Clean and prepare the data",
-      "Explore relationships between bill size, party size, and tip",
-      "Visualize findings with Matplotlib, then Seaborn",
+      "Raw dataset ingestion and quality assessment",
+      "Data cleaning and uninformative column pruning",
+      "Business feature engineering and metric derivation",
+      "U.S. Federal Holiday calendar enrichment",
+      "Univariate and categorical distribution analysis",
+      "Bivariate discount vs profitability modeling",
+      "Identification of the 20% loss-making discount cliff",
+      "Statistical validation using ANOVA, t-tests, and correlation",
+      "Executive pricing guardrails and discount governance",
     ],
     results:
-      "Tip amount scales closely with total bill size; party size and day of week show smaller but visible effects.",
+      "Discount is the primary driver of profit margin erosion (r = -0.86). Transactions with discounts up to 20% remain profitable, but discounts above 20% produce consistent net losses across all customer segments and regions.",
     lessonsLearned:
-      "This project is designed to be revisited across Steps 2-6 of the Learning Guide, adding a new skill each pass.",
-    visualizations: ["assets/tip-vs-bill.png"],
-    files: { readme: "README.md", notebook: "notebook.ipynb" },
-    relatedHandbooks: [
-      "numpy-essentials",
-      "pandas-developer-handbook",
-      "matplotlib-developer-handbook",
-      "seaborn-developer-handbook",
-    ],
-    estimatedTime: "4-6 hours (revisited across multiple steps)",
+      "Revenue volume can create an illusion of business health ('profitless prosperity'). Calibrating discount thresholds using statistical validation protects unit margins and prevents structural losses.",
+    files: {
+      readme: "README.md",
+      notebook: "notebooks/05_EDA/05B_Bivariate_EDA.ipynb",
+      report:
+        "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA/blob/d123874b4f4123686d37ec3647861cc2aee7fc4b/reports/EDA%20final%20report.pdf",
+    },
+    estimatedTime: "15-20 hours (Comprehensive EDA & Statistical Study)",
+    order: 1,
   },
   {
     type: "project",

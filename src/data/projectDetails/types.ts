@@ -7,14 +7,27 @@ export type ProjectSectionId =
   | "problem"
   | "objectives"
   | "dataset"
-  | "eda"
+  | "workflow"
   | "preprocessing"
   | "features"
+  | "researchQuestions"
+  | "eda"
+  | "statisticalAnalysis"
   | "modeling"
   | "evaluation"
   | "results"
+  | "recommendations"
   | "deployment"
-  | "learnings";
+  | "learnings"
+  | "enhancements";
+
+export interface ProjectSubsection {
+  title: string;
+  body?: string[];
+  bullets?: string[];
+  steps?: string[];
+  images?: { src: string; caption: string }[];
+}
 
 export interface ProjectSection {
   /** Paragraphs of prose. */
@@ -25,6 +38,8 @@ export interface ProjectSection {
   steps?: string[];
   /** Figures (real project outputs) with captions. */
   images?: { src: string; caption: string }[];
+  /** Structured subsections. */
+  subsections?: ProjectSubsection[];
   /** Marks content as an editable placeholder (rendered with a "to be added" note). */
   placeholder?: boolean;
 }
@@ -34,15 +49,20 @@ export type ProjectDetails = Partial<Record<ProjectSectionId, ProjectSection>>;
 /** Canonical display order + headings. Sections without content are skipped. */
 export const PROJECT_SECTION_ORDER: { id: ProjectSectionId; title: string }[] = [
   { id: "overview", title: "Project Overview" },
-  { id: "problem", title: "Problem Statement" },
+  { id: "problem", title: "Business Problem & Objectives" },
   { id: "objectives", title: "Project Objectives" },
-  { id: "dataset", title: "Dataset Description" },
-  { id: "eda", title: "Exploratory Data Analysis" },
-  { id: "preprocessing", title: "Data Preprocessing" },
+  { id: "dataset", title: "Dataset Understanding" },
+  { id: "workflow", title: "Project Workflow" },
+  { id: "preprocessing", title: "Data Preparation & Cleaning" },
   { id: "features", title: "Feature Engineering" },
+  { id: "researchQuestions", title: "Research Questions" },
+  { id: "eda", title: "Exploratory Data Analysis" },
+  { id: "statisticalAnalysis", title: "Statistical Analysis & Validation" },
   { id: "modeling", title: "Model Development" },
   { id: "evaluation", title: "Model Evaluation" },
-  { id: "results", title: "Results and Insights" },
+  { id: "results", title: "Key Findings & Insights" },
+  { id: "recommendations", title: "Business Recommendations" },
   { id: "deployment", title: "Deployment" },
   { id: "learnings", title: "Key Learnings" },
+  { id: "enhancements", title: "Key Learnings & Future Enhancements" },
 ];

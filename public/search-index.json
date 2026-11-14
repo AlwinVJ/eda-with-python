@@ -1,6 +1,20 @@
 [
   {
     "type": "project",
+    "slug": "discount-vs-profit",
+    "title": "Retail Discount Strategy Analysis",
+    "description": "An extensive exploratory data analysis investigating how retail discount strategies influence profitability, identifying loss-making discount thresholds, and deriving statistically validated pricing recommendations.",
+    "tags": [
+      "eda",
+      "retail",
+      "pricing-strategy",
+      "statistical-analysis",
+      "hypothesis-testing"
+    ],
+    "href": "/projects/discount-vs-profit"
+  },
+  {
+    "type": "project",
     "slug": "house-prices",
     "title": "House Price Prediction",
     "description": "End-to-end machine learning project on the Ames Housing dataset — from data cleaning and feature engineering through regularized regression and gradient boosting models to predict final home sale prices.",
@@ -22,19 +36,6 @@
       "visualization"
     ],
     "href": "/projects/netflix-eda"
-  },
-  {
-    "type": "project",
-    "slug": "tips",
-    "title": "Tips Dataset",
-    "description": "Your first end-to-end project: apply NumPy and Pandas basics to clean and explore a small restaurant tips dataset, then visualize the results.",
-    "tags": [
-      "numpy",
-      "pandas",
-      "eda",
-      "first-project"
-    ],
-    "href": "/projects/tips"
   },
   {
     "type": "project",

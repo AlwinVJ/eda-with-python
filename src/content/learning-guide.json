@@ -92,9 +92,9 @@
     "actions": [
       {
         "verb": "Complete",
-        "label": "Tips Dataset",
+        "label": "Retail Discount Strategy Analysis",
         "targetType": "project",
-        "targetSlug": "tips"
+        "targetSlug": "discount-vs-profit"
       },
       {
         "verb": "Complete",
