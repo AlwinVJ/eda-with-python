@@ -11,6 +11,8 @@ import {
   Copy,
   Check,
   ChevronDown,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import {
   ONETAG_KEY,
@@ -22,6 +24,7 @@ import {
   getStarterQuestions,
   getEducationalFallbackResponse,
 } from "@/lib/onetag";
+import { cn } from "@/lib/utils";
 
 interface ChatMessage {
   id: string;
@@ -124,6 +127,7 @@ function FormattedMessage({ content }: { content: string }) {
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
@@ -145,13 +149,45 @@ export function Chatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    setIsMaximized(false);
+  }, []);
+
+  // Lock background scroll when maximized
+  useEffect(() => {
+    if (isOpen && isMaximized) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen, isMaximized]);
+
+  // Global Escape key listener: restores compact mode if maximized, otherwise closes
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        if (isMaximized) {
+          setIsMaximized(false);
+        } else {
+          handleClose();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, [isOpen, isMaximized, handleClose]);
+
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
       // Auto-focus input on open
       setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen, messages, scrollToBottom]);
+  }, [isOpen, isMaximized, messages, scrollToBottom]);
 
   const handleReset = () => {
     setMessages([
@@ -288,7 +324,14 @@ export function Chatbot() {
       <button
         id="chatbot-launcher"
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (isOpen) {
+            handleClose();
+          } else {
+            setIsOpen(true);
+            setIsMaximized(false);
+          }
+        }}
         aria-label={isOpen ? "Close Eddie" : "Open Eddie, your EDA learning assistant"}
         aria-expanded={isOpen}
         className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-primary-hover focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
@@ -306,11 +349,20 @@ export function Chatbot() {
         )}
       </button>
 
-      {/* Backdrop for mobile & tablet (closed by tapping outside) */}
-      {isOpen && (
+      {/* Backdrop for compact mode on mobile & tablet */}
+      {isOpen && !isMaximized && (
         <div
-          className="fixed inset-0 z-40 bg-background/50 backdrop-blur-xs lg:hidden"
-          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-40 bg-background/50 backdrop-blur-xs lg:hidden transition-opacity"
+          onClick={handleClose}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Full Backdrop for maximized mode across all screens */}
+      {isOpen && isMaximized && (
+        <div
+          className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm transition-opacity duration-300 animate-in fade-in"
+          onClick={() => setIsMaximized(false)}
           aria-hidden="true"
         />
       )}
@@ -320,10 +372,13 @@ export function Chatbot() {
         <section
           id="chatbot-panel"
           aria-label="Eddie - EDA Learning Assistant"
-          className="fixed bottom-20 right-4 left-4 z-50 flex h-[580px] max-h-[calc(100vh-6.5rem)] flex-col rounded-2xl border border-border bg-card text-card-foreground shadow-2xl transition-all sm:right-6 sm:left-auto sm:w-[360px] md:w-[370px] xl:w-[380px]"
+          className={cn(
+            "fixed z-50 flex flex-col rounded-2xl border border-border bg-card text-card-foreground shadow-2xl chatbot-panel",
+            isMaximized ? "chatbot-maximized" : "chatbot-compact",
+          )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3 shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs">
                 <Bot className="h-5 w-5" />
@@ -346,18 +401,31 @@ export function Chatbot() {
                 onClick={handleReset}
                 title="Restart conversation with Eddie"
                 aria-label="Restart conversation with Eddie"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <RotateCcw className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
-                title="Minimize chat"
-                aria-label="Minimize chat"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                onClick={() => setIsMaximized(!isMaximized)}
+                title={isMaximized ? "Restore compact window (Esc)" : "Maximize chat window"}
+                aria-label={isMaximized ? "Restore compact window" : "Maximize chat window"}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <ChevronDown className="h-5 w-5" />
+                {isMaximized ? (
+                  <Minimize2 className="h-4 w-4" />
+                ) : (
+                  <Maximize2 className="h-4 w-4" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                title="Close chat"
+                aria-label="Close chat"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <X className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -378,11 +446,13 @@ export function Chatbot() {
                   )}
 
                   <div
-                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 shadow-xs ${
+                    className={cn(
+                      "max-w-[85%] rounded-2xl px-3.5 py-2.5 shadow-xs",
+                      isMaximized && "sm:max-w-2xl xl:max-w-3xl",
                       isUser
                         ? "bg-primary text-primary-foreground"
-                        : "bg-muted/60 text-foreground border border-border/50"
-                    }`}
+                        : "bg-muted/60 text-foreground border border-border/50",
+                    )}
                   >
                     {message.content ? (
                       <FormattedMessage content={message.content} />
@@ -410,7 +480,9 @@ export function Chatbot() {
                 <p className="mb-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                   Suggested Questions for this page:
                 </p>
-                <div className="flex flex-col gap-1.5">
+                <div
+                  className={cn("flex flex-col gap-1.5", isMaximized && "sm:grid sm:grid-cols-2")}
+                >
                   {starterQuestions.map((q, idx) => (
                     <button
                       key={idx}
@@ -429,7 +501,7 @@ export function Chatbot() {
           </div>
 
           {/* Input Footer */}
-          <div className="border-t border-border bg-muted/20 p-3">
+          <div className="border-t border-border bg-muted/20 p-3 shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();

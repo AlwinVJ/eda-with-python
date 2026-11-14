@@ -150,3 +150,69 @@
     max-width: 100%;
   }
 }
+
+/* ============================================================================
+   Chatbot Window Styles — Smooth Maximize & Minimize Transitions
+   ============================================================================ */
+
+.chatbot-panel {
+  transition:
+    bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    right 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chatbot-compact {
+  bottom: 5rem;
+  right: 1rem;
+  left: 1rem;
+  top: auto;
+  width: auto;
+  height: 580px;
+  max-height: calc(100vh - 6.5rem);
+}
+
+@media (min-width: 640px) {
+  .chatbot-compact {
+    left: auto;
+    right: 1.5rem;
+    width: 360px;
+  }
+}
+
+@media (min-width: 768px) {
+  .chatbot-compact {
+    width: 370px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .chatbot-compact {
+    width: 380px;
+  }
+}
+
+.chatbot-maximized {
+  bottom: 0.75rem;
+  right: 0.75rem;
+  left: 0.75rem;
+  top: 0.75rem;
+  width: auto;
+  height: auto;
+}
+
+@media (min-width: 640px) {
+  .chatbot-maximized {
+    top: auto;
+    left: auto;
+    bottom: calc(50% - min(42.5vh, 25rem));
+    right: calc(50% - min(42.5vw, 32rem));
+    width: min(85vw, 64rem);
+    height: min(85vh, 50rem);
+  }
+}
