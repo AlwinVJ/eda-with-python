@@ -3,7 +3,6 @@ import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from "lucide-re
 import { DifficultyBadge, StatusBadge, TechBadge, Badge } from "@/components/ui/badge";
 import { githubUrl } from "@/lib/content";
 import { getProjectCategoryMeta, getProjectRepoUrl, type Project } from "@/data/projects";
-import { DiscountVsProfitCardVisual } from "./DiscountVsProfitCardVisual";
 
 export function ProjectCard({ project }: { project: Project }) {
   const image = project.image;
@@ -14,9 +13,7 @@ export function ProjectCard({ project }: { project: Project }) {
     <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-accent/40">
       <Link to="/projects/$slug" params={{ slug: project.slug }} className="block">
         <div className="relative aspect-video overflow-hidden border-b border-border bg-muted">
-          {project.slug === "discount-vs-profit" ? (
-            <DiscountVsProfitCardVisual />
-          ) : image ? (
+          {image ? (
             <img
               src={image}
               alt={`${project.title} cover`}

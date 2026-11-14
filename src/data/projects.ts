@@ -37,7 +37,7 @@
 
 import type { ProjectMetadata } from "@/lib/types";
 
-import discountVsProfitCover from "@/assets/projects/discount-vs-profit-cover.svg";
+import discountVsProfitImg from "@/assets/projects/discount-vs-profit.jpg";
 import netflixImg from "@/assets/projects/netflix.jpg";
 import vgsalesImg from "@/assets/projects/vgsales.jpg";
 import houseImg from "@/assets/projects/house.jpg";
@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
     type: "project",
     category: "eda",
     featured: true,
-    image: discountVsProfitCover,
+    image: discountVsProfitImg,
     slug: "discount-vs-profit",
     title: "Retail Discount Strategy Analysis",
     description:
