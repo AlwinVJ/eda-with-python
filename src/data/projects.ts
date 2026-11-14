@@ -415,7 +415,10 @@ export const PROJECTS: Project[] = [
     businessProblem:
       "Estimate loan-default probability from applicant, loan and credit-history features for educational credit-risk decision support.",
     workflow: [],
-    files: {},
+    files: {
+      readme: "README.md",
+      notebook: "credit_risk_assessment.ipynb",
+    },
   },
 ];
 
