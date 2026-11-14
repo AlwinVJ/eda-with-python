@@ -1,14 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { getAllCheatsheets } from '@/lib/content';
-import { CheatsheetCard } from '@/components/cards/CheatsheetCard';
+import { createFileRoute } from "@tanstack/react-router";
+import { getAllCheatsheets } from "@/lib/content";
+import { CheatsheetCard } from "@/components/cards/CheatsheetCard";
 
-export const Route = createFileRoute('/cheatsheets')({
+export const Route = createFileRoute("/cheatsheets")({
   head: () => ({
     meta: [
-      { title: 'Cheatsheets · EDA with Python Docs' },
-      { name: 'description', content: 'Quick visual references to keep open while working through a project.' },
-      { property: 'og:title', content: 'Cheatsheets' },
-      { property: 'og:description', content: 'Quick visual references to keep open while working through a project.' },
+      { title: "Cheatsheets · EDA with Python Docs" },
+      {
+        name: "description",
+        content: "Quick visual references to keep open while working through a project.",
+      },
+      { property: "og:title", content: "Cheatsheets" },
+      {
+        property: "og:description",
+        content: "Quick visual references to keep open while working through a project.",
+      },
     ],
   }),
   component: CheatsheetsPage,
@@ -25,7 +31,9 @@ function CheatsheetsPage() {
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        {sheets.map((s) => <CheatsheetCard key={s.slug} sheet={s} />)}
+        {sheets.map((s) => (
+          <CheatsheetCard key={s.slug} sheet={s} />
+        ))}
       </div>
     </div>
   );

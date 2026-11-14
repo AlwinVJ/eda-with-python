@@ -9,7 +9,7 @@ import path from 'node:path';
 // lib/content.ts's buildSearchIndex(). Kept in sync manually — see comment
 // in lib/content.ts.
 function readMetadataDir(subdir) {
-  const dir = path.join(process.cwd(), 'content', subdir);
+  const dir = path.join(process.cwd(), 'src', 'content', subdir);
   if (!fs.existsSync(dir)) return [];
   return fs
     .readdirSync(dir, { withFileTypes: true })

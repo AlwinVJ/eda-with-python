@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -7,15 +7,14 @@ import {
   HeadContent,
   Scripts,
   type ErrorComponentProps,
-} from '@tanstack/react-router';
-import { useEffect, type ReactNode } from 'react';
+} from "@tanstack/react-router";
+import { useEffect, type ReactNode } from "react";
 
-import appCss from '../styles.css?url';
-import { reportLovableError } from '../lib/lovable-error-reporting';
-import { ThemeProvider, themeNoFlashScript } from '@/lib/theme';
-import { Sidebar } from '@/components/layout/Sidebar';
-import { Topbar } from '@/components/layout/Topbar';
-import { SITE_TAGLINE } from '@/lib/constants';
+import appCss from "../styles.css?url";
+import { ThemeProvider, themeNoFlashScript } from "@/lib/theme";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { Topbar } from "@/components/layout/Topbar";
+import { SITE_TAGLINE } from "@/lib/constants";
 
 function NotFoundComponent() {
   return (
@@ -42,30 +41,32 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: 'tanstack_root_error_component' });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          This page didn't load
+        </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong. You can try again or head back home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
           >
             Try again
           </button>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-flex items-center justify-center rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
             Go home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -75,18 +76,18 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'EDA With Python — Documentation' },
-      { name: 'description', content: SITE_TAGLINE },
-      { property: 'og:title', content: 'EDA With Python — Documentation' },
-      { property: 'og:description', content: SITE_TAGLINE },
-      { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary_large_image' },
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "EDA With Python — Documentation" },
+      { name: "description", content: SITE_TAGLINE },
+      { property: "og:title", content: "EDA With Python — Documentation" },
+      { property: "og:description", content: SITE_TAGLINE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.ico`, type: "image/x-icon" },
     ],
     scripts: [{ children: themeNoFlashScript }],
   }),

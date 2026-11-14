@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Link, useRouter, useRouterState } from '@tanstack/react-router';
-import { ChevronDown } from 'lucide-react';
-import { NAV_ITEMS, isNavItemActive, SITE_NAME, type NavItem } from '@/lib/constants';
-import { PROJECT_CATEGORIES } from '@/data/projects';
-import { REFERENCE_TYPES } from '@/data/references';
-import { DOC_CATEGORIES } from '@/data/docs';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
+import { ChevronDown } from "lucide-react";
+import { NAV_ITEMS, isNavItemActive, SITE_NAME, type NavItem } from "@/lib/constants";
+import { PROJECT_CATEGORIES } from "@/data/projects";
+import { REFERENCE_TYPES } from "@/data/references";
+import { DOC_CATEGORIES } from "@/data/docs";
+import { cn } from "@/lib/utils";
 
 export function Sidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -24,7 +24,7 @@ export function Sidebar() {
 
 /** Render the right variant for each top-level nav item. */
 export function renderNavItem(item: NavItem, pathname: string, onNavigate: () => void = () => {}) {
-  if (item.href === '/projects') {
+  if (item.href === "/projects") {
     return (
       <ScrollNavGroup
         key={item.href}
@@ -33,19 +33,26 @@ export function renderNavItem(item: NavItem, pathname: string, onNavigate: () =>
         onNavigate={onNavigate}
         basePath="/projects"
         sections={[
-          { label: 'All Projects', anchor: null },
+          { label: "All Projects", anchor: null },
           ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
         ]}
       />
     );
   }
-  if (item.href === '/documentation') {
+  if (item.href === "/documentation") {
     // Documentation collapses into topic categories that scroll on /docs.
     // Categories come from `src/data/docs.ts` (imported lazily to avoid a
     // circular sidebar-icon import cycle at build time).
-    return <DocumentationNavGroup key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />;
+    return (
+      <DocumentationNavGroup
+        key={item.href}
+        item={item}
+        pathname={pathname}
+        onNavigate={onNavigate}
+      />
+    );
   }
-  if (item.href === '/references') {
+  if (item.href === "/references") {
     return (
       <ScrollNavGroup
         key={item.href}
@@ -54,7 +61,7 @@ export function renderNavItem(item: NavItem, pathname: string, onNavigate: () =>
         onNavigate={onNavigate}
         basePath="/references"
         sections={[
-          { label: 'All References', anchor: null },
+          { label: "All References", anchor: null },
           ...REFERENCE_TYPES.map((t) => ({ label: t.title, anchor: t.anchor })),
         ]}
       />
@@ -63,15 +70,25 @@ export function renderNavItem(item: NavItem, pathname: string, onNavigate: () =>
   return <NavLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />;
 }
 
-export function NavLink({ item, pathname, onNavigate }: { item: NavItem; pathname: string; onNavigate?: () => void }) {
+export function NavLink({
+  item,
+  pathname,
+  onNavigate,
+}: {
+  item: NavItem;
+  pathname: string;
+  onNavigate?: () => void;
+}) {
   const active = isNavItemActive(item, pathname);
   return (
     <Link
       to={item.href}
       onClick={onNavigate}
       className={cn(
-        'flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors',
-        active ? 'bg-accent/15 font-medium text-accent' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+        "flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors",
+        active
+          ? "bg-accent/15 font-medium text-accent"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
       <item.icon className="h-4 w-4" />
@@ -88,16 +105,16 @@ export function NavLink({ item, pathname, onNavigate }: { item: NavItem; pathnam
 function useScrollToSection() {
   const router = useRouter();
   return (basePath: string, anchor: string | null) => {
-    const targetHash = anchor ?? '';
+    const targetHash = anchor ?? "";
     const alreadyOnPage = window.location.pathname === basePath;
     if (alreadyOnPage) {
-      const newUrl = `${basePath}${targetHash ? `#${targetHash}` : ''}`;
-      window.history.replaceState(null, '', newUrl);
+      const newUrl = `${basePath}${targetHash ? `#${targetHash}` : ""}`;
+      window.history.replaceState(null, "", newUrl);
       if (targetHash) {
         const el = document.getElementById(targetHash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
       router.navigate({ to: basePath, hash: targetHash || undefined });
@@ -105,7 +122,10 @@ function useScrollToSection() {
   };
 }
 
-interface ScrollSection { label: string; anchor: string | null }
+interface ScrollSection {
+  label: string;
+  anchor: string | null;
+}
 
 /**
  * A collapsible sidebar group whose sub-items smoothly scroll to anchors on
@@ -113,7 +133,11 @@ interface ScrollSection { label: string; anchor: string | null }
  * work the same way, only the data changes.
  */
 export function ScrollNavGroup({
-  item, pathname, onNavigate, basePath, sections,
+  item,
+  pathname,
+  onNavigate,
+  basePath,
+  sections,
 }: {
   item: NavItem;
   pathname: string;
@@ -123,7 +147,9 @@ export function ScrollNavGroup({
 }) {
   const active = isNavItemActive(item, pathname);
   const [open, setOpen] = useState(active);
-  useEffect(() => { if (active) setOpen(true); }, [active]);
+  useEffect(() => {
+    if (active) setOpen(true);
+  }, [active]);
   const scrollTo = useScrollToSection();
 
   return (
@@ -133,19 +159,26 @@ export function ScrollNavGroup({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={cn(
-          'flex w-full items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors',
-          active ? 'bg-accent/15 font-medium text-accent' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+          "flex w-full items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors",
+          active
+            ? "bg-accent/15 font-medium text-accent"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground",
         )}
       >
         <item.icon className="h-4 w-4" />
         <span>{item.label}</span>
-        <ChevronDown className={cn('ml-auto h-3.5 w-3.5 transition-transform', open ? 'rotate-180' : 'rotate-0')} />
+        <ChevronDown
+          className={cn(
+            "ml-auto h-3.5 w-3.5 transition-transform",
+            open ? "rotate-180" : "rotate-0",
+          )}
+        />
       </button>
 
       <div
         className={cn(
-          'grid transition-all duration-200',
-          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+          "grid transition-all duration-200",
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         )}
       >
         <div className="overflow-hidden">
@@ -176,10 +209,16 @@ export function ScrollNavGroup({
  * /documentation hub AND expands into topic categories that scroll on /docs.
  */
 function DocumentationNavGroup({
-  item, pathname, onNavigate,
-}: { item: NavItem; pathname: string; onNavigate: () => void }) {
+  item,
+  pathname,
+  onNavigate,
+}: {
+  item: NavItem;
+  pathname: string;
+  onNavigate: () => void;
+}) {
   const sections: ScrollSection[] = [
-    { label: 'All Documentation', anchor: null },
+    { label: "All Documentation", anchor: null },
     ...DOC_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
   ];
   return (
@@ -194,13 +233,17 @@ function DocumentationNavGroup({
 }
 
 /** Kept for backwards compatibility with existing MobileNav imports. */
-export function ProjectsNavGroup(props: { item: NavItem; pathname: string; onNavigate: () => void }) {
+export function ProjectsNavGroup(props: {
+  item: NavItem;
+  pathname: string;
+  onNavigate: () => void;
+}) {
   return (
     <ScrollNavGroup
       {...props}
       basePath="/projects"
       sections={[
-        { label: 'All Projects', anchor: null },
+        { label: "All Projects", anchor: null },
         ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, anchor: c.anchor })),
       ]}
     />

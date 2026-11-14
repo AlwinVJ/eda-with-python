@@ -292,7 +292,8 @@ export const DOCS: Doc[] = [
     id: "doc-feature-engineering",
     slug: "feature-engineering-basics",
     title: "Feature Engineering Basics",
-    description: "Encoding, scaling, interactions, and feature selection strategies before modelling.",
+    description:
+      "Encoding, scaling, interactions, and feature selection strategies before modelling.",
     category: "feature-engineering",
     difficulty: "intermediate",
     order: 1,
@@ -318,7 +319,8 @@ export const DOCS: Doc[] = [
     id: "doc-deployment",
     slug: "model-deployment",
     title: "Model Deployment",
-    description: "Package trained models, expose them behind an API, and monitor them in production.",
+    description:
+      "Package trained models, expose them behind an API, and monitor them in production.",
     category: "deployment",
     difficulty: "advanced",
     order: 1,

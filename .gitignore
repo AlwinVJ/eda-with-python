@@ -7,18 +7,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
-*.local
+# Dependencies
+node_modules/
 
-# Wrangler / Cloudflare
-.wrangler/
+# Production and build outputs
+dist/
+dist-ssr/
+.output/
+.vinxi/
+.tanstack/**
+.nitro/
+.next/
+*.tsbuildinfo
+
+# Environment and local files
+*.local
+.env.local
+.env.*.local
 .dev.vars
+
+# Cloudflare / Wrangler
+.wrangler/
+
+# Lovable
+.lovable/
 
 # Editor directories and files
 .vscode/*

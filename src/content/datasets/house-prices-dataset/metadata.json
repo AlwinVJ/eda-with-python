@@ -13,13 +13,29 @@
   "rows": 1460,
   "columns": 81,
   "features": [
-    { "name": "SalePrice", "type": "int", "description": "Property's final sale price in USD (target)" },
-    { "name": "OverallQual", "type": "int", "description": "Overall material and finish quality (1-10)" },
-    { "name": "GrLivArea", "type": "int", "description": "Above-grade (ground) living area in square feet" },
+    {
+      "name": "SalePrice",
+      "type": "int",
+      "description": "Property's final sale price in USD (target)"
+    },
+    {
+      "name": "OverallQual",
+      "type": "int",
+      "description": "Overall material and finish quality (1-10)"
+    },
+    {
+      "name": "GrLivArea",
+      "type": "int",
+      "description": "Above-grade (ground) living area in square feet"
+    },
     { "name": "GarageCars", "type": "int", "description": "Size of garage in car capacity" },
     { "name": "TotalBsmtSF", "type": "int", "description": "Total square feet of basement area" },
     { "name": "YearBuilt", "type": "int", "description": "Original construction year" },
-    { "name": "Neighborhood", "type": "categorical", "description": "Physical location within Ames city limits" }
+    {
+      "name": "Neighborhood",
+      "type": "categorical",
+      "description": "Physical location within Ames city limits"
+    }
   ],
   "usedInProjects": ["house-price-prediction"],
   "downloadFile": "train.csv"

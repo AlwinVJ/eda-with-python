@@ -10,7 +10,16 @@
   "githubPath": "projects/video-game-sales-analysis",
   "dataset": "video-game-sales-dataset",
   "librariesUsed": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
-  "skillsLearned": ["Data cleaning", "Missing value handling", "Feature engineering", "Sales trend analysis", "Genre analysis", "Platform analysis", "Publisher analysis", "Correlation analysis"],
+  "skillsLearned": [
+    "Data cleaning",
+    "Missing value handling",
+    "Feature engineering",
+    "Sales trend analysis",
+    "Genre analysis",
+    "Platform analysis",
+    "Publisher analysis",
+    "Correlation analysis"
+  ],
   "businessProblem": "Understand what drives video game sales performance across platforms, genres, and publishers to surface actionable business insights.",
   "workflow": [
     "Clean and prepare the raw sales dataset",

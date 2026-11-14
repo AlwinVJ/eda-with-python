@@ -18,7 +18,11 @@
     { "name": "country", "type": "categorical", "description": "Country of production" },
     { "name": "release_year", "type": "int", "description": "Year of release" },
     { "name": "rating", "type": "categorical", "description": "Content rating" },
-    { "name": "duration", "type": "string", "description": "Duration in minutes or number of seasons" }
+    {
+      "name": "duration",
+      "type": "string",
+      "description": "Duration in minutes or number of seasons"
+    }
   ],
   "usedInProjects": ["netflix-eda"],
   "downloadFile": "netflix_titles.csv"

@@ -1,12 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/about')({
+export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: 'About · EDA with Python Docs' },
-      { name: 'description', content: 'About the EDA with Python curriculum and documentation site.' },
-      { property: 'og:title', content: 'About' },
-      { property: 'og:description', content: 'About the EDA with Python curriculum and documentation site.' },
+      { title: "About · EDA with Python Docs" },
+      {
+        name: "description",
+        content: "About the EDA with Python curriculum and documentation site.",
+      },
+      { property: "og:title", content: "About" },
+      {
+        property: "og:description",
+        content: "About the EDA with Python curriculum and documentation site.",
+      },
     ],
   }),
   component: AboutPage,
@@ -20,35 +26,35 @@ function AboutPage() {
       <section>
         <h2 className="text-lg font-semibold">Purpose</h2>
         <p className="mt-2 text-muted-foreground">
-          This repository and its documentation website exist to make a complete, practical
-          Data Preprocessing and Exploratory Data Analysis curriculum navigable — every
-          handbook, cheatsheet, dataset, and project in one indexed place.
+          This repository and its documentation website exist to make a complete, practical Data
+          Preprocessing and Exploratory Data Analysis curriculum navigable — every handbook,
+          cheatsheet, dataset, and project in one indexed place.
         </p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Learning Philosophy</h2>
         <p className="mt-2 text-muted-foreground">
-          Learn by building. Each concept is paired with a real, end-to-end project rather
-          than an isolated notebook cell — grounded in production-oriented practices, not
-          just exploratory snippets.
+          Learn by building. Each concept is paired with a real, end-to-end project rather than an
+          isolated notebook cell — grounded in production-oriented practices, not just exploratory
+          snippets.
         </p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Platform Vision</h2>
         <p className="mt-2 text-muted-foreground">
-          Everything here — handbooks, cheatsheets, datasets, and projects — is organized
-          around a single learning path, so a visitor always knows what to read next and
-          which project to apply it in.
+          Everything here — handbooks, cheatsheets, datasets, and projects — is organized around a
+          single learning path, so a visitor always knows what to read next and which project to
+          apply it in.
         </p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Contributing</h2>
         <p className="mt-2 text-muted-foreground">
-          Interested in contributing a new project, handbook, cheatsheet, or dataset? Reach
-          out via the project maintainers listed on the source repository.
+          Interested in contributing a new project, handbook, cheatsheet, or dataset? Reach out via
+          the project maintainers listed on the source repository.
         </p>
       </section>
 

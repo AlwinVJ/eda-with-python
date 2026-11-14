@@ -5,21 +5,11 @@
   "description": "End-to-end EDA and feature engineering on the classic Titanic dataset, from missing-value handling to a baseline survival model.",
   "difficulty": "beginner",
   "status": "completed",
-  "tags": [
-    "classification",
-    "eda",
-    "feature-engineering"
-  ],
+  "tags": ["classification", "eda", "feature-engineering"],
   "lastUpdated": "2026-05-12",
   "githubPath": "projects/titanic",
   "dataset": "titanic-dataset",
-  "librariesUsed": [
-    "pandas",
-    "numpy",
-    "matplotlib",
-    "seaborn",
-    "scikit-learn"
-  ],
+  "librariesUsed": ["pandas", "numpy", "matplotlib", "seaborn", "scikit-learn"],
   "skillsLearned": [
     "Missing value imputation",
     "Categorical encoding",
@@ -38,21 +28,13 @@
   "results": "A baseline logistic regression achieved ~81% accuracy; sex and passenger class were the strongest predictors of survival.",
   "lessonsLearned": "Title extraction from passenger names was a stronger signal than raw Age after imputation.",
   "preview": "assets/preview.png",
-  "visualizations": [
-    "assets/survival-by-class.png",
-    "assets/age-distribution.png"
-  ],
+  "visualizations": ["assets/survival-by-class.png", "assets/age-distribution.png"],
   "files": {
     "readme": "README.md",
     "notebook": "notebook.ipynb",
     "report": "report.pdf"
   },
-  "relatedHandbooks": [
-    "pandas-developer-handbook",
-    "numpy-essentials"
-  ],
-  "relatedCheatsheets": [
-    "matplotlib-cheatsheet"
-  ],
+  "relatedHandbooks": ["pandas-developer-handbook", "numpy-essentials"],
+  "relatedCheatsheets": ["matplotlib-cheatsheet"],
   "estimatedTime": "3-4 hours"
 }

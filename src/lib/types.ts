@@ -1,5 +1,5 @@
-export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
-export type Status = 'planned' | 'in-progress' | 'completed';
+export type Difficulty = "beginner" | "intermediate" | "advanced";
+export type Status = "planned" | "in-progress" | "completed";
 
 export interface BaseMetadata {
   slug: string;
@@ -13,7 +13,7 @@ export interface BaseMetadata {
 }
 
 export interface ProjectMetadata extends BaseMetadata {
-  type: 'project';
+  type: "project";
   dataset: string;
   librariesUsed: string[];
   skillsLearned: string[];
@@ -37,7 +37,7 @@ export interface ProjectMetadata extends BaseMetadata {
 }
 
 export interface HandbookMetadata extends BaseMetadata {
-  type: 'handbook';
+  type: "handbook";
   version: string;
   pages: number;
   cover?: string;
@@ -47,7 +47,7 @@ export interface HandbookMetadata extends BaseMetadata {
 }
 
 export interface CheatsheetMetadata extends BaseMetadata {
-  type: 'cheatsheet';
+  type: "cheatsheet";
   version: string;
   library: string;
   topicsCovered: string[];
@@ -55,7 +55,7 @@ export interface CheatsheetMetadata extends BaseMetadata {
 }
 
 export interface DatasetMetadata extends BaseMetadata {
-  type: 'dataset';
+  type: "dataset";
   source: string;
   sourceUrl?: string;
   rows: number;
@@ -66,16 +66,16 @@ export interface DatasetMetadata extends BaseMetadata {
 }
 
 export type ResourceCategory =
-  | 'books' | 'documentation' | 'videos' | 'courses' | 'research-papers' | 'official-links';
+  "books" | "documentation" | "videos" | "courses" | "research-papers" | "official-links";
 
 export interface ResourceMetadata extends BaseMetadata {
-  type: 'resource';
+  type: "resource";
   category: ResourceCategory;
   officialUrl: string;
   author?: string;
 }
 
-export type LearningGuideTargetType = 'handbook' | 'project' | 'cheatsheet' | 'dataset';
+export type LearningGuideTargetType = "handbook" | "project" | "cheatsheet" | "dataset";
 
 export interface LearningGuideAction {
   verb: string;
@@ -92,6 +92,6 @@ export interface LearningGuideStep {
   actions: LearningGuideAction[];
 }
 
-export interface LearningGuideStepResolved extends Omit<LearningGuideStep, 'actions'> {
+export interface LearningGuideStepResolved extends Omit<LearningGuideStep, "actions"> {
   actions: (LearningGuideAction & { href?: string })[];
 }

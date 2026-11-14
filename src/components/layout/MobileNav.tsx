@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useRouterState } from '@tanstack/react-router';
-import { Menu, X } from 'lucide-react';
-import { NAV_ITEMS, SITE_NAME } from '@/lib/constants';
-import { renderNavItem } from './Sidebar';
-import { cn } from '@/lib/utils';
+import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
+import { Menu, X } from "lucide-react";
+import { NAV_ITEMS, SITE_NAME } from "@/lib/constants";
+import { renderNavItem } from "./Sidebar";
+import { cn } from "@/lib/utils";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -13,17 +13,17 @@ export function MobileNav() {
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     function handler(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === "Escape") setOpen(false);
     }
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
   useEffect(() => {
     if (open) {
       const raf = requestAnimationFrame(() => setVisible(true));
       const prevOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
       return () => {
         cancelAnimationFrame(raf);
         document.body.style.overflow = prevOverflow;
@@ -49,15 +49,15 @@ export function MobileNav() {
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true">
           <div
             className={cn(
-              'absolute inset-0 bg-primary/40 transition-opacity duration-200',
-              visible ? 'opacity-100' : 'opacity-0',
+              "absolute inset-0 bg-primary/40 transition-opacity duration-200",
+              visible ? "opacity-100" : "opacity-0",
             )}
             onClick={close}
           />
           <nav
             className={cn(
-              'absolute left-0 top-0 flex max-h-[100dvh] w-72 max-w-[80vw] flex-col overflow-hidden rounded-br-xl border-b border-r border-border bg-card shadow-lg transition-transform duration-200',
-              visible ? 'translate-x-0' : '-translate-x-full',
+              "absolute left-0 top-0 flex max-h-[100dvh] w-72 max-w-[80vw] flex-col overflow-hidden rounded-br-xl border-b border-r border-border bg-card shadow-lg transition-transform duration-200",
+              visible ? "translate-x-0" : "-translate-x-full",
             )}
           >
             <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-5">
@@ -79,4 +79,3 @@ export function MobileNav() {
     </>
   );
 }
-

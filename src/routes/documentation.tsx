@@ -1,14 +1,17 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { BookOpen, FileStack, Database, Library, ArrowRight } from 'lucide-react';
-import { getAllHandbooks, getAllCheatsheets, getAllDatasets, getAllResources } from '@/lib/content';
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { BookOpen, FileStack, Database, Library, ArrowRight } from "lucide-react";
+import { getAllHandbooks, getAllCheatsheets, getAllDatasets, getAllResources } from "@/lib/content";
 
-export const Route = createFileRoute('/documentation')({
+export const Route = createFileRoute("/documentation")({
   head: () => ({
     meta: [
-      { title: 'Documentation · EDA with Python Docs' },
-      { name: 'description', content: 'Handbooks, cheatsheets, datasets, and curated resources.' },
-      { property: 'og:title', content: 'Documentation' },
-      { property: 'og:description', content: 'Handbooks, cheatsheets, datasets, and curated resources.' },
+      { title: "Documentation · EDA with Python Docs" },
+      { name: "description", content: "Handbooks, cheatsheets, datasets, and curated resources." },
+      { property: "og:title", content: "Documentation" },
+      {
+        property: "og:description",
+        content: "Handbooks, cheatsheets, datasets, and curated resources.",
+      },
     ],
   }),
   component: DocumentationPage,
@@ -16,10 +19,34 @@ export const Route = createFileRoute('/documentation')({
 
 function DocumentationPage() {
   const sections = [
-    { to: '/handbooks' as const, title: 'Handbooks', icon: BookOpen, count: getAllHandbooks().length, description: 'In-depth references for each library and workflow.' },
-    { to: '/cheatsheets' as const, title: 'Cheatsheets', icon: FileStack, count: getAllCheatsheets().length, description: 'Quick visual references to keep open while working.' },
-    { to: '/datasets' as const, title: 'Datasets', icon: Database, count: getAllDatasets().length, description: 'Every dataset used across the projects.' },
-    { to: '/resources' as const, title: 'Resources', icon: Library, count: getAllResources().length, description: 'Curated external books, docs, courses, and papers.' },
+    {
+      to: "/handbooks" as const,
+      title: "Handbooks",
+      icon: BookOpen,
+      count: getAllHandbooks().length,
+      description: "In-depth references for each library and workflow.",
+    },
+    {
+      to: "/cheatsheets" as const,
+      title: "Cheatsheets",
+      icon: FileStack,
+      count: getAllCheatsheets().length,
+      description: "Quick visual references to keep open while working.",
+    },
+    {
+      to: "/datasets" as const,
+      title: "Datasets",
+      icon: Database,
+      count: getAllDatasets().length,
+      description: "Every dataset used across the projects.",
+    },
+    {
+      to: "/resources" as const,
+      title: "Resources",
+      icon: Library,
+      count: getAllResources().length,
+      description: "Curated external books, docs, courses, and papers.",
+    },
   ];
 
   return (
@@ -32,7 +59,11 @@ function DocumentationPage() {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         {sections.map((s) => (
-          <Link key={s.to} to={s.to} className="group flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-accent/40">
+          <Link
+            key={s.to}
+            to={s.to}
+            className="group flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-accent/40"
+          >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
               <s.icon className="h-5 w-5 text-foreground" />
             </span>

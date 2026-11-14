@@ -1,17 +1,23 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { useEffect } from 'react';
-import { ExternalLink, ArrowRight, Clock } from 'lucide-react';
-import { getDocsByCategory } from '@/data/docs';
-import type { Doc } from '@/data/docs';
-import { DifficultyBadge } from '@/components/ui/badge';
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { ExternalLink, ArrowRight, Clock } from "lucide-react";
+import { getDocsByCategory } from "@/data/docs";
+import type { Doc } from "@/data/docs";
+import { DifficultyBadge } from "@/components/ui/badge";
 
-export const Route = createFileRoute('/docs/')({
+export const Route = createFileRoute("/docs/")({
   head: () => ({
     meta: [
-      { title: 'Documentation · EDA with Python Docs' },
-      { name: 'description', content: 'All documentation, grouped by topic — Python, NumPy, Pandas, EDA, ML, and more.' },
-      { property: 'og:title', content: 'Documentation' },
-      { property: 'og:description', content: 'All documentation, grouped by topic — Python, NumPy, Pandas, EDA, ML, and more.' },
+      { title: "Documentation · EDA with Python Docs" },
+      {
+        name: "description",
+        content: "All documentation, grouped by topic — Python, NumPy, Pandas, EDA, ML, and more.",
+      },
+      { property: "og:title", content: "Documentation" },
+      {
+        property: "og:description",
+        content: "All documentation, grouped by topic — Python, NumPy, Pandas, EDA, ML, and more.",
+      },
     ],
   }),
   component: DocsIndexPage,
@@ -22,10 +28,10 @@ function DocsIndexPage() {
 
   // Scroll to the section referenced in the URL hash (used by sidebar).
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
+    const hash = window.location.hash.replace("#", "");
     if (!hash) return;
     const el = document.getElementById(hash);
-    if (el) el.scrollIntoView({ block: 'start' });
+    if (el) el.scrollIntoView({ block: "start" });
   }, []);
 
   return (
@@ -33,7 +39,8 @@ function DocsIndexPage() {
       <div>
         <h1 className="text-2xl font-semibold">Documentation</h1>
         <p className="mt-2 text-muted-foreground">
-          Handbooks and topic guides for every step of the roadmap. Add or reorder items by editing <code className="rounded bg-muted px-1 py-0.5 text-xs">src/data/docs.ts</code>.
+          Handbooks and topic guides for every step of the roadmap. Add or reorder items by editing{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">src/data/docs.ts</code>.
         </p>
       </div>
 
@@ -46,7 +53,9 @@ function DocsIndexPage() {
           </div>
           <p className="mb-4 text-sm text-muted-foreground">{category.description}</p>
           <div className="grid gap-4 sm:grid-cols-2">
-            {docs.map((doc) => <DocCard key={doc.id} doc={doc} />)}
+            {docs.map((doc) => (
+              <DocCard key={doc.id} doc={doc} />
+            ))}
           </div>
         </section>
       ))}
@@ -81,7 +90,8 @@ function DocCard({ doc }: { doc: Doc }) {
           <Clock className="h-3.5 w-3.5" /> {doc.estimatedReadingTime}
         </span>
         <span className="inline-flex items-center gap-1 text-accent">
-          Read <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          Read{" "}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
       {doc.resourceUrl ? (

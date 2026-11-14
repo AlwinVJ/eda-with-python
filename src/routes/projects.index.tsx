@@ -1,15 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect } from 'react';
-import { ProjectCard } from '@/components/cards/ProjectCard';
-import { PROJECT_CATEGORIES, groupProjectsByCategory } from '@/data/projects';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { ProjectCard } from "@/components/cards/ProjectCard";
+import { PROJECT_CATEGORIES, groupProjectsByCategory } from "@/data/projects";
 
-export const Route = createFileRoute('/projects/')({
+export const Route = createFileRoute("/projects/")({
   head: () => ({
     meta: [
-      { title: 'Projects · EDA with Python Docs' },
-      { name: 'description', content: 'Hands-on EDA and end-to-end machine learning projects.' },
-      { property: 'og:title', content: 'Projects' },
-      { property: 'og:description', content: 'Hands-on EDA and end-to-end machine learning projects.' },
+      { title: "Projects · EDA with Python Docs" },
+      { name: "description", content: "Hands-on EDA and end-to-end machine learning projects." },
+      { property: "og:title", content: "Projects" },
+      {
+        property: "og:description",
+        content: "Hands-on EDA and end-to-end machine learning projects.",
+      },
     ],
   }),
   component: ProjectsPage,
@@ -22,20 +25,20 @@ function ProjectsPage() {
   // then keep responding to hash changes without a full navigation.
   useEffect(() => {
     function scrollToHash() {
-      const hash = window.location.hash.replace('#', '');
+      const hash = window.location.hash.replace("#", "");
       if (!hash) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
       const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     // Initial scroll after mount so anchors exist.
     const t = setTimeout(scrollToHash, 0);
-    window.addEventListener('hashchange', scrollToHash);
+    window.addEventListener("hashchange", scrollToHash);
     return () => {
       clearTimeout(t);
-      window.removeEventListener('hashchange', scrollToHash);
+      window.removeEventListener("hashchange", scrollToHash);
     };
   }, []);
 
@@ -44,7 +47,8 @@ function ProjectsPage() {
       <div>
         <h1 className="text-2xl font-semibold">Projects</h1>
         <p className="mt-2 text-muted-foreground">
-          Hands-on projects grouped by focus area. Start with EDA to build your foundation, then move on to end-to-end machine learning.
+          Hands-on projects grouped by focus area. Start with EDA to build your foundation, then
+          move on to end-to-end machine learning.
         </p>
       </div>
 
@@ -58,7 +62,9 @@ function ProjectsPage() {
               <p className="mt-1 text-sm text-muted-foreground">{cat.description}</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((p) => <ProjectCard key={p.slug} project={p} />)}
+              {items.map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
             </div>
           </section>
         );

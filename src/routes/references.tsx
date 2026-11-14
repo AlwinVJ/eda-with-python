@@ -1,22 +1,28 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useMemo, useState } from 'react';
-import { ExternalLink, Film, FileText, Newspaper } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+import { ExternalLink, Film, FileText, Newspaper } from "lucide-react";
 import {
   getReferencesByType,
   getActiveReferenceCategories,
   type Reference,
   type ReferenceType,
-} from '@/data/references';
-import { DifficultyBadge, TechBadge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+} from "@/data/references";
+import { DifficultyBadge, TechBadge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute('/references')({
+export const Route = createFileRoute("/references")({
   head: () => ({
     meta: [
-      { title: 'References · EDA with Python Docs' },
-      { name: 'description', content: 'Curated videos, blogs, and articles for every topic in the roadmap.' },
-      { property: 'og:title', content: 'References' },
-      { property: 'og:description', content: 'Curated videos, blogs, and articles for every topic in the roadmap.' },
+      { title: "References · EDA with Python Docs" },
+      {
+        name: "description",
+        content: "Curated videos, blogs, and articles for every topic in the roadmap.",
+      },
+      { property: "og:title", content: "References" },
+      {
+        property: "og:description",
+        content: "Curated videos, blogs, and articles for every topic in the roadmap.",
+      },
     ],
   }),
   component: ReferencesPage,
@@ -35,10 +41,10 @@ function ReferencesPage() {
 
   // Scroll to type section on hash change.
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
+    const hash = window.location.hash.replace("#", "");
     if (!hash) return;
     const el = document.getElementById(hash);
-    if (el) el.scrollIntoView({ block: 'start' });
+    if (el) el.scrollIntoView({ block: "start" });
   }, []);
 
   const filteredGroups = useMemo(() => {
@@ -53,14 +59,20 @@ function ReferencesPage() {
       <div>
         <h1 className="text-2xl font-semibold">References</h1>
         <p className="mt-2 text-muted-foreground">
-          Hand-picked videos, blogs, and articles that pair well with the handbooks and projects. Add new entries in <code className="rounded bg-muted px-1 py-0.5 text-xs">src/data/references.ts</code>.
+          Hand-picked videos, blogs, and articles that pair well with the handbooks and projects.
+          Add new entries in{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">src/data/references.ts</code>.
         </p>
       </div>
 
       <div className="flex flex-wrap gap-1.5">
-        <FilterChip active={filter === null} onClick={() => setFilter(null)}>All topics</FilterChip>
+        <FilterChip active={filter === null} onClick={() => setFilter(null)}>
+          All topics
+        </FilterChip>
         {categories.map((c) => (
-          <FilterChip key={c} active={filter === c} onClick={() => setFilter(c)}>{c}</FilterChip>
+          <FilterChip key={c} active={filter === c} onClick={() => setFilter(c)}>
+            {c}
+          </FilterChip>
         ))}
       </div>
 
@@ -79,7 +91,9 @@ function ReferencesPage() {
             </div>
             <p className="mb-4 text-sm text-muted-foreground">{type.description}</p>
             <div className="grid gap-4 sm:grid-cols-2">
-              {items.map((r) => <ReferenceCard key={r.id} reference={r} />)}
+              {items.map((r) => (
+                <ReferenceCard key={r.id} reference={r} />
+              ))}
             </div>
           </section>
         );
@@ -89,17 +103,23 @@ function ReferencesPage() {
 }
 
 function FilterChip({
-  children, active, onClick,
-}: { children: React.ReactNode; active: boolean; onClick: () => void }) {
+  children,
+  active,
+  onClick,
+}: {
+  children: React.ReactNode;
+  active: boolean;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={cn(
-        'rounded-md border px-2.5 py-1 text-xs transition-colors',
+        "rounded-md border px-2.5 py-1 text-xs transition-colors",
         active
-          ? 'border-accent bg-accent/15 text-accent'
-          : 'border-border text-muted-foreground hover:bg-muted hover:text-foreground',
+          ? "border-accent bg-accent/15 text-accent"
+          : "border-border text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
       {children}
@@ -113,7 +133,12 @@ function ReferenceCard({ reference: r }: { reference: Reference }) {
     <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card">
       <div className="relative aspect-[16/9] bg-muted">
         {r.thumbnail ? (
-          <img src={r.thumbnail} alt={`${r.title} thumbnail`} className="h-full w-full object-cover" loading="lazy" />
+          <img
+            src={r.thumbnail}
+            alt={`${r.title} thumbnail`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground">
             <Icon className="h-8 w-8" />
@@ -131,11 +156,18 @@ function ReferenceCard({ reference: r }: { reference: Reference }) {
         <p className="text-sm text-muted-foreground line-clamp-2">{r.description}</p>
         <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
           {r.author ? <span>By {r.author}</span> : null}
-          {r.source ? <><span>·</span><span>{r.source}</span></> : null}
+          {r.source ? (
+            <>
+              <span>·</span>
+              <span>{r.source}</span>
+            </>
+          ) : null}
         </div>
         <div className="flex flex-wrap gap-1.5">
           <TechBadge>{r.category}</TechBadge>
-          {r.tags?.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+          {r.tags?.map((t) => (
+            <TechBadge key={t}>{t}</TechBadge>
+          ))}
         </div>
         <div className="mt-auto pt-2">
           <a

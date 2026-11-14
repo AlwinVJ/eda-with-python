@@ -15,7 +15,12 @@
     "title": "Step 2 — NumPy",
     "summary": "Build the numerical foundation every later library relies on.",
     "actions": [
-      { "verb": "Study", "label": "NumPy Essentials", "targetType": "handbook", "targetSlug": "numpy-essentials" },
+      {
+        "verb": "Study",
+        "label": "NumPy Essentials",
+        "targetType": "handbook",
+        "targetSlug": "numpy-essentials"
+      },
       { "verb": "Practice", "label": "Array creation, indexing, and vectorized math" }
     ]
   },
@@ -25,7 +30,12 @@
     "title": "Step 3 — Pandas",
     "summary": "Learn the primary tool for working with tabular data in Python.",
     "actions": [
-      { "verb": "Study", "label": "Pandas Developer Handbook", "targetType": "handbook", "targetSlug": "pandas-developer-handbook" },
+      {
+        "verb": "Study",
+        "label": "Pandas Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "pandas-developer-handbook"
+      },
       { "verb": "Practice", "label": "Series, DataFrames, indexing, and groupby" }
     ]
   },
@@ -35,7 +45,12 @@
     "title": "Step 4 — Data Cleaning",
     "summary": "Turn raw, messy data into a reliable analysis-ready dataset.",
     "actions": [
-      { "verb": "Read", "label": "Data Preprocessing & EDA Handbook", "targetType": "handbook", "targetSlug": "data-preprocessing-eda-handbook" },
+      {
+        "verb": "Read",
+        "label": "Data Preprocessing & EDA Handbook",
+        "targetType": "handbook",
+        "targetSlug": "data-preprocessing-eda-handbook"
+      },
       { "verb": "Practice", "label": "Missing values, duplicates, and type fixes" }
     ]
   },
@@ -45,8 +60,18 @@
     "title": "Step 5 — Data Visualization",
     "summary": "Turn your data into clear, readable charts.",
     "actions": [
-      { "verb": "Study", "label": "Matplotlib Developer Handbook", "targetType": "handbook", "targetSlug": "matplotlib-developer-handbook" },
-      { "verb": "Study", "label": "Seaborn Developer Handbook", "targetType": "handbook", "targetSlug": "seaborn-developer-handbook" }
+      {
+        "verb": "Study",
+        "label": "Matplotlib Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "matplotlib-developer-handbook"
+      },
+      {
+        "verb": "Study",
+        "label": "Seaborn Developer Handbook",
+        "targetType": "handbook",
+        "targetSlug": "seaborn-developer-handbook"
+      }
     ]
   },
   {
@@ -65,9 +90,24 @@
     "title": "Step 7 — EDA Projects",
     "summary": "Apply everything above to real datasets. Complete these before moving on to machine learning.",
     "actions": [
-      { "verb": "Complete", "label": "Tips Dataset", "targetType": "project", "targetSlug": "tips" },
-      { "verb": "Complete", "label": "Netflix EDA", "targetType": "project", "targetSlug": "netflix-eda" },
-      { "verb": "Complete", "label": "Video Game Sales Analysis", "targetType": "project", "targetSlug": "video-game-sales-analysis" }
+      {
+        "verb": "Complete",
+        "label": "Tips Dataset",
+        "targetType": "project",
+        "targetSlug": "tips"
+      },
+      {
+        "verb": "Complete",
+        "label": "Netflix EDA",
+        "targetType": "project",
+        "targetSlug": "netflix-eda"
+      },
+      {
+        "verb": "Complete",
+        "label": "Video Game Sales Analysis",
+        "targetType": "project",
+        "targetSlug": "video-game-sales-analysis"
+      }
     ]
   },
   {
@@ -96,7 +136,12 @@
     "title": "Step 10 — End-to-End Machine Learning Projects",
     "summary": "Ship a complete ML project — data in, trained model out. Only start after finishing the EDA projects.",
     "actions": [
-      { "verb": "Complete", "label": "House Price Prediction", "targetType": "project", "targetSlug": "house-price-prediction" }
+      {
+        "verb": "Complete",
+        "label": "House Price Prediction",
+        "targetType": "project",
+        "targetSlug": "house-price-prediction"
+      }
     ]
   }
 ]

@@ -1,8 +1,8 @@
-import { Link } from '@tanstack/react-router';
-import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from 'lucide-react';
-import { DifficultyBadge, StatusBadge, TechBadge, Badge } from '@/components/ui/badge';
-import { githubUrl } from '@/lib/content';
-import { getProjectCategoryMeta, getProjectRepoUrl, type Project } from '@/data/projects';
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Database, Github, ExternalLink, ImageIcon } from "lucide-react";
+import { DifficultyBadge, StatusBadge, TechBadge, Badge } from "@/components/ui/badge";
+import { githubUrl } from "@/lib/content";
+import { getProjectCategoryMeta, getProjectRepoUrl, type Project } from "@/data/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   const image = project.image;
@@ -61,25 +61,36 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.skillsLearned.length > 0 && (
           <p className="mt-3 text-xs text-muted-foreground">
             <span className="font-medium text-foreground">Skills: </span>
-            {project.skillsLearned.slice(0, 3).join(', ')}
+            {project.skillsLearned.slice(0, 3).join(", ")}
           </p>
         )}
 
         <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4 text-sm">
           {repoUrl && (
-            <a href={repoUrl} target="_blank" rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted">
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted"
+            >
               <Github className="h-3.5 w-3.5" /> GitHub
             </a>
           )}
           {project.liveDemoUrl && (
-            <a href={project.liveDemoUrl} target="_blank" rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted">
+            <a
+              href={project.liveDemoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted"
+            >
               <ExternalLink className="h-3.5 w-3.5" /> Live Demo
             </a>
           )}
-          <Link to="/projects/$slug" params={{ slug: project.slug }}
-            className="ml-auto inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1 text-primary-foreground transition-colors hover:bg-primary-hover">
+          <Link
+            to="/projects/$slug"
+            params={{ slug: project.slug }}
+            className="ml-auto inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1 text-primary-foreground transition-colors hover:bg-primary-hover"
+          >
             Read More <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

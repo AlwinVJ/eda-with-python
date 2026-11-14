@@ -3,8 +3,18 @@
  * Short metadata (title, tags, links, image…) lives in `src/data/projects.ts`.
  */
 export type ProjectSectionId =
-  | 'overview' | 'problem' | 'objectives' | 'dataset' | 'eda' | 'preprocessing'
-  | 'features' | 'modeling' | 'evaluation' | 'results' | 'deployment' | 'learnings';
+  | "overview"
+  | "problem"
+  | "objectives"
+  | "dataset"
+  | "eda"
+  | "preprocessing"
+  | "features"
+  | "modeling"
+  | "evaluation"
+  | "results"
+  | "deployment"
+  | "learnings";
 
 export interface ProjectSection {
   /** Paragraphs of prose. */
@@ -23,16 +33,16 @@ export type ProjectDetails = Partial<Record<ProjectSectionId, ProjectSection>>;
 
 /** Canonical display order + headings. Sections without content are skipped. */
 export const PROJECT_SECTION_ORDER: { id: ProjectSectionId; title: string }[] = [
-  { id: 'overview', title: 'Project Overview' },
-  { id: 'problem', title: 'Problem Statement' },
-  { id: 'objectives', title: 'Project Objectives' },
-  { id: 'dataset', title: 'Dataset Description' },
-  { id: 'eda', title: 'Exploratory Data Analysis' },
-  { id: 'preprocessing', title: 'Data Preprocessing' },
-  { id: 'features', title: 'Feature Engineering' },
-  { id: 'modeling', title: 'Model Development' },
-  { id: 'evaluation', title: 'Model Evaluation' },
-  { id: 'results', title: 'Results and Insights' },
-  { id: 'deployment', title: 'Deployment' },
-  { id: 'learnings', title: 'Key Learnings' },
+  { id: "overview", title: "Project Overview" },
+  { id: "problem", title: "Problem Statement" },
+  { id: "objectives", title: "Project Objectives" },
+  { id: "dataset", title: "Dataset Description" },
+  { id: "eda", title: "Exploratory Data Analysis" },
+  { id: "preprocessing", title: "Data Preprocessing" },
+  { id: "features", title: "Feature Engineering" },
+  { id: "modeling", title: "Model Development" },
+  { id: "evaluation", title: "Model Evaluation" },
+  { id: "results", title: "Results and Insights" },
+  { id: "deployment", title: "Deployment" },
+  { id: "learnings", title: "Key Learnings" },
 ];

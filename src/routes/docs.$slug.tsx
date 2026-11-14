@@ -1,23 +1,25 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { ArrowLeft, ArrowRight, ExternalLink, Clock } from 'lucide-react';
-import { getDoc, getDocCategory, getDocNeighbors } from '@/data/docs';
-import { DifficultyBadge, TechBadge } from '@/components/ui/badge';
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, ExternalLink, Clock } from "lucide-react";
+import { getDoc, getDocCategory, getDocNeighbors } from "@/data/docs";
+import { DifficultyBadge, TechBadge } from "@/components/ui/badge";
 
-export const Route = createFileRoute('/docs/$slug')({
+export const Route = createFileRoute("/docs/$slug")({
   loader: ({ params }) => {
     const doc = getDoc(params.slug);
     if (!doc) throw notFound();
-    return { doc };
+    const { icon: _icon, ...serializableDoc } = doc;
+    return { doc: serializableDoc };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: 'Not found' }, { name: 'robots', content: 'noindex' }] };
+    if (!loaderData)
+      return { meta: [{ title: "Not found" }, { name: "robots", content: "noindex" }] };
     const { doc } = loaderData;
     return {
       meta: [
         { title: `${doc.title} · Documentation` },
-        { name: 'description', content: doc.description },
-        { property: 'og:title', content: doc.title },
-        { property: 'og:description', content: doc.description },
+        { name: "description", content: doc.description },
+        { property: "og:title", content: doc.title },
+        { property: "og:description", content: doc.description },
       ],
     };
   },
@@ -26,14 +28,18 @@ export const Route = createFileRoute('/docs/$slug')({
 
 function DocDetailPage() {
   const { doc } = Route.useLoaderData();
+  const fullDoc = getDoc(doc.slug);
   const category = getDocCategory(doc.category);
   const { prev, next } = getDocNeighbors(doc.slug);
-  const Icon = doc.icon;
+  const Icon = fullDoc?.icon;
 
   return (
     <div className="space-y-8">
       <div>
-        <Link to="/docs" className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+        <Link
+          to="/docs"
+          className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+        >
           <ArrowLeft className="h-3.5 w-3.5" /> All documentation
         </Link>
         <div className="mt-4 flex items-start gap-3">
@@ -46,13 +52,17 @@ function DocDetailPage() {
             <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               {category ? <span>{category.title}</span> : null}
               <span>·</span>
-              <span className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {doc.estimatedReadingTime}</span>
+              <span className="inline-flex items-center gap-1">
+                <Clock className="h-3.5 w-3.5" /> {doc.estimatedReadingTime}
+              </span>
             </div>
             <h1 className="mt-1 text-2xl font-semibold leading-snug">{doc.title}</h1>
             <p className="mt-2 text-muted-foreground">{doc.description}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               <DifficultyBadge difficulty={doc.difficulty} />
-              {doc.tags.map((t: string) => <TechBadge key={t}>{t}</TechBadge>)}
+              {doc.tags.map((t: string) => (
+                <TechBadge key={t}>{t}</TechBadge>
+              ))}
             </div>
           </div>
         </div>
@@ -87,7 +97,9 @@ function DocDetailPage() {
             </span>
             <span className="font-medium group-hover:text-accent">{prev.title}</span>
           </Link>
-        ) : <span />}
+        ) : (
+          <span />
+        )}
         {next ? (
           <Link
             to="/docs/$slug"
@@ -99,7 +111,9 @@ function DocDetailPage() {
             </span>
             <span className="font-medium group-hover:text-accent">{next.title}</span>
           </Link>
-        ) : <span />}
+        ) : (
+          <span />
+        )}
       </nav>
     </div>
   );

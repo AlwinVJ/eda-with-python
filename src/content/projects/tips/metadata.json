@@ -5,21 +5,11 @@
   "description": "Your first end-to-end project: apply NumPy and Pandas basics to clean and explore a small restaurant tips dataset, then visualize the results.",
   "difficulty": "beginner",
   "status": "completed",
-  "tags": [
-    "numpy",
-    "pandas",
-    "eda",
-    "first-project"
-  ],
+  "tags": ["numpy", "pandas", "eda", "first-project"],
   "lastUpdated": "2026-07-05",
   "githubPath": "projects/tips",
   "dataset": "tips-dataset",
-  "librariesUsed": [
-    "numpy",
-    "pandas",
-    "matplotlib",
-    "seaborn"
-  ],
+  "librariesUsed": ["numpy", "pandas", "matplotlib", "seaborn"],
   "skillsLearned": [
     "NumPy basics",
     "Pandas fundamentals",
@@ -37,9 +27,7 @@
   "results": "Tip amount scales closely with total bill size; party size and day of week show smaller but visible effects.",
   "lessonsLearned": "This project is designed to be revisited across Steps 2-6 of the Learning Guide, adding a new skill each pass.",
   "preview": "assets/preview.png",
-  "visualizations": [
-    "assets/tip-vs-bill.png"
-  ],
+  "visualizations": ["assets/tip-vs-bill.png"],
   "files": {
     "readme": "README.md",
     "notebook": "notebook.ipynb"

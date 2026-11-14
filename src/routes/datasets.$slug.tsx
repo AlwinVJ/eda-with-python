@@ -1,22 +1,23 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { Download } from 'lucide-react';
-import { getDataset, getAllProjects, assetUrl } from '@/lib/content';
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Download } from "lucide-react";
+import { getDataset, getAllProjects, assetUrl } from "@/lib/content";
 
-export const Route = createFileRoute('/datasets/$slug')({
+export const Route = createFileRoute("/datasets/$slug")({
   loader: ({ params }): { dataset: NonNullable<ReturnType<typeof getDataset>> } => {
     const dataset = getDataset(params.slug);
     if (!dataset) throw notFound();
     return { dataset };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: 'Dataset not found' }, { name: 'robots', content: 'noindex' }] };
+    if (!loaderData)
+      return { meta: [{ title: "Dataset not found" }, { name: "robots", content: "noindex" }] };
     const { dataset } = loaderData;
     return {
       meta: [
         { title: `${dataset.title} · EDA with Python Docs` },
-        { name: 'description', content: dataset.description },
-        { property: 'og:title', content: dataset.title },
-        { property: 'og:description', content: dataset.description },
+        { name: "description", content: dataset.description },
+        { property: "og:title", content: dataset.title },
+        { property: "og:description", content: dataset.description },
       ],
     };
   },
@@ -46,11 +47,17 @@ function DatasetPage() {
       </section>
 
       <section>
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">Features</h2>
+        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Features
+        </h2>
         <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full min-w-[480px] text-sm">
             <thead className="bg-muted text-left text-xs text-foreground">
-              <tr><th className="px-3 py-2">Name</th><th className="px-3 py-2">Type</th><th className="px-3 py-2">Description</th></tr>
+              <tr>
+                <th className="px-3 py-2">Name</th>
+                <th className="px-3 py-2">Type</th>
+                <th className="px-3 py-2">Description</th>
+              </tr>
             </thead>
             <tbody>
               {dataset.features.map((f: { name: string; type: string; description?: string }) => (
@@ -67,11 +74,17 @@ function DatasetPage() {
 
       {usedIn.length > 0 && (
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">Projects Using It</h2>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            Projects Using It
+          </h2>
           <ul className="space-y-1 text-sm">
             {usedIn.map((p) => (
               <li key={p.slug}>
-                <Link to="/projects/$slug" params={{ slug: p.slug }} className="text-accent hover:text-primary hover:underline transition-colors">
+                <Link
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  className="text-accent hover:text-primary hover:underline transition-colors"
+                >
                   {p.title}
                 </Link>
               </li>
@@ -81,8 +94,11 @@ function DatasetPage() {
       )}
 
       <section className="flex gap-2 text-sm">
-        <a href={assetUrl(dataset.githubPath, dataset.downloadFile)} download
-          className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted">
+        <a
+          href={assetUrl(dataset.githubPath, dataset.downloadFile)}
+          download
+          className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
+        >
           <Download className="h-4 w-4" /> Download Source
         </a>
       </section>

@@ -1,14 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
-import { getLearningGuide } from '@/lib/content';
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { getLearningGuide } from "@/lib/content";
 
-export const Route = createFileRoute('/learning-guide')({
+export const Route = createFileRoute("/learning-guide")({
   head: () => ({
     meta: [
-      { title: 'Learning Guide · EDA with Python Docs' },
-      { name: 'description', content: 'Guided onboarding sequence for the EDA with Python curriculum.' },
-      { property: 'og:title', content: 'Learning Guide' },
-      { property: 'og:description', content: 'Guided onboarding sequence for the EDA with Python curriculum.' },
+      { title: "Learning Guide · EDA with Python Docs" },
+      {
+        name: "description",
+        content: "Guided onboarding sequence for the EDA with Python curriculum.",
+      },
+      { property: "og:title", content: "Learning Guide" },
+      {
+        property: "og:description",
+        content: "Guided onboarding sequence for the EDA with Python curriculum.",
+      },
     ],
   }),
   component: LearningGuidePage,
@@ -21,9 +27,8 @@ function LearningGuidePage() {
       <div>
         <h1 className="text-2xl font-semibold">Learning Guide</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          New here? Follow these steps in order. Each one builds on the last —
-          by the end you&apos;ll have completed your first project and know exactly
-          where to go next.
+          New here? Follow these steps in order. Each one builds on the last — by the end
+          you&apos;ll have completed your first project and know exactly where to go next.
         </p>
       </div>
 
@@ -40,7 +45,12 @@ function LearningGuidePage() {
                     {i > 0 && <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
                     <span className="font-medium">{action.verb}</span>
                     {action.href ? (
-                      <a href={action.href} className="text-accent hover:text-primary hover:underline transition-colors">{action.label}</a>
+                      <a
+                        href={action.href}
+                        className="text-accent hover:text-primary hover:underline transition-colors"
+                      >
+                        {action.label}
+                      </a>
                     ) : (
                       <span>{action.label}</span>
                     )}

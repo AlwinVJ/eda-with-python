@@ -10,7 +10,18 @@
   "githubPath": "projects/netflix-eda",
   "dataset": "netflix-dataset",
   "librariesUsed": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-  "skillsLearned": ["Data cleaning", "Missing values", "Duplicate removal", "Feature engineering", "Country analysis", "Genre analysis", "Ratings analysis", "Release trend analysis", "Duration analysis", "Correlation analysis"],
+  "skillsLearned": [
+    "Data cleaning",
+    "Missing values",
+    "Duplicate removal",
+    "Feature engineering",
+    "Country analysis",
+    "Genre analysis",
+    "Ratings analysis",
+    "Release trend analysis",
+    "Duration analysis",
+    "Correlation analysis"
+  ],
   "businessProblem": "Explore what the Netflix catalog reveals about content strategy — which countries, genres, and ratings dominate, and how the catalog has shifted over time.",
   "workflow": [
     "Clean the dataset and remove duplicate entries",

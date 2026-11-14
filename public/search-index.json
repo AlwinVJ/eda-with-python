@@ -2,11 +2,12 @@
   {
     "type": "project",
     "slug": "house-prices",
-    "title": "House Prices — Regression & Feature Selection",
-    "description": "Advanced regression on the Ames Housing dataset, focused on feature selection techniques and handling high-cardinality categoricals.",
+    "title": "House Price Prediction",
+    "description": "End-to-end machine learning project on the Ames Housing dataset — from data cleaning and feature engineering through regularized regression and gradient boosting models to predict final home sale prices.",
     "tags": [
       "regression",
-      "feature-selection"
+      "machine-learning",
+      "feature-engineering"
     ],
     "href": "/projects/house-prices"
   },
@@ -25,7 +26,7 @@
   {
     "type": "project",
     "slug": "tips",
-    "title": "Project 1 — Tips Dataset",
+    "title": "Tips Dataset",
     "description": "Your first end-to-end project: apply NumPy and Pandas basics to clean and explore a small restaurant tips dataset, then visualize the results.",
     "tags": [
       "numpy",
@@ -136,6 +137,18 @@
       "visualization"
     ],
     "href": "/cheatsheets#matplotlib-cheatsheet"
+  },
+  {
+    "type": "dataset",
+    "slug": "house-prices-dataset",
+    "title": "Ames Housing (House Prices) Dataset",
+    "description": "The Ames Housing dataset — 79 explanatory variables describing residential homes in Ames, Iowa, used to predict final sale price.",
+    "tags": [
+      "regression",
+      "tabular",
+      "real-estate"
+    ],
+    "href": "/datasets/house-prices-dataset"
   },
   {
     "type": "dataset",

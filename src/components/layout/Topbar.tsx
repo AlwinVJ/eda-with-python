@@ -1,6 +1,6 @@
-import { GlobalSearch } from './Search';
-import { MobileNav } from './MobileNav';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { GlobalSearch } from "./Search";
+import { MobileNav } from "./MobileNav";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Topbar() {
   return (

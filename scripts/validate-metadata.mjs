@@ -13,7 +13,7 @@ const REQUIRED_BY_TYPE = {
   resource: ['category', 'officialUrl'],
 };
 
-const CONTENT_ROOT = path.join(process.cwd(), 'content');
+const CONTENT_ROOT = path.join(process.cwd(), 'src', 'content');
 let errors = 0;
 
 for (const type of ['projects', 'handbooks', 'cheatsheets', 'datasets', 'resources']) {
