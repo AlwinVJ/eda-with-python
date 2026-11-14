@@ -147,11 +147,11 @@ export function GlobalSearch() {
 
   return (
     <>
-      {/* 1. Desktop / Tablet Search Trigger (Immediately beside theme toggle) */}
+      {/* 1. Desktop Search Trigger (Immediately beside theme toggle) */}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="hidden sm:flex h-10 w-52 md:w-64 lg:w-72 items-center gap-2 rounded-full border border-border bg-card/70 px-3.5 text-xs text-muted-foreground shadow-xs transition-all hover:border-accent/40 hover:bg-muted/50 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+        className="hidden md:flex h-10 w-48 lg:w-64 items-center gap-2 rounded-full border border-border bg-card/70 px-3.5 text-xs text-muted-foreground shadow-xs transition-all hover:border-accent/40 hover:bg-muted/50 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
         aria-label="Search projects, topics, technologies"
       >
         <SearchIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
@@ -162,11 +162,11 @@ export function GlobalSearch() {
         </kbd>
       </button>
 
-      {/* 2. Mobile Compact Search Trigger (< 640px) */}
+      {/* 2. Tablet / Mobile Compact Search Trigger (< 768px) */}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs transition-all hover:border-accent/40 hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex md:hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs transition-all hover:border-accent/40 hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
         aria-label="Search"
       >
         <SearchIcon className="h-4 w-4" />

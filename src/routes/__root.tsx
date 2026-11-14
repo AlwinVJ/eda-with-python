@@ -8,12 +8,12 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { ThemeProvider, themeNoFlashScript } from "@/lib/theme";
-import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
+import { BackToTop } from "@/components/BackToTop";
 import { SITE_TAGLINE } from "@/lib/constants";
 
 function NotFoundComponent() {
@@ -117,16 +117,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <div className="flex min-h-screen w-full">
-          <Sidebar />
-          <div className="flex min-h-screen min-w-0 flex-1 flex-col">
-            <Topbar />
-            <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
-              <div className="mx-auto w-full max-w-5xl min-w-0">
-                <Outlet />
-              </div>
-            </main>
-          </div>
+        <div className="flex min-h-screen min-w-0 flex-col bg-background">
+          <Topbar />
+          <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 lg:px-12 md:py-10">
+            <div className="mx-auto w-full max-w-6xl min-w-0">
+              <Outlet />
+            </div>
+          </main>
+          <BackToTop />
         </div>
       </ThemeProvider>
     </QueryClientProvider>

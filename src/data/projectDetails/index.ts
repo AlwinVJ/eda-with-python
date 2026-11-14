@@ -10,6 +10,7 @@ import { mentalHealthSignal } from "./mentalHealthSignal";
 import { creditRiskAssessment } from "./creditRiskAssessment";
 import { discountVsProfit } from "./discountVsProfit";
 import { netflixEda } from "./netflixEda";
+import { titanicDetails } from "./titanic";
 
 const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "house-price-prediction": housePricePrediction,
@@ -17,6 +18,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "credit-risk-assessment": creditRiskAssessment,
   "discount-vs-profit": discountVsProfit,
   "netflix-eda": netflixEda,
+  titanic: titanicDetails,
 };
 
 export function getProjectDetails(slug: string): ProjectDetails | undefined {

@@ -8,6 +8,7 @@
   "tags": ["classification", "eda", "feature-engineering"],
   "lastUpdated": "2026-05-12",
   "githubPath": "projects/titanic",
+  "githubRepoUrl": "https://github.com/AlwinVJ/titanic_preprocessing",
   "dataset": "titanic-dataset",
   "librariesUsed": ["pandas", "numpy", "matplotlib", "seaborn", "scikit-learn"],
   "skillsLearned": [
@@ -31,8 +32,7 @@
   "visualizations": ["assets/survival-by-class.png", "assets/age-distribution.png"],
   "files": {
     "readme": "README.md",
-    "notebook": "notebook.ipynb",
-    "report": "report.pdf"
+    "notebook": "notebook/preprocessing.ipynb"
   },
   "relatedHandbooks": ["pandas-developer-handbook", "numpy-essentials"],
   "relatedCheatsheets": ["matplotlib-cheatsheet"],

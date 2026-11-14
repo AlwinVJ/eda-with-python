@@ -258,6 +258,7 @@ export const PROJECTS: Project[] = [
     tags: ["classification", "eda", "feature-engineering"],
     lastUpdated: "2026-05-12",
     githubPath: "projects/titanic",
+    githubRepoUrl: "https://github.com/AlwinVJ/titanic_preprocessing",
     dataset: "titanic-dataset",
     librariesUsed: ["pandas", "numpy", "matplotlib", "seaborn", "scikit-learn"],
     skillsLearned: [
@@ -281,7 +282,10 @@ export const PROJECTS: Project[] = [
     lessonsLearned:
       "Title extraction from passenger names was a stronger signal than raw Age after imputation.",
     visualizations: ["assets/survival-by-class.png", "assets/age-distribution.png"],
-    files: { readme: "README.md", notebook: "notebook.ipynb", report: "report.pdf" },
+    files: {
+      readme: "README.md",
+      notebook: "notebook/preprocessing.ipynb",
+    },
     relatedHandbooks: ["pandas-developer-handbook", "numpy-essentials"],
     relatedCheatsheets: ["matplotlib-cheatsheet"],
     estimatedTime: "3-4 hours",
