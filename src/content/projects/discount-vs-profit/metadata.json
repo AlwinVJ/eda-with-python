@@ -44,7 +44,6 @@
   "lessonsLearned": "Revenue volume can create an illusion of business health ('profitless prosperity'). Calibrating discount thresholds using statistical validation protects unit margins and prevents structural losses.",
   "files": {
     "readme": "README.md",
-    "notebook": "notebooks/05_EDA/05B_Bivariate_EDA.ipynb",
     "report": "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA/blob/d123874b4f4123686d37ec3647861cc2aee7fc4b/reports/EDA%20final%20report.pdf"
   },
   "estimatedTime": "15-20 hours (Comprehensive EDA & Statistical Study)"

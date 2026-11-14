@@ -9,9 +9,9 @@
   "lastUpdated": "2026-07-12",
   "githubPath": "datasets/netflix-dataset",
   "source": "Kaggle",
-  "sourceUrl": "https://www.kaggle.com/datasets/shivamb/netflix-shows",
-  "rows": 8807,
-  "columns": 12,
+  "sourceUrl": "https://www.kaggle.com/datasets/rohitgrewal/netflix-data",
+  "rows": 7789,
+  "columns": 11,
   "features": [
     { "name": "type", "type": "categorical", "description": "Movie or TV Show" },
     { "name": "title", "type": "string", "description": "Title of the content" },

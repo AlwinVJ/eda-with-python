@@ -141,7 +141,6 @@ export const PROJECTS: Project[] = [
       "Revenue volume can create an illusion of business health ('profitless prosperity'). Calibrating discount thresholds using statistical validation protects unit margins and prevents structural losses.",
     files: {
       readme: "README.md",
-      notebook: "notebooks/05_EDA/05B_Bivariate_EDA.ipynb",
       report:
         "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA/blob/d123874b4f4123686d37ec3647861cc2aee7fc4b/reports/EDA%20final%20report.pdf",
     },
@@ -162,6 +161,7 @@ export const PROJECTS: Project[] = [
     tags: ["eda", "streaming", "visualization"],
     lastUpdated: "2026-07-12",
     githubPath: "projects/netflix-eda",
+    githubRepoUrl: "https://github.com/AlwinVJ/netflix_EDA",
     dataset: "netflix-dataset",
     librariesUsed: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     skillsLearned: [
@@ -191,7 +191,11 @@ export const PROJECTS: Project[] = [
       "US-produced titles and the Drama/Comedy genres dominate the catalog; content additions accelerated sharply in the years leading up to the dataset's cutoff.",
     lessonsLearned:
       "The `country` and `cast` fields required careful multi-value parsing before any group-level analysis was reliable.",
-    files: { readme: "README.md", notebook: "notebook.ipynb" },
+    files: {
+      readme: "README.md",
+      notebook: "notebooks/03_Univariate_EDA.ipynb",
+      report: "https://github.com/AlwinVJ/netflix_EDA/blob/main/reports/Final_EDA_Report.docx",
+    },
     relatedHandbooks: ["pandas-developer-handbook", "matplotlib-developer-handbook"],
     estimatedTime: "5-6 hours",
   },
