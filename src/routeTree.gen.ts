@@ -10,84 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as CheatsheetsRouteImport } from './routes/cheatsheets'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as DocumentationRouteImport } from './routes/documentation'
-import { Route as HandbooksRouteImport } from './routes/handbooks'
-import { Route as LearningGuideRouteImport } from './routes/learning-guide'
-import { Route as ReferencesRouteImport } from './routes/references'
-import { Route as ResourcesRouteImport } from './routes/resources'
-import { Route as DatasetsIndexRouteImport } from './routes/datasets.index'
-import { Route as DatasetsSlugRouteImport } from './routes/datasets.$slug'
-import { Route as DocsIndexRouteImport } from './routes/docs.index'
-import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheatsheetsRoute = CheatsheetsRouteImport.update({
-  id: '/cheatsheets',
-  path: '/cheatsheets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DocumentationRoute = DocumentationRouteImport.update({
-  id: '/documentation',
-  path: '/documentation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HandbooksRoute = HandbooksRouteImport.update({
-  id: '/handbooks',
-  path: '/handbooks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LearningGuideRoute = LearningGuideRouteImport.update({
-  id: '/learning-guide',
-  path: '/learning-guide',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReferencesRoute = ReferencesRouteImport.update({
-  id: '/references',
-  path: '/references',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesRoute = ResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatasetsIndexRoute = DatasetsIndexRouteImport.update({
-  id: '/datasets/',
-  path: '/datasets/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatasetsSlugRoute = DatasetsSlugRouteImport.update({
-  id: '/datasets/$slug',
-  path: '/datasets/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DocsIndexRoute = DocsIndexRouteImport.update({
-  id: '/docs/',
-  path: '/docs/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DocsSlugRoute = DocsSlugRouteImport.update({
-  id: '/docs/$slug',
-  path: '/docs/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
@@ -103,125 +31,31 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/cheatsheets': typeof CheatsheetsRoute
-  '/contact': typeof ContactRoute
-  '/documentation': typeof DocumentationRoute
-  '/handbooks': typeof HandbooksRoute
-  '/learning-guide': typeof LearningGuideRoute
-  '/references': typeof ReferencesRoute
-  '/resources': typeof ResourcesRoute
-  '/datasets/$slug': typeof DatasetsSlugRoute
-  '/docs/$slug': typeof DocsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/datasets/': typeof DatasetsIndexRoute
-  '/docs/': typeof DocsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/cheatsheets': typeof CheatsheetsRoute
-  '/contact': typeof ContactRoute
-  '/documentation': typeof DocumentationRoute
-  '/handbooks': typeof HandbooksRoute
-  '/learning-guide': typeof LearningGuideRoute
-  '/references': typeof ReferencesRoute
-  '/resources': typeof ResourcesRoute
-  '/datasets/$slug': typeof DatasetsSlugRoute
-  '/docs/$slug': typeof DocsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/datasets': typeof DatasetsIndexRoute
-  '/docs': typeof DocsIndexRoute
   '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/cheatsheets': typeof CheatsheetsRoute
-  '/contact': typeof ContactRoute
-  '/documentation': typeof DocumentationRoute
-  '/handbooks': typeof HandbooksRoute
-  '/learning-guide': typeof LearningGuideRoute
-  '/references': typeof ReferencesRoute
-  '/resources': typeof ResourcesRoute
-  '/datasets/$slug': typeof DatasetsSlugRoute
-  '/docs/$slug': typeof DocsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/datasets/': typeof DatasetsIndexRoute
-  '/docs/': typeof DocsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/cheatsheets'
-    | '/contact'
-    | '/documentation'
-    | '/handbooks'
-    | '/learning-guide'
-    | '/references'
-    | '/resources'
-    | '/datasets/$slug'
-    | '/docs/$slug'
-    | '/projects/$slug'
-    | '/datasets/'
-    | '/docs/'
-    | '/projects/'
+  fullPaths: '/' | '/projects/$slug' | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/cheatsheets'
-    | '/contact'
-    | '/documentation'
-    | '/handbooks'
-    | '/learning-guide'
-    | '/references'
-    | '/resources'
-    | '/datasets/$slug'
-    | '/docs/$slug'
-    | '/projects/$slug'
-    | '/datasets'
-    | '/docs'
-    | '/projects'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/cheatsheets'
-    | '/contact'
-    | '/documentation'
-    | '/handbooks'
-    | '/learning-guide'
-    | '/references'
-    | '/resources'
-    | '/datasets/$slug'
-    | '/docs/$slug'
-    | '/projects/$slug'
-    | '/datasets/'
-    | '/docs/'
-    | '/projects/'
+  to: '/' | '/projects/$slug' | '/projects'
+  id: '__root__' | '/' | '/projects/$slug' | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  CheatsheetsRoute: typeof CheatsheetsRoute
-  ContactRoute: typeof ContactRoute
-  DocumentationRoute: typeof DocumentationRoute
-  HandbooksRoute: typeof HandbooksRoute
-  LearningGuideRoute: typeof LearningGuideRoute
-  ReferencesRoute: typeof ReferencesRoute
-  ResourcesRoute: typeof ResourcesRoute
-  DatasetsSlugRoute: typeof DatasetsSlugRoute
-  DocsSlugRoute: typeof DocsSlugRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
-  DatasetsIndexRoute: typeof DatasetsIndexRoute
-  DocsIndexRoute: typeof DocsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
@@ -232,90 +66,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cheatsheets': {
-      id: '/cheatsheets'
-      path: '/cheatsheets'
-      fullPath: '/cheatsheets'
-      preLoaderRoute: typeof CheatsheetsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/documentation': {
-      id: '/documentation'
-      path: '/documentation'
-      fullPath: '/documentation'
-      preLoaderRoute: typeof DocumentationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/handbooks': {
-      id: '/handbooks'
-      path: '/handbooks'
-      fullPath: '/handbooks'
-      preLoaderRoute: typeof HandbooksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/learning-guide': {
-      id: '/learning-guide'
-      path: '/learning-guide'
-      fullPath: '/learning-guide'
-      preLoaderRoute: typeof LearningGuideRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/references': {
-      id: '/references'
-      path: '/references'
-      fullPath: '/references'
-      preLoaderRoute: typeof ReferencesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resources': {
-      id: '/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof ResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/datasets/': {
-      id: '/datasets/'
-      path: '/datasets'
-      fullPath: '/datasets/'
-      preLoaderRoute: typeof DatasetsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/datasets/$slug': {
-      id: '/datasets/$slug'
-      path: '/datasets/$slug'
-      fullPath: '/datasets/$slug'
-      preLoaderRoute: typeof DatasetsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/docs/': {
-      id: '/docs/'
-      path: '/docs'
-      fullPath: '/docs/'
-      preLoaderRoute: typeof DocsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/docs/$slug': {
-      id: '/docs/$slug'
-      path: '/docs/$slug'
-      fullPath: '/docs/$slug'
-      preLoaderRoute: typeof DocsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects/': {
@@ -337,19 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  CheatsheetsRoute: CheatsheetsRoute,
-  ContactRoute: ContactRoute,
-  DocumentationRoute: DocumentationRoute,
-  HandbooksRoute: HandbooksRoute,
-  LearningGuideRoute: LearningGuideRoute,
-  ReferencesRoute: ReferencesRoute,
-  ResourcesRoute: ResourcesRoute,
-  DatasetsSlugRoute: DatasetsSlugRoute,
-  DocsSlugRoute: DocsSlugRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
-  DatasetsIndexRoute: DatasetsIndexRoute,
-  DocsIndexRoute: DocsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport

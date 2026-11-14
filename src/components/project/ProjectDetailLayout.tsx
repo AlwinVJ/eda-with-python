@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Github, FileText, NotebookPen, Database, ExternalLink } from "lucide-react";
 import {
   getDataset,
@@ -6,6 +5,7 @@ import {
   getAllCheatsheets,
   githubUrl,
   githubBlobUrl,
+  assetUrl,
 } from "@/lib/content";
 import { DifficultyBadge, StatusBadge, TechBadge } from "@/components/ui/badge";
 import { getProjectRepoUrl, type Project } from "@/data/projects";
@@ -204,13 +204,28 @@ export function ProjectDetailLayout({
 
       {dataset && (
         <Section title="Dataset">
-          <Link
-            to="/datasets/$slug"
-            params={{ slug: dataset.slug }}
-            className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-primary hover:underline transition-colors"
-          >
-            <Database className="h-4 w-4" /> {dataset.title}
-          </Link>
+          <div className="flex flex-wrap items-center gap-2 text-sm text-foreground">
+            <Database className="h-4 w-4 text-muted-foreground shrink-0" />
+            <span className="font-medium">{dataset.title}</span>
+            {dataset.rows && dataset.columns && (
+              <span className="text-xs text-muted-foreground">
+                ({dataset.rows.toLocaleString()} rows × {dataset.columns} columns)
+              </span>
+            )}
+            {dataset.sourceUrl && (
+              <a
+                href={dataset.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-accent hover:text-primary hover:underline transition-colors ml-1"
+              >
+                Source <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
+          </div>
+          {dataset.description && (
+            <p className="mt-1 text-xs text-muted-foreground">{dataset.description}</p>
+          )}
         </Section>
       )}
 
@@ -235,20 +250,24 @@ export function ProjectDetailLayout({
             {relatedHandbooks.map((h) => (
               <li key={h.slug}>
                 <a
-                  href={`/handbooks#${h.slug}`}
-                  className="text-accent hover:text-primary hover:underline transition-colors"
+                  href={assetUrl(h.githubPath, h.file)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-accent hover:text-primary hover:underline transition-colors"
                 >
-                  {h.title} (Handbook)
+                  {h.title} (Handbook PDF) <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
             ))}
             {relatedCheatsheets.map((c) => (
               <li key={c.slug}>
                 <a
-                  href={`/cheatsheets#${c.slug}`}
-                  className="text-accent hover:text-primary hover:underline transition-colors"
+                  href={assetUrl(c.githubPath, c.image)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-accent hover:text-primary hover:underline transition-colors"
                 >
-                  {c.title} (Cheatsheet)
+                  {c.title} (Cheatsheet) <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
             ))}

@@ -41,7 +41,7 @@ export function GlobalSearch() {
         aria-label="Open search"
       >
         <SearchIcon className="h-4 w-4 shrink-0" />
-        <span className="truncate">Search docs…</span>
+        <span className="truncate">Search projects…</span>
         <kbd className="ml-auto hidden shrink-0 rounded border border-border bg-background px-1.5 py-0.5 text-[10px] sm:inline-block">
           ⌘K
         </kbd>
@@ -60,7 +60,7 @@ export function GlobalSearch() {
                 autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search projects, handbooks, cheatsheets, datasets…"
+                placeholder="Search projects…"
                 className="flex-1 bg-transparent text-sm outline-none"
               />
               <button onClick={() => setOpen(false)} aria-label="Close search">

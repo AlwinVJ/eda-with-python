@@ -117,48 +117,14 @@ export function getRepoStats() {
 }
 
 export function buildSearchIndex() {
-  return [
-    ...getAllProjects().map((p) => ({
-      type: "project" as const,
-      slug: p.slug,
-      title: p.title,
-      description: p.description,
-      tags: p.tags,
-      href: `/projects/${p.slug}`,
-    })),
-    ...getAllHandbooks().map((h) => ({
-      type: "handbook" as const,
-      slug: h.slug,
-      title: h.title,
-      description: h.description,
-      tags: h.tags,
-      href: `/handbooks#${h.slug}`,
-    })),
-    ...getAllCheatsheets().map((c) => ({
-      type: "cheatsheet" as const,
-      slug: c.slug,
-      title: c.title,
-      description: c.description,
-      tags: c.tags,
-      href: `/cheatsheets#${c.slug}`,
-    })),
-    ...getAllDatasets().map((d) => ({
-      type: "dataset" as const,
-      slug: d.slug,
-      title: d.title,
-      description: d.description,
-      tags: d.tags,
-      href: `/datasets/${d.slug}`,
-    })),
-    ...getAllResources().map((r) => ({
-      type: "resource" as const,
-      slug: r.slug,
-      title: r.title,
-      description: r.description,
-      tags: r.tags,
-      href: `/resources#${r.slug}`,
-    })),
-  ];
+  return getAllProjects().map((p) => ({
+    type: "project" as const,
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    tags: p.tags,
+    href: `/projects/${p.slug}`,
+  }));
 }
 
 const REPO_BASE =

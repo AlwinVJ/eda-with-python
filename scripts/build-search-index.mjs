@@ -22,13 +22,16 @@ function readMetadataDir(subdir) {
     .filter(Boolean);
 }
 
-const projects = readMetadataDir('projects').map((p) => ({ type: 'project', slug: p.slug, title: p.title, description: p.description, tags: p.tags, href: `/projects/${p.slug}` }));
-const handbooks = readMetadataDir('handbooks').map((h) => ({ type: 'handbook', slug: h.slug, title: h.title, description: h.description, tags: h.tags, href: `/handbooks#${h.slug}` }));
-const cheatsheets = readMetadataDir('cheatsheets').map((c) => ({ type: 'cheatsheet', slug: c.slug, title: c.title, description: c.description, tags: c.tags, href: `/cheatsheets#${c.slug}` }));
-const datasets = readMetadataDir('datasets').map((d) => ({ type: 'dataset', slug: d.slug, title: d.title, description: d.description, tags: d.tags, href: `/datasets/${d.slug}` }));
-const resources = readMetadataDir('resources').map((r) => ({ type: 'resource', slug: r.slug, title: r.title, description: r.description, tags: r.tags, href: `/resources#${r.slug}` }));
+const projects = readMetadataDir('projects').map((p) => ({
+  type: 'project',
+  slug: p.slug,
+  title: p.title,
+  description: p.description,
+  tags: p.tags,
+  href: `/projects/${p.slug}`,
+}));
 
-const index = [...projects, ...handbooks, ...cheatsheets, ...datasets, ...resources];
+const index = projects;
 
 fs.mkdirSync(path.join(process.cwd(), 'public'), { recursive: true });
 fs.writeFileSync(path.join(process.cwd(), 'public', 'search-index.json'), JSON.stringify(index, null, 2));

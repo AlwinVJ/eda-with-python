@@ -106,7 +106,7 @@ npm run preview
 
 The project is preconfigured for static deployment on GitHub Pages:
 
-1. **Static HTML Prerendering:** All static and dynamic routes (`/`, `/about`, `/projects`, `/projects/*`, `/docs`, `/docs/*`, `/datasets`, `/datasets/*`, `/handbooks`, `/cheatsheets`, `/references`, `/resources`, `/learning-guide`, `/contact`) are crawled and prerendered into static HTML files in `dist/client`.
+1. **Static HTML Prerendering:** All core static and dynamic routes (`/`, `/projects`, `/projects/*`) are crawled and prerendered into static HTML files in `dist/client`.
 2. **SPA Routing Fallback:** Direct navigation or refreshes on deep paths are supported via `404.html` fallback.
 3. **Base Path Support:** Configurable base path via `VITE_BASE_PATH` (e.g., `VITE_BASE_PATH=/${{ github.event.repository.name }}/`).
 4. **Jekyll Processing Disabled:** `.nojekyll` is generated in `dist/client` to ensure all asset paths and nested files are served without interference.
@@ -148,13 +148,12 @@ Available variables:
 ├── src/
 │   ├── assets/                  # Images and asset metadata pointers
 │   ├── components/
-│   │   ├── cards/               # ProjectCard, HandbookCard, DatasetCard, etc.
+│   │   ├── cards/               # ProjectCard, HandbookCard
 │   │   ├── layout/              # Sidebar, Topbar, Search, MobileNav
 │   │   ├── project/             # ProjectDetailLayout and section renderers
 │   │   └── ui/                  # Reusable UI component primitives
 │   ├── content/                 # JSON metadata for datasets, handbooks, cheatsheets
 │   ├── data/
-│   │   ├── docs.ts              # Documentation chapters and metadata
 │   │   ├── projects.ts          # Central project repository registry
 │   │   ├── references.ts        # External references and learning resources
 │   │   └── projectDetails/      # Long-form project case study details
@@ -163,9 +162,8 @@ Available variables:
 │   ├── routes/                  # TanStack Router route tree
 │   │   ├── __root.tsx           # Application root layout, SEO head, and shell
 │   │   ├── index.tsx            # Home page
-│   │   ├── projects.$slug.tsx   # Dynamic project detail view
-│   │   ├── docs.$slug.tsx       # Dynamic documentation view
-│   │   └── ...                  # Other route endpoints
+│   │   ├── projects.index.tsx   # Projects catalog
+│   │   └── projects.$slug.tsx   # Dynamic project detail view
 │   ├── router.tsx               # TanStack Router instance creation
 │   ├── routeTree.gen.ts         # Generated route tree
 │   ├── start.ts                 # TanStack Start instance configuration
