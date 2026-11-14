@@ -4,7 +4,7 @@
  * ============================================================================
  *
  *  Everything in the References system (the /references page, its Videos /
- *  Blogs / Articles sections, topic filters, sidebar scroll targets, and the
+ *  Blogs / Articles sections, topic filters, section scroll targets, and the
  *  Home page "Featured References" section) is generated from this file.
  *
  *  --------------------------------------------------------------------------
@@ -47,7 +47,7 @@ export type ReferenceType = "video" | "blog" | "article";
 export interface ReferenceTypeMeta {
   id: ReferenceType;
   title: string;
-  /** Anchor id used for smooth-scrolling from the sidebar. */
+  /** Anchor id used for section navigation and deep linking. */
   anchor: string;
   description: string;
   order: number;

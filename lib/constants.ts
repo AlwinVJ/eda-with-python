@@ -11,10 +11,7 @@ export const SITE_TAGLINE = 'A practical, project-driven roadmap for mastering m
 
 // ============================================================================
 // NAVIGATION
-// Single source of truth for both the desktop sidebar and the mobile drawer
-// (components/layout/Sidebar.tsx and components/layout/MobileNav.tsx) —
-// previously this array was duplicated inline in the sidebar only, with no
-// mobile equivalent at all.
+// Global navigation items and routing definitions.
 // `matchPrefixes` lists additional route prefixes that should count as
 // "active" for this nav item (e.g. Documentation covers four sub-routes).
 // ============================================================================

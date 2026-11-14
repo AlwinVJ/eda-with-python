@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Sidebar } from '@/components/layout/Sidebar';
 import { Topbar } from '@/components/layout/Topbar';
 import { SITE_NAME, SITE_TAGLINE, THEME_STORAGE_KEY } from '@/lib/constants';
 
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="flex min-h-screen">
-        <Sidebar />
         <div className="flex min-h-screen flex-1 flex-col">
           <Topbar />
           <main className="flex-1 px-6 py-8 md:px-10 md:py-10">

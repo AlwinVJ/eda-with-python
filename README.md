@@ -149,7 +149,7 @@ Available variables:
 │   ├── assets/                  # Images and asset metadata pointers
 │   ├── components/
 │   │   ├── cards/               # ProjectCard, HandbookCard
-│   │   ├── layout/              # Sidebar, Topbar, Search, MobileNav
+│   │   ├── layout/              # Topbar, GlobalSearch
 │   │   ├── project/             # ProjectDetailLayout and section renderers
 │   │   └── ui/                  # Reusable UI component primitives
 │   ├── content/                 # JSON metadata for datasets, handbooks, cheatsheets
@@ -157,7 +157,6 @@ Available variables:
 │   │   ├── projects.ts          # Central project repository registry
 │   │   ├── references.ts        # External references and learning resources
 │   │   └── projectDetails/      # Long-form project case study details
-│   ├── hooks/                   # Custom React hooks (use-mobile, etc.)
 │   ├── lib/                     # Utilities, theme provider, types, content helpers
 │   ├── routes/                  # TanStack Router route tree
 │   │   ├── __root.tsx           # Application root layout, SEO head, and shell

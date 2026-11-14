@@ -4,7 +4,7 @@
  * ============================================================================
  *
  *  Everything about projects (Home "Featured Projects", the Projects page,
- *  sidebar categories, project cards, badges) is generated from this file.
+ *  category sections, project cards, badges) is generated from this file.
  *
  *  --------------------------------------------------------------------------
  *  HOW TO ADD A NEW PROJECT
@@ -13,7 +13,7 @@
  *     `import` for it at the top of this file.
  *  2. Append a new object to the `PROJECTS` array below.
  *  3. Set `category: 'eda'` OR `category: 'ml'` — this decides the section it
- *     appears under, its badge label, and the sidebar it scrolls to.
+ *     appears under and its badge label.
  *  4. Set `featured: true` if you want it on the Home page.
  *  5. Fill in the standard project metadata (title, description, workflow…).
  *  6. (Optional) For a rich detail page, create
@@ -21,7 +21,7 @@
  *     `src/data/projectDetails/index.ts`. Without it, the detail page falls
  *     back to the standard sections built from this metadata.
  *
- *  The Projects page, sidebar, category badges, and Featured Projects list
+ *  The Projects page, category badges, and Featured Projects list
  *  will update automatically. No component code needs to change.
  *
  *  --------------------------------------------------------------------------
@@ -50,7 +50,7 @@ export type ProjectCategoryId = "eda" | "ml";
 export interface ProjectCategory {
   id: ProjectCategoryId;
   title: string;
-  /** Anchor id used for smooth-scrolling from the sidebar. */
+  /** Anchor id used for section navigation and deep linking. */
   anchor: string;
   /** Short label used on project cards (e.g. "EDA Project"). */
   badge: string;
