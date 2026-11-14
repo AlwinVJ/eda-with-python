@@ -10,9 +10,9 @@ export function Topbar() {
   const isProjectsActive = pathname.startsWith("/projects");
 
   return (
-    <header className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-background/80 px-3 backdrop-blur-md sm:px-6 md:px-8">
+    <header className="sticky top-0 z-40 flex h-14 w-full items-center border-b border-border bg-background/80 px-3 backdrop-blur-md sm:px-6 md:px-8">
       {/* Left Section – Website Branding */}
-      <div className="flex items-center shrink-0">
+      <div className="flex items-center shrink-0 w-auto lg:w-48 xl:w-52">
         <Link
           to="/"
           className="group flex items-center select-none rounded-md transition-opacity hover:opacity-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
@@ -24,8 +24,11 @@ export function Topbar() {
         </Link>
       </div>
 
-      {/* Center Section – Navigation Buttons */}
-      <nav aria-label="Main Navigation" className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+      {/* Navigation Buttons – Aligned with Main Content Start */}
+      <nav
+        aria-label="Main Navigation"
+        className="flex items-center gap-1 sm:gap-1.5 md:gap-2 ml-3 sm:ml-4 lg:ml-0"
+      >
         <Link
           to="/"
           className={cn(
@@ -53,7 +56,7 @@ export function Topbar() {
       </nav>
 
       {/* Right Section – Search & Theme Toggle */}
-      <div className="flex items-center gap-1.5 sm:gap-2.5 md:gap-3 shrink-0">
+      <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5 md:gap-3 shrink-0">
         <GlobalSearch />
         <ThemeToggle />
       </div>

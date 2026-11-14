@@ -15,7 +15,9 @@ import { ThemeProvider } from "@/lib/theme";
 import { themeNoFlashScript } from "@/lib/theme-context";
 import { Topbar } from "@/components/layout/Topbar";
 import { BackToTop } from "@/components/BackToTop";
+import { Chatbot } from "@/components/Chatbot";
 import { SITE_TAGLINE } from "@/lib/constants";
+import { ONETAG_KEY } from "@/lib/onetag";
 
 function NotFoundComponent() {
   return (
@@ -90,7 +92,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.ico`, type: "image/x-icon" },
     ],
-    scripts: [{ children: themeNoFlashScript }],
+    scripts: [
+      { children: themeNoFlashScript },
+      {
+        src: "https://onetagai.com/v1.js",
+        "data-key": ONETAG_KEY,
+        async: true,
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -120,12 +129,13 @@ function RootComponent() {
       <ThemeProvider>
         <div className="flex min-h-screen min-w-0 flex-col bg-background">
           <Topbar />
-          <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 lg:px-12 md:py-10">
-            <div className="mx-auto w-full max-w-6xl min-w-0">
+          <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+            <div className="w-full min-w-0 mr-auto max-w-full md:max-w-3xl lg:ml-48 xl:ml-52 lg:max-w-[calc(100%-12rem)] xl:max-w-[calc(100%-13rem-26rem)] 2xl:max-w-[1280px]">
               <Outlet />
             </div>
           </main>
           <BackToTop />
+          <Chatbot />
         </div>
       </ThemeProvider>
     </QueryClientProvider>

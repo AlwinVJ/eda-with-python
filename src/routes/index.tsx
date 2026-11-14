@@ -47,7 +47,7 @@ export function HomePage() {
         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
           Exploratory Data Analysis & Data Preprocessing
         </h1>
-        <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
+        <p className="max-w-3xl text-base text-muted-foreground leading-relaxed">
           A concise, educational guide to understanding raw datasets, diagnosing data-quality
           issues, and preparing features for reliable machine learning workflows.
         </p>

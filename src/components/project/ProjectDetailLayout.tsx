@@ -56,7 +56,7 @@ export function ProjectDetailLayout({
   }, []);
 
   return (
-    <article className="space-y-10">
+    <article id="educational-content" className="space-y-10">
       <header className="space-y-3 border-b border-border pb-6">
         <div className="flex flex-wrap items-center gap-2">
           <DifficultyBadge difficulty={project.difficulty} />
