@@ -1,6 +1,20 @@
 [
   {
     "type": "project",
+    "slug": "amazon-conveyor-eda",
+    "title": "Amazon Conveyor EDA",
+    "description": "Exploratory data analysis and root cause investigation of 9,686 SCADA alarm logs from Amazon's Pick to Rebin (P2R) conveyor system, identifying primary downtime drivers, bottleneck locations, and flow-balancing solutions.",
+    "tags": [
+      "eda",
+      "logistics",
+      "scada",
+      "root-cause-analysis",
+      "pareto-analysis"
+    ],
+    "href": "/projects/amazon-conveyor-eda"
+  },
+  {
+    "type": "project",
     "slug": "discount-vs-profit",
     "title": "Retail Discount Strategy Analysis",
     "description": "An extensive exploratory data analysis investigating how retail discount strategies influence profitability, identifying loss-making discount thresholds, and deriving statistically validated pricing recommendations.",

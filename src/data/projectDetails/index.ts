@@ -10,9 +10,11 @@ import { mentalHealthSignal } from "./mentalHealthSignal";
 import { creditRiskAssessment } from "./creditRiskAssessment";
 import { discountVsProfit } from "./discountVsProfit";
 import { netflixEda } from "./netflixEda";
+import { amazonConveyor } from "./amazonConveyor";
 import { titanicDetails } from "./titanic";
 
 const PROJECT_DETAILS: Record<string, ProjectDetails> = {
+  "amazon-conveyor-eda": amazonConveyor,
   "house-price-prediction": housePricePrediction,
   "mental-health-signal": mentalHealthSignal,
   "credit-risk-assessment": creditRiskAssessment,
