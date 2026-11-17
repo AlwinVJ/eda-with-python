@@ -70,7 +70,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <a
               href={repoUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted"
             >
               <Github className="h-3.5 w-3.5" /> GitHub
@@ -80,7 +80,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <a
               href={project.liveDemoUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 hover:bg-muted"
             >
               <ExternalLink className="h-3.5 w-3.5" /> Live Demo

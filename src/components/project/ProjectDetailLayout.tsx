@@ -11,6 +11,7 @@ import {
 import { DifficultyBadge, StatusBadge, TechBadge } from "@/components/ui/badge";
 import { getProjectRepoUrl, type Project } from "@/data/projects";
 import { PROJECT_SECTION_ORDER, type ProjectDetails } from "@/data/projectDetails";
+import { cn } from "@/lib/utils";
 
 function getFileBlobUrl(project: Project, file: string): string {
   if (file.startsWith("http://") || file.startsWith("https://")) {
@@ -72,6 +73,30 @@ export function ProjectDetailLayout({
             <TechBadge key={l}>{l}</TechBadge>
           ))}
         </div>
+        {(project.liveDemoUrl || repoUrl) && (
+          <div className="flex flex-wrap items-center gap-2 pt-2">
+            {project.liveDemoUrl && (
+              <a
+                href={project.liveDemoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary-hover focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ExternalLink className="h-3.5 w-3.5" /> Live Demo
+              </a>
+            )}
+            {repoUrl && (
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+              >
+                <Github className="h-3.5 w-3.5" /> Source Code
+              </a>
+            )}
+          </div>
+        )}
       </header>
 
       {details ? (
@@ -106,14 +131,24 @@ export function ProjectDetailLayout({
                     {s.images.map((img) => (
                       <figure
                         key={img.src}
-                        className="overflow-hidden rounded-lg border border-border bg-card"
+                        className={cn(
+                          "overflow-hidden rounded-lg border border-border bg-card flex flex-col justify-between",
+                          img.containerClassName,
+                        )}
                       >
-                        <img
-                          src={img.src}
-                          alt={img.caption}
-                          loading="lazy"
-                          className="w-full bg-white object-contain"
-                        />
+                        <div
+                          className={cn(
+                            "flex items-center justify-center bg-white overflow-hidden",
+                            img.containerClassName ? "h-full w-full" : "w-full",
+                          )}
+                        >
+                          <img
+                            src={img.src}
+                            alt={img.caption}
+                            loading="lazy"
+                            className={cn("w-full bg-white object-contain", img.className)}
+                          />
+                        </div>
                         <figcaption className="px-3 py-2 text-xs text-muted-foreground">
                           {img.caption}
                         </figcaption>
@@ -173,14 +208,24 @@ export function ProjectDetailLayout({
                             {sub.images.map((img) => (
                               <figure
                                 key={img.src}
-                                className="overflow-hidden rounded-lg border border-border bg-card"
+                                className={cn(
+                                  "overflow-hidden rounded-lg border border-border bg-card flex flex-col justify-between",
+                                  img.containerClassName,
+                                )}
                               >
-                                <img
-                                  src={img.src}
-                                  alt={img.caption}
-                                  loading="lazy"
-                                  className="w-full bg-white object-contain"
-                                />
+                                <div
+                                  className={cn(
+                                    "flex items-center justify-center bg-white overflow-hidden",
+                                    img.containerClassName ? "h-full w-full" : "w-full",
+                                  )}
+                                >
+                                  <img
+                                    src={img.src}
+                                    alt={img.caption}
+                                    loading="lazy"
+                                    className={cn("w-full bg-white object-contain", img.className)}
+                                  />
+                                </div>
                                 <figcaption className="px-3 py-2 text-xs text-muted-foreground">
                                   {img.caption}
                                 </figcaption>
@@ -240,7 +285,7 @@ export function ProjectDetailLayout({
             <a
               href={getFileBlobUrl(project, project.files.notebook)}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
             >
               <NotebookPen className="h-4 w-4" /> Open Notebook
@@ -250,7 +295,7 @@ export function ProjectDetailLayout({
             <a
               href={getFileBlobUrl(project, project.files.report)}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
             >
               <FileText className="h-4 w-4" /> Report
@@ -260,7 +305,7 @@ export function ProjectDetailLayout({
             <a
               href={repoUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
             >
               <Github className="h-4 w-4" /> View Source Code (GitHub)
@@ -278,7 +323,7 @@ export function ProjectDetailLayout({
             <a
               href={project.liveDemoUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 hover:bg-muted"
             >
               <ExternalLink className="h-4 w-4" /> Live Demo

@@ -21,12 +21,19 @@ export type ProjectSectionId =
   | "learnings"
   | "enhancements";
 
+export interface ProjectImage {
+  src: string;
+  caption: string;
+  className?: string;
+  containerClassName?: string;
+}
+
 export interface ProjectSubsection {
   title: string;
   body?: string[];
   bullets?: string[];
   steps?: string[];
-  images?: { src: string; caption: string }[];
+  images?: ProjectImage[];
 }
 
 export interface ProjectSection {
@@ -37,7 +44,7 @@ export interface ProjectSection {
   /** Ordered steps. */
   steps?: string[];
   /** Figures (real project outputs) with captions. */
-  images?: { src: string; caption: string }[];
+  images?: ProjectImage[];
   /** Structured subsections. */
   subsections?: ProjectSubsection[];
   /** Marks content as an editable placeholder (rendered with a "to be added" note). */

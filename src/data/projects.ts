@@ -513,11 +513,12 @@ export const PROJECTS: Project[] = [
     description:
       "Multi-class classification pipeline predicting NYC Airbnb accommodation room types using ColumnTransformer preprocessing, SMOTE resampling, and tuned Random Forest, served via FastAPI.",
     difficulty: "intermediate",
-    status: "in-progress",
+    status: "completed",
     tags: ["classification", "machine-learning", "imbalanced-data", "fastapi", "smote"],
     lastUpdated: "2026-11-17",
     githubPath: "",
     githubRepoUrl: "https://github.com/AlwinVJ/NYC-Airbnb-Room-Type-Predictor",
+    liveDemoUrl: "https://nyc-airbnb-room-type-predictor-ysoj.onrender.com/",
     dataset: "",
     librariesUsed: [
       "Python",
@@ -531,6 +532,7 @@ export const PROJECTS: Project[] = [
       "Seaborn",
       "Joblib",
       "Uvicorn",
+      "Docker",
     ],
     skillsLearned: [
       "Multi-class imbalanced classification",

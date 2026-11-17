@@ -14,9 +14,9 @@ export const nycAirbnb: ProjectDetails = {
   overview: {
     body: [
       "NYC Airbnb Room Type Predictor is an end-to-end machine learning classification project designed to predict the accommodation room type of New York City Airbnb listings based on their physical location, price dynamics, booking policies, and host activity metrics.",
-      "In the short-term vacation rental marketplace, accurate listing classification is essential for catalog integrity, search filtering, algorithmic price recommendation, and regulatory compliance. NYC municipal housing regulations impose stringent restrictions on short-term rentals (such as Local Law 18), distinguishing sharply between unhosted entire homes and hosted private or shared rooms.",
-      "Analyzing 48,895 listings from the New York City Airbnb Open Data repository, this project establishes a complete data science lifecycle: from exploratory geospatial analysis and addressing severe class imbalance (where shared rooms represent only ~2.4% of all listings) using SMOTE, through hyperparameter-tuned ensemble classification with Scikit-Learn pipelines, to production-ready serving via a FastAPI REST API and an interactive web interface.",
-      "Project Status: In Progress. The core data preprocessing, SMOTE-balanced training pipelines, Random Forest model tuning, FastAPI serving backend, and responsive dashboard are functional. Ongoing work focuses on advanced hyperparameter tuning with gradient boosting architectures, extracting NLP signals from listing titles, and cloud containerization.",
+      "In the short-term vacation rental marketplace, accurate listing classification is essential for catalog integrity, search filtering, algorithmic price recommendation, revenue management, and municipal regulatory compliance. New York City municipal regulations impose stringent restrictions on short-term rentals (such as Local Law 18 / Short-Term Rental Registration Law), distinguishing sharply between unhosted entire homes and host-occupied private or shared rooms.",
+      "Analyzing 48,895 listings from the New York City Airbnb Open Data repository, this project establishes a complete data science lifecycle: from exploratory geospatial analysis and addressing severe class imbalance (where shared rooms represent only ~2.4% of all listings) using SMOTE, through hyperparameter-tuned ensemble classification with Scikit-Learn pipelines, to production-ready serving via a containerized FastAPI REST microservice and an interactive web dashboard.",
+      "Project Status: Completed. The end-to-end pipeline is fully trained, evaluated, containerized with Docker, and deployed live on Render at https://nyc-airbnb-room-type-predictor-ysoj.onrender.com/.",
     ],
   },
   problem: {
@@ -28,9 +28,13 @@ export const nycAirbnb: ProjectDetails = {
       "High Spatial and Price Variance: Manhattan and Brooklyn listings exhibit distinct pricing distributions and density compared to Queens, the Bronx, and Staten Island, requiring geographic coordinates and neighbourhood granularity.",
       "Extreme Outliers: Listing prices and minimum night requirements feature severe positive skewness, with prices reaching up to $10,000/night and minimum night requirements exceeding a full year, necessitating robust capping and scaling.",
       "Data Leakage Prevention: Ensuring all imputation, scaling, one-hot encoding, and synthetic oversampling (SMOTE) are strictly encapsulated within cross-validation folds and training sets without leaking test distribution data.",
+      "Regulatory & Compliance Relevance: Municipal regulations (such as NYC Local Law 18) require hosts to be present for stays under 30 days unless registered, making accurate automated verification of entire-home vs. hosted-room listings crucial for legal compliance.",
     ],
   },
   objectives: {
+    body: [
+      "The primary objective of this project is to build, evaluate, and deploy a robust multi-class classification system capable of accurately predicting an Airbnb listing's room type from its observable market characteristics.",
+    ],
     bullets: [
       "Perform end-to-end exploratory data analysis across 48,895 NYC Airbnb listings to uncover spatial, economic, and availability patterns",
       "Clean raw data by addressing missing values (e.g. 10,052 missing reviews_per_month), dropping non-predictive identifiers, and capping 99th-percentile outliers",
@@ -40,6 +44,7 @@ export const nycAirbnb: ProjectDetails = {
       "Optimize model performance via RandomizedSearchCV with 3-fold cross-validation targeting Macro F1 score",
       "Evaluate generalization performance on an untouched 33% stratified test set (16,136 listings) with multi-class precision, recall, and confusion matrix auditing",
       "Build and serve a lightweight FastAPI REST microservice with Pydantic schema validation for real-time inference",
+      "Containerize the application using Docker with security best practices and deploy to Render with live health monitoring",
       "Develop an interactive web dashboard with NYC visual themes, preset listings, and instant room-type probability predictions",
     ],
   },
@@ -62,21 +67,21 @@ export const nycAirbnb: ProjectDetails = {
     ],
     subsections: [
       {
-        title: "Model Feature Schema (10 Predictor Features)",
+        title: "Model Feature Schema (10 Verified Predictor Features)",
         body: [
-          "After data cleaning and schema pruning, the modeling pipeline consumes 10 verified predictor variables:",
+          "After exploratory data analysis and feature pruning, the modeling pipeline consumes 10 verified predictor variables. Each feature captures specific behavioral, economic, or geographic dimensions that distinguish accommodation types:",
         ],
         steps: [
-          "latitude (float64): Precise geographic latitude coordinate of the listing (range: 40.49979 to 40.91306).",
-          "longitude (float64): Precise geographic longitude coordinate of the listing (range: -74.24442 to -73.71299).",
-          "price (float64): Nightly listing price in USD. Raw range: $0 to $10,000 (capped at the 99th percentile: $799).",
-          "minimum_nights (int64): Minimum booking duration required by host. Raw range: 1 to 1,250 nights (capped at 99th percentile: 45 nights).",
-          "number_of_reviews (int64): Total lifetime count of customer reviews received (range: 0 to 629).",
-          "reviews_per_month (float64): Average monthly review velocity (10,052 listings had null values due to zero reviews; imputed with 0.0).",
-          "calculated_host_listings_count (int64): Total properties managed by the host (range: 1 to 327; proxies commercial vs individual operators).",
-          "availability_365 (int64): Number of days listing is available for booking per calendar year (range: 0 to 365 days).",
-          "neighbourhood_group (object / categorical): The borough in which listing is situated: Manhattan (21,661), Brooklyn (20,104), Queens (5,666), Bronx (1,091), and Staten Island (373).",
-          "neighbourhood (object / categorical): Specific local district or neighbourhood name (221 unique neighbourhoods, e.g. Williamsburg, Bedford-Stuyvesant, Harlem).",
+          "latitude (float64): Precise geographic latitude coordinate (range: 40.49979 to 40.91306). Captures north-south position across NYC and distance to major commercial corridors.",
+          "longitude (float64): Precise geographic longitude coordinate (range: -74.24442 to -73.71299). Encodes east-west spatial location, distinguishing transit-accessible inner-city hubs from outer suburban zones.",
+          "price (float64): Nightly listing price in USD (raw range: $0 to $10,000; capped at the 99th percentile: $799). Price serves as the primary economic separator, as entire homes command substantial premiums over private and shared rooms.",
+          "minimum_nights (int64): Minimum booking duration required by host (raw range: 1 to 1,250 nights; capped at 99th percentile: 45 nights). Differentiates flexible short-term vacation stays from extended stays or homestay arrangements.",
+          "number_of_reviews (int64): Total lifetime count of customer reviews received (range: 0 to 629). Reflects cumulative customer transaction volume and listing maturity.",
+          "reviews_per_month (float64): Average monthly review velocity (10,052 listings had null values due to zero reviews; imputed with 0.0). Proxies active turnover and ongoing tenant demand.",
+          "calculated_host_listings_count (int64): Total properties managed by the host (range: 1 to 327). Distinguishes individual resident hosts sharing extra rooms from commercial property management firms operating entire-home portfolios.",
+          "availability_365 (int64): Number of days listing is available for booking per calendar year (range: 0 to 365 days). Separates year-round commercial investment properties from part-time or primary residences.",
+          "neighbourhood_group (object / categorical): The borough in which the listing is situated: Manhattan (21,661), Brooklyn (20,104), Queens (5,666), Bronx (1,091), and Staten Island (373). Reflects borough-level density, tourism demand, and zoning.",
+          "neighbourhood (object / categorical): Specific local district or neighbourhood name (221 unique neighbourhoods, e.g. Williamsburg, Bedford-Stuyvesant, Harlem, Midtown). Captures micro-market pricing and housing typology.",
         ],
       },
     ],
@@ -93,7 +98,7 @@ export const nycAirbnb: ProjectDetails = {
       "Stratified Train-Test Splitting: Split data into 67% training (32,759 listings) and 33% test (16,136 listings), maintaining exact class proportions across splits.",
       "Pipeline Transformation & Resampling: Wrapped numerical imputer + standard scaler and categorical one-hot encoder inside a ColumnTransformer, followed by SMOTE resampling on the training split.",
       "Model Benchmarking & Tuning: Evaluated 4 algorithmic architectures using 3-fold cross-validation; optimized Random Forest hyperparameters via RandomizedSearchCV.",
-      "Production Serving & Web UI: Exported serialized model pipeline (Model_Pipeline.pkl), built FastAPI prediction endpoints, and constructed an interactive frontend with NYC styling.",
+      "Production Serving & Web UI: Exported serialized model pipeline (Model_Pipeline.pkl), built FastAPI prediction endpoints, containerized with Docker, and deployed live to Render.",
     ],
     images: [
       {
@@ -112,11 +117,15 @@ export const nycAirbnb: ProjectDetails = {
         src: fig("numerical-feature-distributions.png"),
         caption:
           "Numerical Feature Distributions: Histograms showing severe right-skewness in price, minimum_nights, reviews_per_month, and host listings.",
+        className: "max-h-56 sm:max-h-64 object-contain mx-auto",
+        containerClassName: "max-h-[320px] sm:max-h-[350px]",
       },
       {
         src: fig("numerical-boxplots.png"),
         caption:
           "Boxplot Outlier Diagnostics: Highlighting extreme positive outliers prior to 99th percentile Winsorization / capping.",
+        className: "max-h-56 sm:max-h-64 object-contain mx-auto",
+        containerClassName: "max-h-[320px] sm:max-h-[350px]",
       },
     ],
     steps: [
@@ -180,6 +189,12 @@ export const nycAirbnb: ProjectDetails = {
         title: "2. Economic Differentiation Across Room Types",
         body: [
           "Price provides strong discriminative signal for separating Entire homes from Private and Shared rooms. While Entire homes have median prices around $160, Private rooms cluster closely around $70, and Shared rooms center around $45. However, price alone cannot reliably distinguish Private from Shared rooms, making availability, review cadence, and minimum stay critical secondary indicators.",
+        ],
+      },
+      {
+        title: "3. Correlation & Outlier Analysis",
+        body: [
+          "The correlation matrix confirms that numerical predictors are largely independent, with minimal collinearity across features (the strongest correlation observed is r = 0.55 between total reviews and reviews per month). However, extreme outliers in price (up to $10,000/night) and minimum stay (up to 1,250 nights) would disproportionately distort decision boundaries without robust capping.",
         ],
       },
     ],
@@ -249,9 +264,10 @@ export const nycAirbnb: ProjectDetails = {
         ],
       },
       {
-        title: "3. Confusion Matrix Diagnostic Insights",
+        title: "3. Confusion Matrix Diagnostic Insights & Metric Selection",
         body: ["Analysis of test set misclassifications reveals key operational insights:"],
         bullets: [
+          "Why Accuracy is Insufficient: In highly imbalanced datasets, accuracy is dominated by the majority classes (~97.6% combined). A naive baseline predicting only Entire home or Private room would score ~85% accuracy while achieving 0% recall on shared rooms. Macro F1 is the definitive evaluation metric because it weights each class equally, strictly penalizing models that fail on rare categories.",
           "Entire Home vs. Private Room: High discrimination accuracy. Only 980 entire homes were predicted as private rooms, and 1,061 private rooms were predicted as entire homes.",
           "Shared Room Detection: Of 383 true shared rooms, 149 were correctly classified, 166 were predicted as private rooms, and 68 as entire homes. The lower recall (39%) reflects the overlap in price and feature distributions between low-cost private rooms and shared spaces.",
         ],
@@ -260,7 +276,8 @@ export const nycAirbnb: ProjectDetails = {
   },
   deployment: {
     body: [
-      "The trained pipeline is operationalized using a production-ready FastAPI backend paired with an interactive modern web dashboard.",
+      "The trained pipeline is operationalized using a production-ready FastAPI backend paired with an interactive modern web dashboard, fully containerized with Docker and hosted on Render.",
+      "Live Application: https://nyc-airbnb-room-type-predictor-ysoj.onrender.com/",
     ],
     subsections: [
       {
@@ -269,7 +286,8 @@ export const nycAirbnb: ProjectDetails = {
           "The backend (main.py) loads the serialized Model_Pipeline.pkl (incorporating the Scikit-Learn ColumnTransformer and tuned Random Forest classifier) and exposes inference endpoints:",
         ],
         steps: [
-          "GET /: Health check and service status probe confirming operational availability.",
+          "GET /: Serves the interactive web user interface (index.html, style.css, script.js) with fallback API JSON info.",
+          "GET /health: Operational monitoring probe returning {'status': 'healthy'} for Docker and cloud healthcheck monitors.",
           "POST /predict: Primary inference endpoint. Accepts validated JSON payloads, maps inputs to expected dataframe schemas, computes class probabilities, and returns predicted room type with confidence score.",
         ],
       },
@@ -280,7 +298,7 @@ export const nycAirbnb: ProjectDetails = {
         ],
         bullets: [
           "Request Payload: { latitude: 40.7128, longitude: -74.0060, price: 150.0, minimum_nights: 2, number_of_reviews: 25, reviews_per_month: 1.5, calculated_host_listings_count: 1, availability_365: 180, neighbourhood_group: 'Manhattan', neighbourhood: 'Harlem' }",
-          "Response Payload: { 'Predicted_room_type': 'Entire home/apt', 'Probability': 0.82 }",
+          "Response Payload: { 'Predicted_room_type': 'Entire home/apt', 'Probability': [0.82, 0.16, 0.02] }",
         ],
       },
       {
@@ -289,25 +307,36 @@ export const nycAirbnb: ProjectDetails = {
           "The repository includes a responsive frontend dashboard (index.html, style.css, script.js) with NYC styling:",
         ],
         bullets: [
-          "Quick-Fill Presets: One-click buttons to load realistic sample profiles (Manhattan Loft, Brooklyn Studio, Queens Shared Room).",
-          "Dynamic Visual Feedback: Dynamic building height animations and ambient NYC skyline lights that respond to classification results.",
+          "Quick-Fill Presets: One-click 'Try an example' button to populate realistic listing profiles across boroughs.",
+          "Dynamic Visual Feedback: Dynamic 3D building height animations and ambient NYC skyline lights that illuminate windows according to class probabilities.",
           "Real-Time Error Handling: Client-side validation ensuring valid geographic boundaries and positive prices prior to API dispatch.",
+        ],
+      },
+      {
+        title: "4. Docker Containerization & Render Cloud Hosting",
+        body: [
+          "The service is packaged using Docker following containerization best practices and deployed on Render:",
+        ],
+        steps: [
+          "Base Image: Official python:3.12-slim lightweight base image, minimizing container footprint and vulnerability surface.",
+          "Security: Creates and switches to a dedicated unprivileged non-root user (appuser).",
+          "Health Probe: Integrated Docker HEALTHCHECK running curl -f http://localhost:${PORT:-10000}/health every 30 seconds.",
+          "Server Execution: Starts Uvicorn bound to 0.0.0.0 and dynamic $PORT injection to seamlessly adapt to cloud platform routing.",
+          "Cloud Deployment: Deployed on Render as a web service accessible at https://nyc-airbnb-room-type-predictor-ysoj.onrender.com/.",
         ],
       },
     ],
   },
   learnings: {
     body: [
-      "This project showcases end-to-end data science principles, from handling severe multi-class imbalance to deploying reproducible ML microservices.",
+      "The NYC Airbnb Room Type Predictor project demonstrates the full end-to-end data science lifecycle, from handling severe multi-class imbalance to deploying reproducible containerized ML microservices.",
     ],
     bullets: [
-      "SMOTE Resampling Criticality: In multi-class classification with extreme imbalance (~2.4% minority class), SMOTE prevented the model from collapsing into trivial majority-class predictions, lifting Macro F1 from 0.52 to 0.74.",
-      "Pipeline Encapsulation: Embedding SimpleImputer, StandardScaler, and OneHotEncoder directly into a ColumnTransformer eliminated data leakage between training folds and test evaluations.",
-      "Status — In Progress & Future Roadmap:",
-      "1. Text Signal Extraction: Extracting TF-IDF or transformer embedding features from the listing 'name' column (e.g. keywords like 'sofa', 'bunk', 'studio', 'penthouse') to enhance shared room discrimination.",
-      "2. Advanced Gradient Boosting: Benchmarking LightGBM, CatBoost, and XGBoost with focal loss formulations tailored for imbalanced multi-class problems.",
-      "3. Cost-Sensitive Threshold Tuning: Optimizing class decision thresholds rather than relying strictly on argmax probabilities.",
-      "4. Containerization & Cloud Deployment: Packaging the FastAPI application with Docker and deploying to a public cloud container platform.",
+      "Multiclass Imbalance Mitigation: In multi-class classification with extreme imbalance (~2.4% minority class), SMOTE prevented the model from collapsing into trivial majority-class predictions, lifting Macro F1 from 0.52 to 0.74.",
+      "Leakage-Free Pipeline Architecture: Embedding SimpleImputer, StandardScaler, and OneHotEncoder directly into a ColumnTransformer eliminated data leakage between training folds and test evaluations.",
+      "Metric Selection Discipline: Demonstrated why accuracy alone is deceptive in imbalanced classification and why Macro F1 must be the optimization objective for multi-class problems.",
+      "Production REST Microservices: Engineered a clean FastAPI service with strict Pydantic v2 data validation schemas.",
+      "Containerization & Cloud Deployment: Packaged the service with a secure, non-root Dockerfile and deployed live to Render with active healthcheck probing.",
     ],
   },
 };
