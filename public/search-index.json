@@ -53,6 +53,20 @@
   },
   {
     "type": "project",
+    "slug": "nyc-airbnb-room-type-predictor",
+    "title": "NYC Airbnb Room Type Predictor",
+    "description": "Multi-class classification pipeline predicting NYC Airbnb accommodation room types using ColumnTransformer preprocessing, SMOTE resampling, and tuned Random Forest, served via FastAPI.",
+    "tags": [
+      "classification",
+      "machine-learning",
+      "imbalanced-data",
+      "fastapi",
+      "smote"
+    ],
+    "href": "/projects/nyc-airbnb-room-type-predictor"
+  },
+  {
+    "type": "project",
     "slug": "titanic",
     "title": "Titanic Survival Analysis",
     "description": "End-to-end EDA and feature engineering on the classic Titanic dataset, from missing-value handling to a baseline survival model.",

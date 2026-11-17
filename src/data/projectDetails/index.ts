@@ -12,12 +12,14 @@ import { discountVsProfit } from "./discountVsProfit";
 import { netflixEda } from "./netflixEda";
 import { amazonConveyor } from "./amazonConveyor";
 import { titanicDetails } from "./titanic";
+import { nycAirbnb } from "./nycAirbnb";
 
 const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "amazon-conveyor-eda": amazonConveyor,
   "house-price-prediction": housePricePrediction,
   "mental-health-signal": mentalHealthSignal,
   "credit-risk-assessment": creditRiskAssessment,
+  "nyc-airbnb-room-type-predictor": nycAirbnb,
   "discount-vs-profit": discountVsProfit,
   "netflix-eda": netflixEda,
   titanic: titanicDetails,

@@ -45,6 +45,7 @@ import houseImg from "@/assets/projects/house.jpg";
 import titanicImg from "@/assets/projects/titanic.jpg";
 import mentalHealthImg from "@/assets/projects/mental-health.jpg";
 import creditRiskImg from "@/assets/projects/credit-risk.jpg";
+import nycAirbnbImg from "@/assets/projects/nyc-airbnb.jpg";
 
 export type ProjectCategoryId = "eda" | "ml";
 
@@ -265,55 +266,8 @@ export const PROJECTS: Project[] = [
   {
     type: "project",
     category: "eda",
-    featured: true,
-    image: vgsalesImg,
-    order: 4,
-    slug: "video-game-sales-analysis",
-    title: "Video Game Sales Analysis",
-    description:
-      "Performed complete exploratory data analysis on a video game sales dataset — from data cleaning through genre, platform, and publisher-level sales trends.",
-    difficulty: "intermediate",
-    status: "in-progress",
-    tags: ["eda", "sales", "visualization"],
-    lastUpdated: "2026-07-10",
-    githubPath: "projects/video-game-sales-analysis",
-    dataset: "video-game-sales-dataset",
-    librariesUsed: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
-    skillsLearned: [
-      "Data cleaning",
-      "Missing value handling",
-      "Feature engineering",
-      "Sales trend analysis",
-      "Genre analysis",
-      "Platform analysis",
-      "Publisher analysis",
-      "Correlation analysis",
-    ],
-    businessProblem:
-      "Understand what drives video game sales performance across platforms, genres, and publishers to surface actionable business insights.",
-    workflow: [
-      "Clean and prepare the raw sales dataset",
-      "Handle missing values across platform and publisher fields",
-      "Engineer features for trend and regional analysis",
-      "Analyze sales trends over time",
-      "Break down performance by genre, platform, and publisher",
-      "Run correlation analysis across sales regions",
-      "Visualize findings and summarize business insights",
-    ],
-    results:
-      "Action and Sports genres led global sales volume; a small number of publishers accounted for a disproportionate share of top-selling titles.",
-    lessonsLearned:
-      "Regional sales columns were highly correlated, which shaped how the correlation analysis was interpreted and presented.",
-    files: { readme: "README.md", notebook: "notebook.ipynb" },
-    relatedHandbooks: ["pandas-developer-handbook", "seaborn-developer-handbook"],
-    relatedCheatsheets: ["matplotlib-cheatsheet"],
-    estimatedTime: "5-6 hours",
-  },
-  {
-    type: "project",
-    category: "eda",
     image: titanicImg,
-    order: 5,
+    order: 4,
     slug: "titanic",
     title: "Titanic Survival Analysis",
     description:
@@ -354,6 +308,53 @@ export const PROJECTS: Project[] = [
     relatedHandbooks: ["pandas-developer-handbook", "numpy-essentials"],
     relatedCheatsheets: ["matplotlib-cheatsheet"],
     estimatedTime: "3-4 hours",
+  },
+  {
+    type: "project",
+    category: "eda",
+    featured: true,
+    image: vgsalesImg,
+    order: 5,
+    slug: "video-game-sales-analysis",
+    title: "Video Game Sales Analysis",
+    description:
+      "Performed complete exploratory data analysis on a video game sales dataset — from data cleaning through genre, platform, and publisher-level sales trends.",
+    difficulty: "intermediate",
+    status: "in-progress",
+    tags: ["eda", "sales", "visualization"],
+    lastUpdated: "2026-07-10",
+    githubPath: "projects/video-game-sales-analysis",
+    dataset: "video-game-sales-dataset",
+    librariesUsed: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
+    skillsLearned: [
+      "Data cleaning",
+      "Missing value handling",
+      "Feature engineering",
+      "Sales trend analysis",
+      "Genre analysis",
+      "Platform analysis",
+      "Publisher analysis",
+      "Correlation analysis",
+    ],
+    businessProblem:
+      "Understand what drives video game sales performance across platforms, genres, and publishers to surface actionable business insights.",
+    workflow: [
+      "Clean and prepare the raw sales dataset",
+      "Handle missing values across platform and publisher fields",
+      "Engineer features for trend and regional analysis",
+      "Analyze sales trends over time",
+      "Break down performance by genre, platform, and publisher",
+      "Run correlation analysis across sales regions",
+      "Visualize findings and summarize business insights",
+    ],
+    results:
+      "Action and Sports genres led global sales volume; a small number of publishers accounted for a disproportionate share of top-selling titles.",
+    lessonsLearned:
+      "Regional sales columns were highly correlated, which shaped how the correlation analysis was interpreted and presented.",
+    files: { readme: "README.md", notebook: "notebook.ipynb" },
+    relatedHandbooks: ["pandas-developer-handbook", "seaborn-developer-handbook"],
+    relatedCheatsheets: ["matplotlib-cheatsheet"],
+    estimatedTime: "5-6 hours",
   },
   {
     type: "project",
@@ -499,6 +500,62 @@ export const PROJECTS: Project[] = [
     files: {
       readme: "README.md",
       notebook: "credit_risk_assessment.ipynb",
+    },
+  },
+  {
+    type: "project",
+    category: "ml",
+    featured: true,
+    image: nycAirbnbImg,
+    order: 4,
+    slug: "nyc-airbnb-room-type-predictor",
+    title: "NYC Airbnb Room Type Predictor",
+    description:
+      "Multi-class classification pipeline predicting NYC Airbnb accommodation room types using ColumnTransformer preprocessing, SMOTE resampling, and tuned Random Forest, served via FastAPI.",
+    difficulty: "intermediate",
+    status: "in-progress",
+    tags: ["classification", "machine-learning", "imbalanced-data", "fastapi", "smote"],
+    lastUpdated: "2026-11-17",
+    githubPath: "",
+    githubRepoUrl: "https://github.com/AlwinVJ/NYC-Airbnb-Room-Type-Predictor",
+    dataset: "",
+    librariesUsed: [
+      "Python",
+      "Scikit-learn",
+      "Imbalanced-learn",
+      "FastAPI",
+      "Pydantic",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Joblib",
+      "Uvicorn",
+    ],
+    skillsLearned: [
+      "Multi-class imbalanced classification",
+      "SMOTE synthetic oversampling",
+      "Scikit-learn ColumnTransformer",
+      "RandomForest hyperparameter tuning",
+      "Microservice deployment with FastAPI",
+      "Model evaluation with Macro F1",
+    ],
+    businessProblem:
+      "Predict NYC Airbnb room type (Entire home/apt, Private room, Shared room) from location, price, and listing activity while handling severe class imbalance (~2.4% shared rooms).",
+    workflow: [
+      "Data ingestion, missing value imputation, and 99th-percentile outlier capping",
+      "Exploratory spatial, price, and class distribution analysis",
+      "Stratified train-test split (67% train / 33% test)",
+      "ColumnTransformer numerical scaling & categorical one-hot encoding",
+      "SMOTE oversampling on training data to balance minority classes",
+      "Algorithm benchmarking (Logistic Regression, Decision Tree, Gradient Boosting, Random Forest)",
+      "Hyperparameter optimization via RandomizedSearchCV targeting Macro F1",
+      "Model evaluation on 16,136 holdout test listings",
+      "FastAPI inference microservice and interactive web dashboard",
+    ],
+    files: {
+      readme: "README.md",
+      notebook: "nyc_airbnb_room_type_classification.ipynb",
     },
   },
 ];

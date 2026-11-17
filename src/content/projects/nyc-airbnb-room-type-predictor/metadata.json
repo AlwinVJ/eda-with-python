@@ -1,0 +1,52 @@
+{
+  "type": "project",
+  "slug": "nyc-airbnb-room-type-predictor",
+  "title": "NYC Airbnb Room Type Predictor",
+  "description": "Multi-class classification pipeline predicting NYC Airbnb accommodation room types using ColumnTransformer preprocessing, SMOTE resampling, and tuned Random Forest, served via FastAPI.",
+  "difficulty": "intermediate",
+  "status": "in-progress",
+  "tags": ["classification", "machine-learning", "imbalanced-data", "fastapi", "smote"],
+  "lastUpdated": "2026-11-17",
+  "githubPath": "",
+  "githubRepoUrl": "https://github.com/AlwinVJ/NYC-Airbnb-Room-Type-Predictor",
+  "dataset": "https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data",
+  "librariesUsed": [
+    "Python",
+    "Scikit-learn",
+    "Imbalanced-learn",
+    "FastAPI",
+    "Pydantic",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Seaborn",
+    "Joblib",
+    "Uvicorn"
+  ],
+  "skillsLearned": [
+    "Multi-class imbalanced classification",
+    "SMOTE synthetic oversampling",
+    "Scikit-learn ColumnTransformer",
+    "RandomForest hyperparameter tuning",
+    "Microservice deployment with FastAPI",
+    "Model evaluation with Macro F1"
+  ],
+  "businessProblem": "Predict NYC Airbnb room type (Entire home/apt, Private room, Shared room) from location, price, and listing activity while handling severe class imbalance (~2.4% shared rooms).",
+  "workflow": [
+    "Data ingestion, missing value imputation, and 99th-percentile outlier capping",
+    "Exploratory spatial, price, and class distribution analysis",
+    "Stratified train-test split (67% train / 33% test)",
+    "ColumnTransformer numerical scaling & categorical one-hot encoding",
+    "SMOTE oversampling on training data to balance minority classes",
+    "Algorithm benchmarking (Logistic Regression, Decision Tree, Gradient Boosting, Random Forest)",
+    "Hyperparameter optimization via RandomizedSearchCV targeting Macro F1",
+    "Model evaluation on 16,136 holdout test listings",
+    "FastAPI inference microservice and interactive web dashboard"
+  ],
+  "results": "Achieved 85.40% overall test accuracy and 0.7393 Macro F1 on 16,136 holdout listings, significantly improving minority shared-room F1 to 0.50 after SMOTE resampling.",
+  "lessonsLearned": "SMOTE balancing is vital for multi-class problems with rare classes (~2.4%). Encapsulating imputation, scaling, and encoding within a ColumnTransformer guarantees data leakage prevention.",
+  "files": {
+    "readme": "README.md",
+    "notebook": "nyc_airbnb_room_type_classification.ipynb"
+  }
+}
