@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   Clock,
   Compass,
+  ExternalLink,
   GraduationCap,
   Grid,
   Layers,
@@ -293,6 +294,17 @@ export function LearningRoadmap() {
           Income, Seltman Table 4.4 Age vs Strength, Hen & Eggs, and EDA2.dat), formulas, and
           decision rules originate from this masterwork.
         </p>
+        <div className="pt-2">
+          <a
+            href="https://www.stat.cmu.edu/~hseltman/309/Book/Book.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
+          >
+            <span>Read Original CMU Textbook (Book.pdf)</span>
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </section>
     </div>
   );

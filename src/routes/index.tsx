@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 });
 
 export function HomePage() {
-  const RECOMMENDED_PDF_URL = "https://www.stat.cmu.edu/~hseltman/309/Book/chapter4.pdf";
+  const RECOMMENDED_PDF_URL = "https://www.stat.cmu.edu/~hseltman/309/Book/Book.pdf";
 
   return (
     <div className="space-y-16 py-2">
