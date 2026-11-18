@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import {
   MessageSquare,
   X,
@@ -10,19 +10,20 @@ import {
   User,
   Copy,
   Check,
-  ChevronDown,
   Maximize2,
   Minimize2,
+  ExternalLink,
+  ArrowRight,
 } from "lucide-react";
 import {
   ONETAG_KEY,
   isPlaceholderKey,
   EDA_CHATBOT_NAME,
   EDA_CHATBOT_WELCOME_MESSAGE,
-  EDA_CHATBOT_SYSTEM_PROMPT,
-  extractPageContext,
-  getStarterQuestions,
-  getEducationalFallbackResponse,
+  getPageContext,
+  buildSystemPrompt,
+  generateContextualResponse,
+  type PageContextInfo,
 } from "@/lib/onetag";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +36,83 @@ interface ChatMessage {
 }
 
 /**
- * Helper to render structured markdown-like text with code blocks and copy buttons.
+ * Parses markdown inline formatting: **bold**, `code`, [text](url), *italic*
+ */
+function renderInlineFormatted(text: string) {
+  // Regex to split by markdown links [text](url), inline `code`, and **bold**
+  const tokenRegex = /(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const tokens = text.split(tokenRegex);
+
+  return tokens.map((token, idx) => {
+    // Markdown links: [label](url)
+    const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const [, label, url] = linkMatch;
+      const isInternal = url.startsWith("/") && !url.startsWith("//");
+
+      if (isInternal) {
+        return (
+          <Link
+            key={idx}
+            to={url}
+            className="inline-flex items-center gap-0.5 text-primary font-semibold underline underline-offset-2 hover:text-primary/80 transition-colors"
+          >
+            <span>{label}</span>
+            <ArrowRight className="h-3 w-3 inline" />
+          </Link>
+        );
+      }
+
+      return (
+        <a
+          key={idx}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-0.5 text-primary font-semibold underline underline-offset-2 hover:text-primary/80 transition-colors"
+        >
+          <span>{label}</span>
+          <ExternalLink className="h-3 w-3 inline" />
+        </a>
+      );
+    }
+
+    // Inline code: `code`
+    if (token.startsWith("`") && token.endsWith("`") && token.length > 2) {
+      return (
+        <code
+          key={idx}
+          className="rounded bg-muted/80 border border-border/50 px-1 py-0.5 font-mono text-[11px] font-semibold text-primary"
+        >
+          {token.slice(1, -1)}
+        </code>
+      );
+    }
+
+    // Bold text: **bold**
+    if (token.startsWith("**") && token.endsWith("**") && token.length > 4) {
+      return (
+        <strong key={idx} className="font-bold text-foreground">
+          {token.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    // Italic text: *italic*
+    if (token.startsWith("*") && token.endsWith("*") && token.length > 2) {
+      return (
+        <em key={idx} className="italic text-foreground/90">
+          {token.slice(1, -1)}
+        </em>
+      );
+    }
+
+    return token;
+  });
+}
+
+/**
+ * Helper to render structured markdown-like text with code blocks, copy buttons, headers, and lists.
  */
 function FormattedMessage({ content }: { content: string }) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -50,7 +127,7 @@ function FormattedMessage({ content }: { content: string }) {
   const parts = content.split(/(```[\s\S]*?```)/g);
 
   return (
-    <div className="space-y-2 text-sm leading-relaxed">
+    <div className="space-y-2 text-xs sm:text-sm leading-relaxed">
       {parts.map((part, index) => {
         if (part.startsWith("```") && part.endsWith("```")) {
           const lines = part.slice(3, -3).trim().split("\n");
@@ -68,7 +145,7 @@ function FormattedMessage({ content }: { content: string }) {
               className="my-2 overflow-hidden rounded-lg border border-border bg-muted/90 text-foreground"
             >
               <div className="flex items-center justify-between border-b border-border/60 bg-muted px-3 py-1 text-xs text-muted-foreground">
-                <span>{language || "code"}</span>
+                <span className="font-mono">{language || "python"}</span>
                 <button
                   type="button"
                   onClick={() => copyCode(code.trim(), index)}
@@ -78,7 +155,9 @@ function FormattedMessage({ content }: { content: string }) {
                   {copiedIndex === index ? (
                     <>
                       <Check className="h-3 w-3 text-emerald-500" />
-                      <span>Copied</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                        Copied
+                      </span>
                     </>
                   ) : (
                     <>
@@ -88,33 +167,69 @@ function FormattedMessage({ content }: { content: string }) {
                   )}
                 </button>
               </div>
-              <pre className="overflow-x-auto p-3 text-xs font-mono leading-normal">
+              <pre className="overflow-x-auto p-3 text-xs font-mono leading-normal text-foreground">
                 <code>{code.trim()}</code>
               </pre>
             </div>
           );
         }
 
-        // Render plain text paragraphs, converting ### headers and bullet points
+        // Render plain text paragraphs, converting ### headers, bullets, and inline markdown
         return (
-          <div key={index} className="space-y-1.5 whitespace-pre-wrap">
+          <div key={index} className="space-y-1.5">
             {part
               .split("\n\n")
               .filter(Boolean)
               .map((paragraph, pIdx) => {
-                if (paragraph.startsWith("### ")) {
+                const trimmed = paragraph.trim();
+
+                // Headers ###
+                if (trimmed.startsWith("### ")) {
                   return (
                     <h4
                       key={pIdx}
-                      className="mt-2 text-xs font-bold uppercase tracking-wider text-primary"
+                      className="mt-2.5 text-xs font-bold uppercase tracking-wider text-primary border-b border-border/40 pb-0.5"
                     >
-                      {paragraph.replace("### ", "")}
+                      {renderInlineFormatted(trimmed.replace("### ", ""))}
                     </h4>
                   );
                 }
+
+                // Bullets list
+                const lines = trimmed.split("\n");
+                const isBulletList = lines.every(
+                  (l) =>
+                    l.trim().startsWith("•") ||
+                    l.trim().startsWith("- ") ||
+                    l.trim().startsWith("✓ ") ||
+                    l.trim().startsWith("✕ ") ||
+                    /^\d+\.\s/.test(l.trim()),
+                );
+
+                if (isBulletList && lines.length > 1) {
+                  return (
+                    <ul key={pIdx} className="space-y-1 my-1 pl-1">
+                      {lines.map((line, lIdx) => (
+                        <li key={lIdx} className="flex items-start gap-1.5 text-foreground/90">
+                          <span className="text-primary font-bold shrink-0 mt-0.5">
+                            {line.trim().startsWith("✓")
+                              ? "✓"
+                              : line.trim().startsWith("✕")
+                                ? "✕"
+                                : "•"}
+                          </span>
+                          <span className="leading-relaxed">
+                            {renderInlineFormatted(line.replace(/^([•\-✓✕]|\d+\.)\s*/, "").trim())}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+
                 return (
-                  <p key={pIdx} className="leading-relaxed">
-                    {paragraph}
+                  <p key={pIdx} className="leading-relaxed text-foreground/90">
+                    {renderInlineFormatted(trimmed)}
                   </p>
                 );
               })}
@@ -130,6 +245,10 @@ export function Chatbot() {
   const [isMaximized, setIsMaximized] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const currentPageContext: PageContextInfo = getPageContext(pathname);
+
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: "initial-welcome",
@@ -141,9 +260,10 @@ export function Chatbot() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isSubmittingRef = useRef(false);
+  const lastPathnameRef = useRef(pathname);
 
-  const starterQuestions = getStarterQuestions(pathname);
+  const starterQuestions = currentPageContext.starterQuestions;
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -153,6 +273,50 @@ export function Chatbot() {
     setIsOpen(false);
     setIsMaximized(false);
   }, []);
+
+  // Listen to client-side route changes and smoothly update context
+  useEffect(() => {
+    if (lastPathnameRef.current !== pathname) {
+      const newCtx = getPageContext(pathname);
+      lastPathnameRef.current = pathname;
+
+      setMessages((prev) => {
+        // If user hasn't started an active dialogue, simply update the welcome message
+        if (prev.length <= 1) {
+          return [
+            {
+              id: `welcome-${Date.now()}`,
+              role: "assistant",
+              content: `Hey! I'm Eddie. You're viewing **${newCtx.pageTitle}**.\nAsk me anything about this page, its findings, or technical concepts!`,
+              timestamp: new Date(),
+            },
+          ];
+        }
+
+        // Avoid duplicate consecutive navigation notices
+        const lastMsg = prev[prev.length - 1];
+        if (lastMsg && lastMsg.id.startsWith("nav-")) {
+          return prev.slice(0, -1).concat({
+            id: `nav-${Date.now()}`,
+            role: "assistant",
+            content: `📍 **Navigated to: ${newCtx.pageTitle}**\nI've updated my knowledge context to this page. Ask me anything about ${newCtx.shortLabel}!`,
+            timestamp: new Date(),
+          });
+        }
+
+        // Add clear navigation transition notice to preserve history while isolating page context
+        return [
+          ...prev,
+          {
+            id: `nav-${Date.now()}`,
+            role: "assistant",
+            content: `📍 **Navigated to: ${newCtx.pageTitle}**\nI've updated my knowledge context to this page. Ask me anything about ${newCtx.shortLabel}!`,
+            timestamp: new Date(),
+          },
+        ];
+      });
+    }
+  }, [pathname]);
 
   // Lock background scroll when maximized
   useEffect(() => {
@@ -184,7 +348,6 @@ export function Chatbot() {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      // Auto-focus input on open
       setTimeout(() => inputRef.current?.focus(), 150);
     }
   }, [isOpen, isMaximized, messages, scrollToBottom]);
@@ -194,7 +357,7 @@ export function Chatbot() {
       {
         id: `welcome-${Date.now()}`,
         role: "assistant",
-        content: EDA_CHATBOT_WELCOME_MESSAGE,
+        content: `Hey! I'm Eddie, your assistant for **${currentPageContext.pageTitle}**.\nAsk me anything about this page, dataset, Python code, or statistics!`,
         timestamp: new Date(),
       },
     ]);
@@ -202,7 +365,8 @@ export function Chatbot() {
 
   const handleSendMessage = async (userPrompt?: string) => {
     const query = (userPrompt || input).trim();
-    if (!query || isLoading) return;
+    if (!query || isLoading || isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
 
     const userMessage: ChatMessage = {
       id: `user-${Date.now()}`,
@@ -224,24 +388,28 @@ export function Chatbot() {
     setInput("");
     setIsLoading(true);
 
-    // Extract dynamic page context for this query
-    const pageContext = extractPageContext();
+    // Snapshot the active page context at query time
+    const activeContext = getPageContext(pathname);
 
     try {
-      // Check if OneTag AI SDK is loaded on window and has a live key
+      // Check if OneTag AI SDK is loaded on window and has a live valid key
       if (typeof window !== "undefined" && window.onetag && !isPlaceholderKey(ONETAG_KEY)) {
         let accumulatedText = "";
 
-        // Format history for OneTag API (excluding the current turn)
+        // Format history (excluding welcome & nav announcements)
         const history = messages
-          .filter((m) => m.id !== "initial-welcome")
+          .filter(
+            (m) =>
+              !m.id.startsWith("welcome") && !m.id.startsWith("nav") && m.id !== "initial-welcome",
+          )
+          .slice(-6)
           .map((m) => ({
             role: m.role,
             content: m.content,
           }));
 
-        const result = await window.onetag.ask(query, pageContext, {
-          system: EDA_CHATBOT_SYSTEM_PROMPT,
+        const result = await window.onetag.ask(query, activeContext.fullTextContext, {
+          system: buildSystemPrompt(activeContext),
           history,
           stream: (delta: string) => {
             accumulatedText += delta;
@@ -267,22 +435,22 @@ export function Chatbot() {
           ),
         );
       } else {
-        // Fallback / Preview Mode: generate educational answer using prompt knowledge & page context
-        await new Promise((resolve) => setTimeout(resolve, 350));
-        const educationalResponse = getEducationalFallbackResponse(query, pageContext);
+        // High-Quality Grounded Contextual Responder
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        const educationalResponse = generateContextualResponse(query, activeContext);
 
-        // Stream fallback text smoothly
+        // Smooth streaming animation for local answers
         const words = educationalResponse.split(" ");
         let streamed = "";
         for (let i = 0; i < words.length; i++) {
           streamed += (i > 0 ? " " : "") + words[i];
-          if (i % 4 === 0 || i === words.length - 1) {
+          if (i % 5 === 0 || i === words.length - 1) {
             setMessages((prev) =>
               prev.map((msg) =>
                 msg.id === assistantMsgId ? { ...msg, content: streamed, isStreaming: true } : msg,
               ),
             );
-            await new Promise((resolve) => setTimeout(resolve, 20));
+            await new Promise((resolve) => setTimeout(resolve, 15));
           }
         }
 
@@ -295,8 +463,8 @@ export function Chatbot() {
         );
       }
     } catch (err: unknown) {
-      console.warn("OneTag AI invocation failed, using educational fallback:", err);
-      const fallback = getEducationalFallbackResponse(query, pageContext);
+      console.warn("OneTag AI invocation failed, using grounded fallback:", err);
+      const fallback = generateContextualResponse(query, activeContext);
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMsgId ? { ...msg, content: fallback, isStreaming: false } : msg,
@@ -304,6 +472,7 @@ export function Chatbot() {
       );
     } finally {
       setIsLoading(false);
+      isSubmittingRef.current = false;
     }
   };
 
@@ -313,10 +482,6 @@ export function Chatbot() {
       handleSendMessage();
     }
   };
-
-  const currentPageLabel = pathname.includes("/projects/")
-    ? `Project: ${pathname.replace("/projects/", "").replace(/\/$/, "")}`
-    : "Home: Foundations";
 
   return (
     <>
@@ -379,23 +544,25 @@ export function Chatbot() {
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3 shrink-0">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs">
                 <Bot className="h-5 w-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-sm font-semibold text-foreground">{EDA_CHATBOT_NAME}</h3>
-                  <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="flex h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
                 </div>
-                <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
-                  <Sparkles className="h-3 w-3 text-amber-500" />
-                  <span className="truncate max-w-[190px]">{currentPageLabel}</span>
+                <div className="flex items-center gap-1 text-[11px] text-muted-foreground truncate">
+                  <Sparkles className="h-3 w-3 text-amber-500 shrink-0" />
+                  <span className="truncate max-w-[200px] font-medium text-foreground/80">
+                    {currentPageContext.shortLabel}
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 shrink-0">
               <button
                 type="button"
                 onClick={handleReset}
@@ -434,6 +601,21 @@ export function Chatbot() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message) => {
               const isUser = message.role === "user";
+              const isNavNotice = message.id.startsWith("nav-");
+
+              if (isNavNotice) {
+                return (
+                  <div
+                    key={message.id}
+                    className="flex items-center justify-center my-2 text-center"
+                  >
+                    <div className="rounded-lg border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs text-muted-foreground max-w-md">
+                      <FormattedMessage content={message.content} />
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <div
                   key={message.id}
@@ -474,11 +656,11 @@ export function Chatbot() {
               );
             })}
 
-            {/* Quick Starter Question Chips (shown after first assistant message) */}
-            {messages.length === 1 && (
+            {/* Quick Starter Question Chips */}
+            {messages.length <= 2 && starterQuestions.length > 0 && (
               <div className="pt-2">
-                <p className="mb-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                  Suggested Questions for this page:
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  Suggested Questions for {currentPageContext.shortLabel}:
                 </p>
                 <div
                   className={cn("flex flex-col gap-1.5", isMaximized && "sm:grid sm:grid-cols-2")}
@@ -487,8 +669,9 @@ export function Chatbot() {
                     <button
                       key={idx}
                       type="button"
+                      disabled={isLoading}
                       onClick={() => handleSendMessage(q)}
-                      className="text-left rounded-lg border border-border/70 bg-card px-2.5 py-1.5 text-xs text-foreground transition-all hover:border-primary/50 hover:bg-muted/70 active:scale-[0.99]"
+                      className="text-left rounded-lg border border-border/70 bg-card px-2.5 py-1.5 text-xs text-foreground transition-all hover:border-primary/50 hover:bg-muted/70 active:scale-[0.99] disabled:opacity-50"
                     >
                       💡 {q}
                     </button>
@@ -515,7 +698,7 @@ export function Chatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask Eddie about this page, Python, or EDA..."
+                placeholder={`Ask Eddie about ${currentPageContext.shortLabel}...`}
                 disabled={isLoading}
                 className="max-h-24 flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
               />
@@ -529,7 +712,8 @@ export function Chatbot() {
               </button>
             </form>
             <p className="mt-1.5 text-center text-[10px] text-muted-foreground">
-              Eddie reads live page context to explain concepts.
+              Eddie uses live page context from{" "}
+              <strong className="text-foreground">{currentPageContext.shortLabel}</strong>.
             </p>
           </div>
         </section>
