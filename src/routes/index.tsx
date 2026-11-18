@@ -53,10 +53,16 @@ export function HomePage() {
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <Link
-            to="/projects"
-            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+            to="/learn"
+            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover shadow-xs"
           >
-            Explore Projects <ArrowRight className="h-4 w-4" />
+            Start Learning EDA <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
+            Explore Projects
           </Link>
           <a
             href={RECOMMENDED_PDF_URL}
@@ -64,7 +70,7 @@ export function HomePage() {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
-            Read Recommended PDF <ExternalLink className="h-4 w-4 text-muted-foreground" />
+            Original CMU PDF <ExternalLink className="h-4 w-4 text-muted-foreground" />
           </a>
         </div>
       </section>
@@ -300,38 +306,49 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Section 3: Recommended Reading Resource Card */}
+      {/* Section 3: Recommended Reading & Interactive Course Card */}
       <section className="space-y-4">
         <div>
-          <h2 className="text-xl font-semibold tracking-tight">Recommended Reading</h2>
+          <h2 className="text-xl font-semibold tracking-tight">
+            Interactive Course & Recommended Reading
+          </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Academic resource for foundational statistical concepts and data preparation methods.
+            Academic resource and structured interactive curriculum based on Dr. Howard Seltman's
+            course text.
           </p>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-accent/40">
+        <div className="rounded-xl border border-primary/30 bg-primary/5 p-6 transition-colors hover:border-primary/50">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1.5 min-w-0">
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wide text-muted-foreground">
-                <FileText className="h-3.5 w-3.5 text-accent" />
-                <span>Carnegie Mellon University · Dr. Howard Seltman</span>
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wide text-primary font-semibold">
+                <FileText className="h-3.5 w-3.5 text-primary" />
+                <span>Carnegie Mellon University · Dr. Howard Seltman · 21 Lessons</span>
               </div>
               <h3 className="text-lg font-semibold text-foreground">
-                Recommended Reading – Data Preprocessing
+                Master EDA: Complete 6-Module Interactive Curriculum
               </h3>
               <p className="max-w-2xl text-xs text-muted-foreground leading-relaxed">
-                A focused chapter covering data preparation, data cleaning principles, and related
-                statistical concepts from Carnegie Mellon University.
+                Study all 40 pages of Dr. Seltman's foundational Chapter 4 through structured
+                lessons, manual formula calculations with real numbers, reproducible Python code,
+                diagnostic rules, and interactive knowledge-check quizzes.
               </p>
             </div>
-            <div className="shrink-0 pt-2 sm:pt-0">
+            <div className="shrink-0 flex items-center gap-2.5 pt-2 sm:pt-0">
+              <Link
+                to="/learn"
+                className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover shadow-xs"
+              >
+                Start Learning <ArrowRight className="h-4 w-4" />
+              </Link>
               <a
                 href={RECOMMENDED_PDF_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                title="View original CMU PDF document"
               >
-                Read PDF <ExternalLink className="h-4 w-4" />
+                PDF <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
               </a>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, FolderKanban } from "lucide-react";
+import { Home, FolderKanban, BookOpen } from "lucide-react";
 import { GlobalSearch } from "./Search";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export function Topbar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHomeActive = pathname === "/";
+  const isLearnActive = pathname.startsWith("/learn");
   const isProjectsActive = pathname.startsWith("/projects");
 
   return (
@@ -40,6 +41,18 @@ export function Topbar() {
         >
           <Home className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
           <span>Home</span>
+        </Link>
+        <Link
+          to="/learn"
+          className={cn(
+            "flex items-center gap-1.5 rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
+            isLearnActive
+              ? "bg-accent/15 text-accent font-semibold"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground",
+          )}
+        >
+          <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span>Learn</span>
         </Link>
         <Link
           to="/projects"
