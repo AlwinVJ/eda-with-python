@@ -65,6 +65,15 @@ function detectForeignProjectMention(prompt: string, currentSlug?: string): Proj
       return proj;
     }
     if (
+      slugLower === "customer-churn-prediction" &&
+      (p.includes("customer churn") ||
+        p.includes("churn prediction") ||
+        p.includes("telco churn") ||
+        p.includes("churn"))
+    ) {
+      return proj;
+    }
+    if (
       slugLower === "video-game-sales-analysis" &&
       (p.includes("video game") || p.includes("vgsales"))
     ) {
@@ -83,19 +92,39 @@ function detectForeignProjectMention(prompt: string, currentSlug?: string): Proj
 }
 
 /**
- * Searches sections of the current page for keywords.
+ * Searches sections of the current page for keywords, prioritizing dedicated content
+ * sections by title, then content, over the general core-metadata summary.
  */
 function findRelevantSection(
   context: PageContextInfo,
   keywords: string[],
 ): { title: string; content: string } | undefined {
+  // Pass 1: Match by section title first (avoiding core-metadata false-positive)
   for (const s of context.sections) {
-    const text = (s.title + " " + s.content).toLowerCase();
-    const match = keywords.some((k) => text.includes(k.toLowerCase()));
-    if (match) {
+    if (s.id === "core-metadata") continue;
+    const titleLower = s.title.toLowerCase();
+    if (keywords.some((k) => titleLower.includes(k.toLowerCase()))) {
       return s;
     }
   }
+
+  // Pass 2: Match by section content (excluding core-metadata)
+  for (const s of context.sections) {
+    if (s.id === "core-metadata") continue;
+    const text = (s.title + " " + s.content).toLowerCase();
+    if (keywords.some((k) => text.includes(k.toLowerCase()))) {
+      return s;
+    }
+  }
+
+  // Pass 3: Fall back to core-metadata if no dedicated section matched
+  for (const s of context.sections) {
+    const text = (s.title + " " + s.content).toLowerCase();
+    if (keywords.some((k) => text.includes(k.toLowerCase()))) {
+      return s;
+    }
+  }
+
   return undefined;
 }
 
@@ -154,10 +183,11 @@ function respondForProjectDetail(prompt: string, context: PageContextInfo): stri
 
   // 3. Live Demo & GitHub inquiries
   if (
-    q.includes("live demo") ||
+    q.includes("demo") ||
     q.includes("stream-lit") ||
     q.includes("streamlit") ||
     q.includes("deploy") ||
+    q.includes("live application") ||
     q.includes("app")
   ) {
     if (context.metadata.liveDemoUrl) {
@@ -193,6 +223,48 @@ function respondForProjectDetail(prompt: string, context: PageContextInfo): stri
       );
     } else {
       return `A standalone GitHub repository link is not explicitly documented for this project.`;
+    }
+  }
+
+  // Customer Churn specific questions
+  if (currentSlug === "customer-churn-prediction") {
+    if (
+      q.includes("what is customer churn") ||
+      q.includes("what is churn") ||
+      q.includes("definition of churn")
+    ) {
+      return (
+        `### What is Customer Churn?\n\n` +
+        `**Customer churn** (or customer attrition) refers to when a subscriber cancels their service or stops doing business with a company.\n\n` +
+        `• **Why it matters:** Acquiring new customers costs 5 to 7 times more than retaining existing ones. Churn directly erodes monthly recurring revenue (MRR) and decreases Customer Lifetime Value (CLV).\n` +
+        `• **Why this project was built:** To empower telecommunications retention teams with predictive foresight—identifying customers at high risk of leaving so proactive retention interventions (like contract upgrades, service discounts, or dedicated support) can be deployed before cancellation occurs.`
+      );
+    }
+
+    if (q.includes("limitation") || q.includes("drawback") || q.includes("caveat")) {
+      return (
+        `### Limitations of the Customer Churn Prediction Project\n\n` +
+        `As documented in the project and application:\n` +
+        `1. **Observational Cross-Sectional Data:** The dataset represents snapshot customer records without time-series usage logs or evolving monthly behavioral sequences.\n` +
+        `2. **Educational Demonstration:** As stated in the deployed Streamlit app, the application demonstrates a machine learning classification workflow and should not be treated as a definitive business decision tool without enterprise calibration.\n` +
+        `3. **Missing TotalCharges Assumption:** 11 customer accounts with 0 months of tenure had blank total charges and were imputed as 0.0, assuming no bills had yet accrued.\n` +
+        `4. **Precision-Recall Trade-off:** By weighting the minority class to achieve 78.61% recall, precision is 50.87%, meaning approximately half of flagged customers may not have churned without intervention (though retention offers to loyal customers carry low risk).`
+      );
+    }
+
+    if (
+      q.includes("class weight") ||
+      q.includes("balanced") ||
+      q.includes("recall score") ||
+      q.includes("imbalance")
+    ) {
+      return (
+        `### Impact of Class Weighting on Customer Churn Prediction\n\n` +
+        `In the raw training data, only 26.54% of customers churned. An unweighted model tended to favor the majority class:\n\n` +
+        `• **Default Unweighted Baseline:** Baseline Logistic Regression achieved ~80.19% accuracy but only **54.38% recall**—missing nearly half of all churners.\n` +
+        `• **With \`class_weight='balanced'\`:** Applying inverse-frequency class weighting via GridSearchCV penalizes false negatives, dramatically boosting holdout **churn recall to 78.61%** (catching 294 out of 374 churners in the test set) and increasing the cross-validated F1-score to **0.6288**.\n\n` +
+        `In customer retention, catching at-risk customers (high recall) is far more critical than avoiding unnecessary retention offers.`
+      );
     }
   }
 

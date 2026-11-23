@@ -110,7 +110,8 @@ async function runChatbotTestSuite() {
     assert(
       mlListAns.includes("House Price Prediction") &&
         mlListAns.includes("Credit Risk") &&
-        mlListAns.includes("NYC Airbnb"),
+        mlListAns.includes("NYC Airbnb") &&
+        mlListAns.includes("Customer Churn"),
       "Projects: Accurately lists End-to-End ML projects",
     );
 
@@ -186,6 +187,33 @@ async function runChatbotTestSuite() {
     assert(
       airbnbTargetAns.includes("room_type") || airbnbTargetAns.toLowerCase().includes("classification"),
       "NYC Airbnb: Cites room_type target variable and classification task",
+    );
+
+    // Test I: Customer Churn Prediction
+    const churnCtx = getPageContext("/projects/customer-churn-prediction");
+    const churnDefAns = generateContextualResponse("What is customer churn?", churnCtx);
+    assert(
+      churnDefAns.toLowerCase().includes("churn") &&
+        (churnDefAns.toLowerCase().includes("retention") || churnDefAns.toLowerCase().includes("cancel")),
+      "Customer Churn: Accurately explains churn and business retention importance",
+    );
+
+    const churnModelAns = generateContextualResponse("Which model was selected?", churnCtx);
+    assert(
+      churnModelAns.toLowerCase().includes("logistic regression"),
+      "Customer Churn: Correctly identifies Logistic Regression as the selected model",
+    );
+
+    const churnDemoAns = generateContextualResponse("Is there a live interactive demo?", churnCtx);
+    assert(
+      churnDemoAns.includes("customer-churn--prediction-model.streamlit.app"),
+      "Customer Churn: Provides verified live Streamlit application URL",
+    );
+
+    const churnRecallAns = generateContextualResponse("How did class weighting affect recall score?", churnCtx);
+    assert(
+      churnRecallAns.includes("78.61%") || churnRecallAns.toLowerCase().includes("balanced"),
+      "Customer Churn: Explains class weighting impact on churn recall",
     );
 
     // -------------------------------------------------------------

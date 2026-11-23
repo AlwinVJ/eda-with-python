@@ -235,6 +235,15 @@ function getProjectStarterQuestions(project: Project): string[] {
     ];
   }
 
+  if (slug === "customer-churn-prediction") {
+    return [
+      "What is customer churn and why is it important to predict?",
+      "Which model was selected and what were the final evaluation results?",
+      "How did class weighting affect the churn recall score?",
+      "Is there an interactive live demo available for this project?",
+    ];
+  }
+
   if (slug === "discount-vs-profit") {
     return [
       "At what discount percentage does profit margin turn negative?",
