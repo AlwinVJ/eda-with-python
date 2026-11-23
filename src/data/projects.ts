@@ -197,7 +197,7 @@ export const PROJECTS: Project[] = [
       "The `country` and `cast` fields required careful multi-value parsing before any group-level analysis was reliable.",
     files: {
       readme: "README.md",
-      notebook: "notebooks/03_Univariate_EDA.ipynb",
+      notebook: "https://github.com/AlwinVJ/netflix_EDA/tree/main/notebooks",
       report: "https://github.com/AlwinVJ/netflix_EDA/blob/main/reports/Final_EDA_Report.docx",
     },
     relatedHandbooks: ["pandas-developer-handbook", "matplotlib-developer-handbook"],
@@ -257,7 +257,7 @@ export const PROJECTS: Project[] = [
       "Alarm frequency does not equal operational severity; a single catastrophic belt crack caused 45% of total downtime. Integrating SCADA logs with spatial conveyor mapping pinpointed localized bottlenecks at PEC 71 on the 2600 line.",
     files: {
       readme: "README.md",
-      notebook: "notebooks/04_exploratory_data_analysis.ipynb",
+      notebook: "https://github.com/AlwinVJ/amazon_conveyor_EDA/tree/main/notebooks",
       report:
         "https://github.com/AlwinVJ/amazon_conveyor_EDA/blob/main/reports/eda_report/Conveyor_Alarm_EDA_Report.pdf",
     },
