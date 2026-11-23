@@ -44,6 +44,6 @@
   "lessonsLearned": "In customer retention, false negatives (failing to detect a churner) are costlier than false positives. Applying class_weight='balanced' boosted churn recall from 54.38% to 78.61%.",
   "files": {
     "readme": "README.md",
-    "notebook": "notebooks/04_model_training.ipynb"
+    "notebook": "https://github.com/AlwinVJ/Customer_churn_prediction/tree/main/notebooks"
   }
 }

@@ -144,6 +144,7 @@ export const PROJECTS: Project[] = [
       "Revenue volume can create an illusion of business health ('profitless prosperity'). Calibrating discount thresholds using statistical validation protects unit margins and prevents structural losses.",
     files: {
       readme: "README.md",
+      notebook: "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA/tree/main/notebooks",
       report:
         "https://github.com/AlwinVJ/discount_vs_profit_extensive_EDA/blob/d123874b4f4123686d37ec3647861cc2aee7fc4b/reports/EDA%20final%20report.pdf",
     },
@@ -325,6 +326,7 @@ export const PROJECTS: Project[] = [
     tags: ["eda", "sales", "visualization"],
     lastUpdated: "2026-07-10",
     githubPath: "projects/video-game-sales-analysis",
+    githubRepoUrl: "https://github.com/AlwinVJ/Video_game_sales_EDA",
     dataset: "video-game-sales-dataset",
     librariesUsed: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
     skillsLearned: [
@@ -352,7 +354,10 @@ export const PROJECTS: Project[] = [
       "Action and Sports genres led global sales volume; a small number of publishers accounted for a disproportionate share of top-selling titles.",
     lessonsLearned:
       "Regional sales columns were highly correlated, which shaped how the correlation analysis was interpreted and presented.",
-    files: { readme: "README.md", notebook: "notebook.ipynb" },
+    files: {
+      readme: "README.md",
+      notebook: "https://github.com/AlwinVJ/Video_game_sales_EDA/tree/main/notebooks",
+    },
     relatedHandbooks: ["pandas-developer-handbook", "seaborn-developer-handbook"],
     relatedCheatsheets: ["matplotlib-cheatsheet"],
     estimatedTime: "5-6 hours",
@@ -452,7 +457,10 @@ export const PROJECTS: Project[] = [
     businessProblem:
       "Estimate a student's mental health score from lifestyle, digital-usage and stress factors.",
     workflow: [],
-    files: {},
+    files: {
+      readme: "README.md",
+      notebook: "https://github.com/AlwinVJ/Mental-Health-Score/blob/main/ML_Project.ipynb",
+    },
   },
   {
     type: "project",
@@ -611,7 +619,7 @@ export const PROJECTS: Project[] = [
     ],
     files: {
       readme: "README.md",
-      notebook: "notebooks/04_model_training.ipynb",
+      notebook: "https://github.com/AlwinVJ/Customer_churn_prediction/tree/main/notebooks",
     },
   },
 ];

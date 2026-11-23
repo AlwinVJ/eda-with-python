@@ -8,6 +8,7 @@
   "tags": ["eda", "sales", "visualization"],
   "lastUpdated": "2026-07-10",
   "githubPath": "projects/video-game-sales-analysis",
+  "githubRepoUrl": "https://github.com/AlwinVJ/Video_game_sales_EDA",
   "dataset": "video-game-sales-dataset",
   "librariesUsed": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn"],
   "skillsLearned": [
@@ -34,7 +35,7 @@
   "lessonsLearned": "Regional sales columns were highly correlated, which shaped how the correlation analysis was interpreted and presented.",
   "files": {
     "readme": "README.md",
-    "notebook": "notebook.ipynb"
+    "notebook": "https://github.com/AlwinVJ/Video_game_sales_EDA/tree/main/notebooks"
   },
   "relatedHandbooks": ["pandas-developer-handbook", "seaborn-developer-handbook"],
   "relatedCheatsheets": ["matplotlib-cheatsheet"],
