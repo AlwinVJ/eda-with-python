@@ -13,6 +13,7 @@ import { netflixEda } from "./netflixEda";
 import { amazonConveyor } from "./amazonConveyor";
 import { titanicDetails } from "./titanic";
 import { nycAirbnb } from "./nycAirbnb";
+import { customerChurn } from "./customerChurn";
 
 const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "amazon-conveyor-eda": amazonConveyor,
@@ -20,6 +21,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetails> = {
   "mental-health-signal": mentalHealthSignal,
   "credit-risk-assessment": creditRiskAssessment,
   "nyc-airbnb-room-type-predictor": nycAirbnb,
+  "customer-churn-prediction": customerChurn,
   "discount-vs-profit": discountVsProfit,
   "netflix-eda": netflixEda,
   titanic: titanicDetails,

@@ -46,6 +46,7 @@ import titanicImg from "@/assets/projects/titanic.jpg";
 import mentalHealthImg from "@/assets/projects/mental-health.jpg";
 import creditRiskImg from "@/assets/projects/credit-risk.jpg";
 import nycAirbnbImg from "@/assets/projects/nyc-airbnb.jpg";
+import customerChurnImg from "@/assets/projects/customer-churn.jpg";
 
 export type ProjectCategoryId = "eda" | "ml";
 
@@ -558,6 +559,59 @@ export const PROJECTS: Project[] = [
     files: {
       readme: "README.md",
       notebook: "nyc_airbnb_room_type_classification.ipynb",
+    },
+  },
+  {
+    type: "project",
+    category: "ml",
+    featured: true,
+    image: customerChurnImg,
+    order: 5,
+    slug: "customer-churn-prediction",
+    title: "Customer Churn Prediction",
+    description:
+      "An end-to-end machine learning application that analyzes customer behavior and predicts customer churn using data preprocessing, exploratory analysis, and predictive modeling to help identify customers at risk of leaving.",
+    difficulty: "intermediate",
+    status: "completed",
+    tags: ["classification", "machine-learning", "customer-churn", "streamlit", "scikit-learn"],
+    lastUpdated: "2026-11-23",
+    githubPath: "",
+    githubRepoUrl: "https://github.com/AlwinVJ/Customer_churn_prediction.git",
+    liveDemoUrl: "https://customer-churn--prediction-model.streamlit.app/",
+    dataset: "Telco Customer Churn Dataset (7,043 customers, 21 attributes)",
+    librariesUsed: [
+      "Python",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Streamlit",
+      "Joblib",
+    ],
+    skillsLearned: [
+      "Binary classification with imbalanced target",
+      "Data cleaning & type coercion",
+      "Scikit-learn ColumnTransformer & Pipeline",
+      "GridSearchCV hyperparameter tuning",
+      "Precision-Recall trade-off analysis",
+      "Interactive Streamlit web application",
+    ],
+    businessProblem:
+      "Identify telecom customers at risk of leaving (churning) based on demographics, tenure, subscription services, and billing contracts, enabling targeted retention interventions.",
+    workflow: [
+      "Data ingestion and type coercion (converting blank TotalCharges to numerical 0 for new customers)",
+      "Exploratory data analysis uncovering tenure, monthly charges, and contract duration associations",
+      "Stratified 80/20 train-test split preserving the 26.54% churn base rate",
+      "ColumnTransformer pipeline with median imputation & StandardScaler for numericals, and most-frequent imputation & OneHotEncoder for categoricals",
+      "Benchmarking baseline DummyClassifier against Logistic Regression, KNN, Decision Tree, and SVM",
+      "Hyperparameter optimization with GridSearchCV on Logistic Regression (C=0.1, class_weight='balanced') and SVM",
+      "Test set evaluation on 1,409 holdout customers achieving 78.61% recall and 0.8408 ROC-AUC",
+      "Serialization to joblib pipeline and interactive deployment via Streamlit",
+    ],
+    files: {
+      readme: "README.md",
+      notebook: "notebooks/04_model_training.ipynb",
     },
   },
 ];
